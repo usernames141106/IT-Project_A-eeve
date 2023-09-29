@@ -3,6 +3,7 @@ import express from "express";
 const app = express();
 
 app.use(express.static("public"));
+app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -10,7 +11,7 @@ app.set("view engine", "ejs");
 app.set("port", 3000);
 
 app.get("/", (req, res) => {
-    res.render("index");
+    res.render("index",{title: null});
 });
 
 app.listen(app.get("port"),  () => {
