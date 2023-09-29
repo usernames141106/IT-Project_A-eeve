@@ -11,7 +11,7 @@ app.set("view engine", "ejs");
 app.set("port", 3000);
 
 app.get("/", (req, res) => {
-    res.render("index",{title: null});
+    res.render("index",{title: ""});
 });
 
 app.listen(app.get("port"),  () => {
