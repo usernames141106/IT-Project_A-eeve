@@ -11,8 +11,12 @@ app.set("view engine", "ejs");
 app.set("port", 3000);
 
 app.get("/", (req, res) => {
-    res.render("index",{title: "Home"});
+    res.render("homeProject",{title: "Home"});
 });
+
+app.get("/home",(req,res)=>{
+    res.render("home",{title: ""})
+})
 
 app.listen(app.get("port"),  () => {
     console.log(`Local url: http://localhost:${app.get("port")}`);

@@ -4,28 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <script src="/bootstrap/js/bootstrap.bundle.min.js" defer></script>
     <title>
         <%= title=="" ? `Project Eevee` : `Project Eevee - ${title}` %>
     </title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container">
-                <a class="navbar-brand" href="#"><img src="/images/projectcenter.png" height="75px"></a>
+    <header class="bg-body-tertiary pb-5 border border-bottom border-1">
+        <nav class="navbar navbar-expand-lg ">
+            <div class="container-fluid">
+
+                <a class="navbar-brand align-center" href="#"><img src="/images/projectcenter.png" height="75px"></a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                     <ul class="d-grid gap-2 d-flex">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                <a class="nav-link dropdown-toggle text-uppercase" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     Login
                                 </a>
@@ -44,7 +49,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                <a class="nav-link dropdown-toggle text-uppercase" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     Register
                                 </a>
