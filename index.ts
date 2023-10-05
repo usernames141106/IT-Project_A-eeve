@@ -18,6 +18,9 @@ app.get("/home",(req,res)=>{
     res.render("home",{title: ""})
 })
 
+app.get("/whosthatpokemon",(req,res)=>{
+    res.render("whosthatpokemon",{title: ""})
+})
 app.listen(app.get("port"),  () => {
     console.log(`Local url: http://localhost:${app.get("port")}`);
 });
