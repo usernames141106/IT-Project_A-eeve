@@ -11,15 +11,15 @@ app.set("view engine", "ejs");
 app.set("port", 3000);
 
 app.get("/", (req, res) => {
-    res.render("index",{title: "Home"});
+    res.render("index");
 });
 
 app.get("/home",(req,res)=>{
-    res.render("home",{title: ""})
+    res.render("home")
 })
 
 app.get("/whosthatpokemon",(req,res)=>{
-    res.render("whosthatpokemon",{title: ""})
+    res.render("whosthatpokemon")
 })
 app.listen(app.get("port"),  () => {
     console.log(`Local url: http://localhost:${app.get("port")}`);
