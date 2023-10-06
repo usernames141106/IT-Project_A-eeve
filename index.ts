@@ -21,6 +21,11 @@ app.get("/home",(req,res)=>{
 app.get("/whosthatpokemon",(req,res)=>{
     res.render("whosthatpokemon")
 })
+
+app.get("/pokemonCatch",(req,res)=>{
+    res.render("pokemonCatch")
+})
+
 app.listen(app.get("port"),  () => {
     console.log(`Local url: http://localhost:${app.get("port")}`);
 });
