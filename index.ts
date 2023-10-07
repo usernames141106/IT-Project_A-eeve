@@ -18,6 +18,10 @@ app.get("/home",(req,res)=>{
     res.render("home")
 })
 
+app.get("/pokemonBattle",(req,res)=>{
+    res.render("pokemonbattle")
+})
+
 app.get("/whosthatpokemon",(req,res)=>{
     res.render("whosthatpokemon")
 })
