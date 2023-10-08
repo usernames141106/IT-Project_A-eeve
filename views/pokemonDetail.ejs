@@ -3,80 +3,85 @@
         <div class="d-flex flex-row justify-content-center">
             <div class="p-2 w-50">
                 <table class="table">
-            <tbody>
-                    <tr>
-                        <th>ID:</th>
-                        <td>01</td>
-                    </tr>
-                    <tr>
-                        <th>Name:</th>
-                        <td>Eevee</td>
-                    </tr>
-                    <tr>
-                        <th>Nickname:</th>
-                        <td>the best Eevee</td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <th>ID:</th>
+                            <td>01</td>
+                        </tr>
+                        <tr>
+                            <th>Name:</th>
+                            <td>Eevee</td>
+                        </tr>
+                        <tr>
+                            <th>Nickname:</th>
+                            <td>the best Eevee</td>
+                        </tr>
 
-                </tbody>
-            
-        </table>
+                    </tbody>
+
+                </table>
             </div>
-              
+
         </div>
-      
-     
-        <div class="d-flex flex-row justify-content-center">
+
+
+        <div class="d-flex flex-row justify-content-evenly">
             <div class="d-flex justify-content-center">
-                <img src="/images/eevee.png">
+                <img src="/images/eevee.png" class="img-fluid" alt="">
             </div>
             <div class="d-flex flex-column">
                 <div class="p-2 d-flex">
                     <div class="container-fluid">
-                        <table class="table caption-top table-striped w-50">
-                            <caption><strong>Statistieken</strong></caption>
+                        <table class="table caption-top table-sm" style="width: 300px;">
+                            <caption><h1>Statistieken</h1></caption>
                             <tbody>
-                                <tr >
-                                    <th style="text-align: center;">HP</th>
+                                <tr>
+                                    <th style="text-align: start;">HP</th>
                                     <td>10
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th style="text-align: center;">Attack</th>
+                                    <th style="text-align: start;">Attack</th>
                                     <td>10
                                         <button class="ms-2">
-                                              <img src="/images/arrow.png" height="20px" style="background-color: brown;" class="rounded-circle">
+                                            <img src="/images/arrow.png" height="20px" style="background-color: brown;"
+                                                class="rounded-circle">
                                         </button>
-                                      
+
+                                        <button class="ms-2">
+                                            <img src="/images/arrow.png" height="20px" style="background-color: brown;"
+                                                class="rounded-circle" id="arrowDown">
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align: start;">Defence</th>
+                                    <td>10
+                                        <button class="ms-2">
+                                            <img src="/images/arrow.png" height="20px" style="background-color: brown;"
+                                                class="rounded-circle">
+                                        </button>
+
                                         <button class="ms-2 mirror">
-                                             <img src="/images/arrow.png" height="20px" style="background-color: brown;" class="rounded-circle">
+                                            <img src="/images/arrow.png" height="20px" style="background-color: brown;"
+                                                class="rounded-circle">
                                         </button>
-                                       
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th style="text-align: center;">Defence</th>
-                                    <td>10
-                                        <button class="ms-2">
-                                            <img src="/images/arrow.png" height="20px" style="background-color: brown;" class="rounded-circle">
-                                      </button>
-                                    
-                                      <button class="ms-2 mirror">
-                                           <img src="/images/arrow.png" height="20px" style="background-color: brown;" class="rounded-circle">
-                                      </button>
-                                     
+
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="p-2 flex-fill">
+                <div class="p-2 d-flex flex-column">
                     <div class="container-fluid">
                         <h1>Evolutiepad</h1>
-                        <div class="d-flex">
-                            <img src="/images/eevee.png" width="150px">
-                            <img src="/images/eevee.png" width="150px">
-                            <img src="/images/eevee.png" width="150px">
+                        <div class="d-flex ">
+                            <img src="/images/eevee.png" width="100px">
+                            <img src="/images/arrow.png" width="30px" height="30px" class="align-self-center" id="arrowRight">
+                            <img src="/images/eevee.png" width="100px">
+                            <img src="/images/arrow.png" width="30px" height="30px" class="align-self-center"  id="arrowRight">
+                            <img src="/images/eevee.png" width="100px">
                         </div>
 
                     </div>
@@ -88,8 +93,5 @@
 
     </main>
 
-    <aside class=" container text-center col-3 col-md-3 align-bottom">
-        <h2>Huidige Pokemon</h2>
-        <img src="/images/fiffa.jpg" alt="">
-    </aside>
-    <%- include("partials/footer"); %>
+    <%- include("partials/aside"); %>
+        <%- include("partials/footer"); %>

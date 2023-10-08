@@ -3,6 +3,14 @@ nav{
    margin: 0 auto;
 }
 
+#arrowDown {
+transform:rotate(180deg)
+}
+
+#arrowRight {
+  transform: rotate(90deg);
+}
+
 /*---------- PokemonBattle ----------*/
 #fightButton {
   position: relative;
