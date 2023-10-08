@@ -1,9 +1,36 @@
 <%- include("partials/header",{title: "Pokemon Battle" }); %>
     <div class="row">
-        <main class="container col-2">
-            <section class="container d-flex justify-content-evenly">
-                <%- include("partials/card",{title: "Fiffa", text: "Klik hier voor alle voetball plezier", img: "/images/fiffa.jpg", alt: "Fiffa"}) %>
-                <%- include("partials/card",{title: "Fiffa", text: "Klik hier voor alle voetball plezier", img: "/images/fiffa.jpg", alt: "Fiffa"}) %>
+        <main class="container col-9">
+            <section class="container d-flex"> <!-- Section PokemonStats -->
+
+              <article class="container">
+                <div class="row justify-content-center">
+                     <div class="card col-md-3 m-3"> <!-- size and margin of card 1 -->
+                          <img src="/images/HPbar.png" alt="HPbar"> <!-- HPbar (TODO: in need of some cropping) -->
+                          <img src="/images/pikachu.jpg" alt="Huidige Pokemon">
+                          <div class="card-body text-center">
+                              <h5 class="card-title">Huidige Pokemon</h5>
+                              <p class="card-text">Stats</p>
+                          </div>
+                    </div>
+
+                    <div class="card col-md-3 m-3"> <!-- size and margin of card 2 -->
+                        <img src="/images/HPbar.png" alt="HPbar">
+                        <img src="/images/eevee.png" alt="Pokemon2">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Vijand Pokemon</h5>
+                            <p class="card-text">Stats</p>
+                        </div>
+                    </div>
+                </div>
+              </article>
+
+            </section>
+
+            <section class="text-center"> <!-- Section FightButton -->
+              <button id="fightButton">
+                <img src="/images/cartoon-pokeball-sticker.png" alt="fightButton"> <!-- fightbutton image (TODO: add the word "Fight" on top of it) -->
+              </button>
             </section>
         </main>
 

@@ -3,6 +3,22 @@ nav{
    margin: 0 auto;
 }
 
+/*---------- PokemonBattle ----------*/
+#fightButton {
+  position: relative;
+  margin-top:-50px;
+  border: 1px solid lightgray;
+  width: 15%;
+  transition: 0.5s ease;
+}
+
+#fightButton:hover {
+  transform: scale(1.1);
+  transition: 0.5s ease;
+}
+
+
+/*---------- Media queries ----------*/
 @media (max-width: 1250px) {
     /* … */
   }
