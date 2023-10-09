@@ -10,7 +10,9 @@
                           <img src="/images/pikachu.png" alt="Huidige Pokemon">
                           <div class="card-body text-center">
                               <h5 class="card-title">Huidige Pokemon</h5>
-                              <p class="card-text">Stats</p>
+                          </div>
+                          <div class="card text-center border-0">
+                            <p class="card-text">Stats</p>
                           </div>
                     </div>
 
@@ -18,19 +20,20 @@
                         <img src="/images/HPbar.png" alt="HPbar">
                         <img src="/images/eevee.png" alt="Pokemon2">
                         <div class="card-body text-center">
-                          <div class="input-group">  <!-- dropdown menu for the enemy Pokemon -->
-                            <select class="custom-select" id="inputGroupSelect04">
-                              <option selected>Vijandige Pokemon</option>
+                          <div class="input-group-append">  <!-- dropdown menu for the enemy Pokemon -->
+                            <select class="custom-select card" style="text-align: left;">
+                              <option selected>Kies een vijandige Pokemon</option>
                               <option value="1">Pikachu</option>
                               <option value="2">Eevee</option>
                               <option value="3">Gengar</option>
                             </select>
                             <div class="input-group-append">
-                              <button class="btn btn-outline-secondary" type="button">Fight</button>
+                              <button class="btn btn-outline-secondary" type="button">Battle</button>
                             </div>
                           </div>
-                            <!-- <h5 class="card-title">Vijand Pokemon</h5> temporary placeholder-->
-                            <p class="card-text">Stats</p>
+                        </div>
+                        <div class="card text-center border-0">
+                          <p class="card-text">Stats</p>
                         </div>
                     </div>
                 </div>
@@ -40,7 +43,7 @@
 
             <section class="text-center"> <!-- Section FightButton -->
               <button id="fightButton">
-                <img src="/images/cartoon-pokeball-sticker.png" alt="fightButton"> <!-- fightbutton image (TODO: add the word "Fight" on top of it) -->
+                <img src="/images/fight_icon.png" alt="fightButton"> <!-- fightbutton image (TODO: add the word "Fight" on top of it) -->
               </button>
             </section>
         </main>
