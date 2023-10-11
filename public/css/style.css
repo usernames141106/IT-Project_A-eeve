@@ -1,11 +1,15 @@
 * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: large;
+  
 }
 
 nav{
-    max-width: 90vw;
-   margin: 0 auto;
+   font-size: small;
+   text-transform: uppercase;
+   letter-spacing: 0.2rem;
 }
 footer{
   background-color: #5e727d ;
