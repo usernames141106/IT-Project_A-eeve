@@ -1,6 +1,89 @@
-<%- include("partials/header",{title: "Home", secondRow:true }); %>
-    <main class="container col-9">
-        <div class="d-flex flex-row justify-content-center">
+<%- include("partials/header",{title: "Home", secondRow: true }); %>
+    <main class="container col-9 col-sm-9 col-md-9 col-xl-9">
+
+        <div class="row">
+            <div class="col-12">.col-6 .col-md-4
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>ID:</th>
+                            <td>01</td>
+                        </tr>
+                        <tr>
+                            <th>Name:</th>
+                            <td>Eevee</td>
+                        </tr>
+                        <tr>
+                            <th>Nickname:</th>
+                            <td>the best Eevee</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+              <div class="col-12 col-sm-6 col-md-6 col-xl-6">.links
+                <div class="">
+                    <img src="/images/eevee.png" class="img-fluid" alt="">
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 col-xl-6">
+              <div class="col-12">.col-6 .col-md-4
+                <table class="table caption-top table-sm" style="width: 300px;">
+                    <caption><h1>Statistieken</h1></caption>
+                    <tbody>
+                        <tr>
+                            <th style="text-align: start;">HP</th>
+                            <td>10
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="text-align: start;">Attack</th>
+                            <td>10
+                                <button class="ms-2">
+                                    <img src="/images/arrow.png" height="20px" style="background-color: brown;"
+                                        class="rounded-circle">
+                                </button>
+
+                                <button class="ms-2">
+                                    <img src="/images/arrow.png" height="20px" style="background-color: brown;"
+                                        class="rounded-circle" id="arrowDown">
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="text-align: start;">Defence</th>
+                            <td>10
+                                <button class="ms-2">
+                                    <img src="/images/arrow.png" height="20px" style="background-color: brown;"
+                                        class="rounded-circle">
+                                </button>
+
+                                <button class="ms-2 mirror">
+                                    <img src="/images/arrow.png" height="20px" style="background-color: brown;"
+                                        class="rounded-circle">
+                                </button>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+              <div class="col-12">.col-6 .col-md-4
+                <h1>Evolutiepad</h1>
+                <div class="d-flex ">
+                    <img src="/images/eevee.png" width="100px">
+                    <img src="/images/arrow.png" width="30px" height="30px" class="align-self-center" id="arrowRight">
+                    <img src="/images/eevee.png" width="100px">
+                    <img src="/images/arrow.png" width="30px" height="30px" class="align-self-center"  id="arrowRight">
+                    <img src="/images/eevee.png" width="100px">
+                </div>
+              </div>
+              </div>
+            </div>
+
+
+        <!-- <div class="d-flex flex-row justify-content-center">
             <div class="p-2 w-50">
                 <table class="table">
                     <tbody>
@@ -21,12 +104,9 @@
 
                 </table>
             </div>
-
         </div>
-
-
-        <div class="d-flex flex-row justify-content-evenly">
-            <div class="d-flex justify-content-center">
+        <div class="d-flex flex-row justify-content-evenly ">
+            <div class="">
                 <img src="/images/eevee.png" class="img-fluid" alt="">
             </div>
             <div class="d-flex flex-column">
@@ -89,7 +169,7 @@
             </div>
 
 
-        </div>
+        </div> -->
 
     </main>
 
