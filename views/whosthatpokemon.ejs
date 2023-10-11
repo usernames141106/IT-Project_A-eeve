@@ -18,16 +18,7 @@
         <button type="submit" style="display: none;"></button>
       </form>
 
-      <script>
-        $(document).ready(function() {
-          $('#form1').keypress(function(event) {
-            if (event.which == 13) { // 13 is the key code for "Enter"
-              event.preventDefault();
-              $(this).closest('form').submit();
-            }
-          });
-        });
-      </script>
+      
     
 </article>
 </main>
@@ -37,3 +28,15 @@
 </div>
 
 <%- include("partials/footer"); %>
+
+
+<script>
+  $(document).ready(function() {
+    $('#form1').keypress(function(event) {
+      if (event.which == 13) { // 13 is the key code for "Enter"
+        event.preventDefault();
+        $(this).closest('form').submit();
+      }
+    });
+  });
+</script>
