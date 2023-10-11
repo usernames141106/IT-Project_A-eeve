@@ -14,7 +14,7 @@ a:hover{
   color: #5e727d;
 }
 nav{
-   font-size: small;
+  font-size: small;
    text-transform: uppercase;
    letter-spacing: 0.2rem;
 }
@@ -22,6 +22,8 @@ footer{
   background-color: #5e727d ;
   color: white;
 }
+
+/*---------- PokemonDetail ----------*/
 #arrowDown {
 transform:rotate(180deg)
 }
