@@ -1,4 +1,72 @@
 <%- include("partials/header",{title: "Pokemon vergelijken", secondRow:true }); %>
+<main>
+<article class=" container  d-flex flex-column p-0 ">
+
+        <form class="container form-outline mx-auto pt-5 p-sm-1" method="post" >
+                <input type="search" id="form1" class="form-control" placeholder="Type query" aria-label="Search" list="pokemonlist" />
+                <datalist id="pokemonlist">
+                    <option value="pikachu"></option>
+                    <option value="charazard"></option>
+                </datalist>
+                <button type="submit" style="display: none;"></button>
+              </form>
+
+        <img src="/images/pikachu.png" class="img-fluid  mx-auto h-50 border  rounded  mb-3 col-sm-12 h-20" alt="">
+
+</div>
+<div class="col-12 col-sm-12 col-md-6 col-xl-6">.links
+</div>
+<div class="col-12 col-sm-12 col-md-6 col-xl-6">
+<div class="col-12 col-md-6 col-sm-4">
+  <table class="table caption-top table-sm" style="width: 300px;">
+      <caption><h1>Statistieken</h1></caption>
+      <tbody>
+          <tr>
+              <th style="text-align: start;">HP</th>
+              <td>10
+              </td>
+          </tr>
+          <tr>
+              <th style="text-align: start;">Attack</th>
+              <td>10
+                  <button class="ms-2">
+                      <img src="/images/arrow.png" height="20px" style="background-color: brown;"
+                          class="rounded-circle">
+                  </button>
+
+                  <button class="ms-2">
+                      <img src="/images/arrow.png" height="20px" style="background-color: brown;"
+                          class="rounded-circle" id="arrowDown">
+                  </button>
+              </td>
+          </tr>
+          <tr>
+              <th style="text-align: start;">Defence</th>
+              <td>10
+                  <button class="ms-2">
+                      <img src="/images/arrow.png" height="20px" style="background-color: brown;"
+                          class="rounded-circle">
+                  </button>
+
+                  <button class="ms-2 mirror">
+                      <img src="/images/arrow.png" height="20px" style="background-color: brown;"
+                          class="rounded-circle">
+                  </button>
+
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
+
+</article>
+<article></article>
+
+
+
+</main>
+
 
 <%- include("partials/aside"); %>
-        <%- include("partials/footer"); %>
+<%- include("partials/footer"); %>
