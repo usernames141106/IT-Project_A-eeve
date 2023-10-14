@@ -36,6 +36,10 @@ app.get("/pokemondetail",(req,res)=> {
     res.render("pokemonDetail")
 })
 
+app.get("/mypokemon",(req,res)=> {
+    res.render("myPokemon")
+})
+
 app.get("/pokemonvergelijken",(req,res)=> {
     res.render("pokemonvergelijken")
 })
