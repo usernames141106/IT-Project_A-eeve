@@ -27,6 +27,11 @@ footer{
 }
 
 /*---------- PokemonDetail ----------*/
+
+#pokemonDetailTables th {
+  font-weight: bold;
+}
+
 #arrowDown {
 transform:rotate(180deg)
 }
@@ -34,6 +39,8 @@ transform:rotate(180deg)
 #arrowRight {
   transform: rotate(90deg);
 }
+
+
 
 /*---------- PokemonBattle ----------*/
 #fightButton {
