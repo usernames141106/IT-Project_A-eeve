@@ -40,6 +40,10 @@ transform:rotate(180deg)
   transform: rotate(90deg);
 }
 
+#h1 {
+  font-size: 40px;
+}
+
 
 
 /*---------- PokemonBattle ----------*/
