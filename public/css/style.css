@@ -61,6 +61,10 @@ transform:rotate(180deg)
 }
 
 
+#buttonW{
+  background-color: #5e727d;
+  border-color: #5e727d;
+}
 /*---------- Media queries ----------*/
 @media (max-width: 1250px) {
     /* … */
