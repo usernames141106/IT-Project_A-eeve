@@ -48,9 +48,23 @@ transform:rotate(180deg)
 
 
 /*---------- PokemonBattle ----------*/
+.hp {
+  font-weight: bold;
+  align-items: center;
+  display: grid;
+  grid-template-columns: 35px 1fr;
+}
+
+#hp-bar {
+  font-weight: bold;
+  border: 3px solid black;
+  color: black;
+  width: 75%;
+  background-color: rgb(0, 200, 0);
+}
+
 #fightButton {
   position: relative;
-  margin-top:-50px;
   border: 1px solid lightgray;
   width: 15%;
   transition: 0.5s ease;
