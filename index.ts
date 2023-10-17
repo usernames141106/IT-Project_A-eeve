@@ -28,8 +28,21 @@ app.get("/whosthatpokemon",(req,res)=>{
     res.render("whosthatpokemon")
 })
 
+app.post("/pokemonCatch",(req,res)=>{
+    const nickname: string | undefined = req.body.nickname;
+    if(nickname == undefined) {
+        res.render("pokemonCatch",{inBall: true, name: "eevee"});
+    } else {
+        res.render("pokemonCatch",{inBall: false, name: nickname});
+    }
+})
+
+app.post("/pokemonCatch/useDefault",(req,res)=>{
+    res.render("pokemonCatch",{inBall: false, name: "eevee"})
+})
+
 app.get("/pokemonCatch",(req,res)=>{
-    res.render("pokemonCatch")
+    res.render("pokemonCatch",{inBall: false, name: "eevee"})
 })
 
 app.get("/pokemondetail",(req,res)=> {
