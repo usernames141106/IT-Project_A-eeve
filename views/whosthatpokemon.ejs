@@ -1,18 +1,18 @@
 <%- include("partials/header",{title: "whosthatpokemon", secondRow:true}); %>
 <script src="/jquery/jquery.min.js" defer></script>
 <main class="container flex-column d-flex flex-wrap d-flex justify-content-center col-9 col-md-9  col-sm-12 d-grid gap-4 p-0">
-    <h1 class="text-center p-3">Wie is die Pokémon</h1>
+    <h1 class="text-center p-3">Wie is deze Pokémon</h1>
 
 <article class="mx-auto flex-column d-flex col-8  ">
     <img src="/images/5d8d37c8408248cc5595837452686fc23c4b3584_hq.jpg" class="img-fluid  mx-auto h-50 border  rounded  mb-3 col-sm-12 h-75"  alt="">
     
-    <form class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row" method="post" >
+    <form class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-4" method="post" >
         <input type="search" id="form1" class="form-control" placeholder="Raad Pokémon" aria-label="Search" list="pokemonlist" />
         <datalist id="pokemonlist">
             <option value="pikachu"></option>
             <option value="charazard"></option>
         </datalist>
-        <button id="buttonW" type="button" method="post" class="btn btn-primary">Try</button>
+        <button id="buttonW" type="button" method="post" class="btn btn-primary ">Raad</button>
       </form>
       
       <script>

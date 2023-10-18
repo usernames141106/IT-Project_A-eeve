@@ -10,6 +10,22 @@ body, html {
   overflow-x: hidden;
   min-height: 100vh;
 }
+h1{
+  text-transform: uppercase;
+   letter-spacing: 0.2rem;
+}
+h3{
+  text-transform: uppercase;
+   letter-spacing: 0.2rem;
+
+}
+.h1{
+  text-transform: uppercase;
+   letter-spacing: 0.2rem;
+   font-size:xx-large;
+}
+
+
 a{
   color: black;
   text-decoration: none;
@@ -22,6 +38,12 @@ nav{
    text-transform: uppercase;
    letter-spacing: 0.2rem;
 }
+#asideTH{
+  text-transform: uppercase;
+   letter-spacing: 0.2rem;
+   font-size: medium;
+}
+
 footer{
   background-color: #5e727d ;
   color: white;
