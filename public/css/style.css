@@ -55,7 +55,7 @@ caption{color: black;}
 
 /*---------- PokemonDetail ----------*/
 
-#pokemonDetailTables th {
+th {
   text-transform: uppercase;
   letter-spacing: 0.2rem;
 }
@@ -113,6 +113,13 @@ transform:rotate(180deg)
   background-color: #5e727d;
   border-color: #5e727d;
 }
+
+/*---------- Pokemonvergelijken ----------*/
+
+.border-on-hover {
+  border: 1px solid #5e727d; /* Change the border style when the button is hovered */
+}
+
 /*---------- Media queries ----------*/
 @media (max-width: 1250px) {
     /* … */
