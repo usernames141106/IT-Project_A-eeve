@@ -6,11 +6,15 @@
       </h1>
       <img src="/images/eevee.png" alt="eevee" width="400px">
       <% if(inBall) { %>
-        <script> // yes this is the only way i can find
-          $(document).ready(function () {
-            $("#renameModal").modal('show');
+        <script defer>
+          document.addEventListener('DOMContentLoaded', function () {
+              var modal = document.getElementById('renameModal');
+              if (modal) {
+                  var bootstrapModal = new bootstrap.Modal(modal);
+                  bootstrapModal.show();
+              }
           });
-        </script>
+      </script>
         <img src="/images/pokeBallGreen.png" width="150px" alt="pokeball">
         <form method="post" action="/pokemonCatch" class="modal fade" id="renameModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="renameModalLabel" aria-hidden="true">
           <div class="modal-dialog">
