@@ -113,7 +113,16 @@ transform:rotate(180deg)
   background-color: #5e727d;
   border-color: #5e727d;
 }
+#buttonW:hover{
+  background-color: #dee2e6;
+}
 
+.buttonForm2:hover svg {
+  fill: #5e727d; /* Change the fill color when the button is hovered */
+}
+.buttonForm1:hover svg {
+  fill: #5e727d; /* Change the fill color when the button is hovered */
+}
 /*---------- Pokemonvergelijken ----------*/
 
 .border-on-hover {
