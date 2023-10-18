@@ -56,8 +56,15 @@ caption{color: black;}
 /*---------- PokemonDetail ----------*/
 
 #pokemonDetailTables th {
-  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
 }
+
+td {
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+}
+
 
 #arrowDown {
 transform:rotate(180deg)
