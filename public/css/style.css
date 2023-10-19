@@ -124,7 +124,6 @@ transform:rotate(180deg)
   fill: #5e727d; /* Change the fill color when the button is hovered */
 }
 /*---------- Pokemonvergelijken ----------*/
-
 .border-on-hover {
   border: 1px solid #5e727d; /* Change the border style when the button is hovered */
 }
