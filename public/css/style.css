@@ -98,7 +98,6 @@ transform:rotate(180deg)
 
 #fightButton {
   position: relative;
-  border: 1px solid lightgray;
   width: 15%;
   transition: 0.5s ease;
 }
