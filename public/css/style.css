@@ -114,6 +114,7 @@ transform:rotate(180deg)
 }
 #buttonW:hover{
   background-color: #dee2e6;
+  color: #5e727d;
 }
 
 .buttonForm2:hover svg {
@@ -127,6 +128,20 @@ transform:rotate(180deg)
 .border-on-hover {
   border: 1px solid #5e727d; /* Change the border style when the button is hovered */
 }
+/*------------------Who's that pokemon---------------------------------*/
+.relative-position {
+  position: relative;
+}
+
+.layered-img {
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  width: 45%; /* Make the overlay image cover the entire container */
+  height: 45%;
+  z-index: 1; /* Ensure the overlay image is on top of the original image */
+  filter: brightness(0);
+ }
 
 /*---------- Media queries ----------*/
 @media (max-width: 1250px) {
