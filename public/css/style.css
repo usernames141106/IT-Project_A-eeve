@@ -24,8 +24,6 @@ h3{
    letter-spacing: 0.2rem;
    font-size:xx-large;
 }
-
-
 a{
   color: black;
   text-decoration: none;
@@ -52,7 +50,7 @@ footer{
   color: white;
 }
 caption{color: black;}
-/*..........MyPokemon.............*/
+/*---------- myPokemon ----------*/
 
 #myPokemonList {
   transition: 0.5s ease;
@@ -99,14 +97,18 @@ transform:rotate(180deg)
   font-size: 40px;
 }
 
-
-
 /*---------- PokemonBattle ----------*/
 .hp {
   font-weight: bold;
   align-items: center;
-  display: grid;
   grid-template-columns: 35px 1fr;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: left;
+}
+
+.hp label {
+  margin-left: 5px;
 }
 
 #hp-bar {
@@ -136,7 +138,7 @@ transform:rotate(180deg)
   transition: 0.5s ease;
 }
 
-
+/*---------- Pokemonvergelijken ----------*/
 #buttonW{
   background-color: #5e727d;
   border-color: #5e727d;
@@ -152,7 +154,7 @@ transform:rotate(180deg)
 .buttonForm1:hover svg {
   fill: #5e727d; /* Change the fill color when the button is hovered */
 }
-/*---------- Pokemonvergelijken ----------*/
+
 .border-on-hover {
   border: 1px solid #5e727d; /* Change the border style when the button is hovered */
 }
