@@ -83,13 +83,13 @@ font-size:small;
 }
 
 #myPokemonSelection {
-  background-color: #dee2e6;
+  background-color: #5e727d;
   border-color: #5e727d;
  
 }
 
 #myPokemonSelection:hover {
-  background-color: #5e727d;
+  background-color: #dee2e6;
   color: #5e727d;
 }
 
