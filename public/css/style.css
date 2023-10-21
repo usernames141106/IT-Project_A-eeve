@@ -113,8 +113,16 @@ transform:rotate(180deg)
   font-weight: bold;
   border: 3px solid black;
   color: black;
-  width: 75%;
-  background-color: rgb(0, 200, 0);
+  width: 0%;
+  transition: 2s ease-in-out;
+}
+
+#hp-bar-enemy {
+  font-weight: bold;
+  border: 3px solid black;
+  color: black;
+  width: 0%;
+  transition: 2s ease-in-out;
 }
 
 #fightButton {
