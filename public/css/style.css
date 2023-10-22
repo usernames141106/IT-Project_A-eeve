@@ -51,6 +51,11 @@ footer{
 }
 caption{color: black;}
 
+.card:hover {
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+
 /*..........Header.............*/
 
 #emaila, #emailb {
