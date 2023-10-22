@@ -142,6 +142,10 @@ td {
 }
 
 /*---------- Pokemon battle ----------*/
+#ownPokemon:hover, #enemyPokemon:hover {
+  transform: none;
+}
+
 .hp {
   align-items: center;
   grid-template-columns: 35px 1fr;
@@ -172,13 +176,13 @@ td {
 
 #fightButton {
   position: relative;
-  width: 10%;
-  transition: 0.5s ease;
+  width: 150px;
+  transition: 0.3s;
 }
 
 #fightButton:hover {
   transform: scale(1.1);
-  transition: 0.5s ease;
+  transition: 0.3s;
 }
 
 /*---------- Pokemon vergelijken ----------*/
