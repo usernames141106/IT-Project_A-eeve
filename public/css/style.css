@@ -74,7 +74,9 @@ caption {
 }
 
 /*..........Header.............*/
-
+header {
+  max-height: 7.5vh;
+}
 #emaila,
 #emailb {
   font-size: small;
