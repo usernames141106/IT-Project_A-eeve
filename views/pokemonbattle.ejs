@@ -1,5 +1,5 @@
 <%- include("partials/header",{title: "Pokemon Battle" , secondRow:true }); %>
-<script src="/js/hpbar.js" defer></script>
+  <script src="/js/hpbar.js" defer></script>
   <div class="row">
 
     <main class="container col-9 container d-flex flex-row flex-wrap p-0 col-9 col-md-9 col-sm-12 d-grid">
@@ -8,13 +8,21 @@
       <section class="container d-flex"> <!-- Section Pokemon -->
         <article class="container">
           <div class="row justify-content-center">
+            
             <div class="card col-md-3 m-3"> <!-- size and margin of card 1 -->
               <img src="/images/pikachu.png" alt="Huidige Pokemon">
               <div class="card-body text-center">
                 <h5 class="card-title">Pikachu</h5>
               </div>
-              <div class="hp">  <!-- HP bar own Pokemon -->
-                <label for="HP">HP </label><div class="text-center">100</div>
+              <div class="hp"> <!-- HP bar own Pokemon -->
+                <table class="table caption-top mx-auto table-sm table table-hover">
+                  <tbody>
+                    <tr>
+                      <th class="ps-4" style="text-align: start;">HP</th>
+                      <td style="text-align: center;">100</td>
+                    </tr>
+                  </tbody>
+                </table>
                 <div class="progress"> <!-- This one is necessary to display a grey outline of the total HP -->
                   <div id="hp-bar" class="progress-bar"></div>
                 </div>
@@ -43,13 +51,20 @@
 
               </div>
 
-              <div class="hp">  <!-- HP bar enemy -->
-                <label for="HP">HP </label><div class="text-center">100</div>
+              <div class="hp"> <!-- HP bar enemy -->
+                <table class="table caption-top mx-auto table-sm table table-hover">
+                  <tbody>
+                    <tr>
+                      <th class="ps-4" style="text-align: start;">HP</th>
+                      <td style="text-align: center;">100</td>
+                    </tr>
+                  </tbody>
+                </table>
                 <div class="progress"> <!-- This one is necessary to display a grey outline of the total HP -->
                   <div id="hp-bar-enemy" class="progress-bar"></div>
                 </div>
               </div>
-              
+
             </div>
           </div>
         </article>

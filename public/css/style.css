@@ -120,7 +120,6 @@ transform:rotate(180deg)
 
 /*---------- PokemonBattle ----------*/
 .hp {
-  font-weight: bold;
   align-items: center;
   grid-template-columns: 35px 1fr;
   display: inline-block;
