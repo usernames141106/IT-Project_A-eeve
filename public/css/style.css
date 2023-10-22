@@ -64,6 +64,10 @@ caption {
   color: black;
 }
 
+.card {
+  transition: 0.2s;
+}
+
 .card:hover {
   transform: scale(1.1);
   transition: 0.2s;
