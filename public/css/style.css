@@ -6,11 +6,14 @@
 
 }
 
-/* Fix for the H scrollbar on the footer */
 body,
 html {
-  overflow-x: hidden;
-  min-height: 100vh;
+  overflow-x: hidden; /* Fix for the H scrollbar */
+  /* min-height: 100vh; */ /* fix for the footer */
+}
+
+main {
+  min-height: 84.8vh;  /* fix for the navbar */
 }
 
 h1 {
@@ -62,6 +65,10 @@ footer {
 
 caption {
   color: black;
+}
+
+.height-20 {
+  height: 5vh;
 }
 
 .card {
