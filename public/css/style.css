@@ -76,6 +76,11 @@ caption {
   transition: 0.2s;
 }
 
+.logoHome {
+  margin: 15px;
+  margin-left: 12rem;
+}
+
 /*..........Header.............*/
 
 #emaila,
@@ -233,8 +238,10 @@ td,label{
 }
 
 /*---------- Media queries ----------*/
-@media (max-width: 1250px) {
-  /* … */
+@media (max-width: 1000px) {
+  .logoHome {
+    margin-left: 2rem;
+  }
 }
 
 /*---------- For mobile phones ----------*/
