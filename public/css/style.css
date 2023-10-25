@@ -242,4 +242,12 @@ td,label{
   .card:hover {
     transform: none;
   }
+
+  #navbar_list li{
+
+    padding: 0.6rem;
+
+  }
+
+  
 }
