@@ -245,7 +245,12 @@ td,label{
 
   #navbar_list li{
 
-    padding: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    
 
   }
 
