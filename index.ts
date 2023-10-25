@@ -1,5 +1,5 @@
 import express from "express";
-
+import { pokemon } from "./interfaces";
 const app = express();
 
 app.use(express.static("public"));
