@@ -237,6 +237,8 @@ td,label{
   filter: brightness(0);
 }
 
+
+
 /*---------- Media queries ----------*/
 @media (max-width: 1000px) {
   .logoHome {
@@ -245,10 +247,12 @@ td,label{
 }
 
 /*---------- For mobile phones ----------*/
-@media (max-width: 768px) {
+@media (max-width: 991px) {
   .card:hover {
     transform: none;
+    
   }
+<<<<<<< HEAD
 
   #navbar_list li{
 
@@ -263,3 +267,11 @@ td,label{
 
   
 }
+=======
+  .custom-class {
+    width:fit-content;
+    
+  }
+}
+
+>>>>>>> 81aa17f (who's that pokemon en collectie gecenterd)
