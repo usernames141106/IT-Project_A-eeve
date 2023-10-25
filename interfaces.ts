@@ -6,6 +6,10 @@ export interface pokemon {
     height: number,
     weight: number,
     maxHP: number,
+    currentHp?:number,
+    wins:number,
+    losses:number,
+    captureDate?:Date
 };
 
 export interface pokemonTypes {
