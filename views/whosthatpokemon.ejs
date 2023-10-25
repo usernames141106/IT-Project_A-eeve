@@ -1,5 +1,4 @@
 <%- include("partials/header",{title: "whosthatpokemon", secondRow:true}); %>
-<script src="/jquery/jquery.min.js" defer></script>
 <main class="container flex-column d-flex flex-wrap d-flex justify-content-center col-9 col-md-9  col-sm-12 d-grid gap-4 p-0">
     <h1 class="text-center p-3">Wie is deze Pokémon</h1>
 
@@ -19,16 +18,19 @@
           <button id="buttonW" type="button" method="post" class="btn btn-primary">poging</button>
       </form>
       
-      <script>
-        $(document).ready(function() {
-          $('#form1').keypress(function(event) {
-            if (event.which == 13) { // 13 is the key code for "Enter"
+      <script defer>
+        document.addEventListener('DOMContentLoaded', function() {
+          var form1 = document.getElementById('form1');
+      
+          form1.addEventListener('keypress', function(event) {
+            if (event.which === 13) { // 13 is the key code for "Enter"
               event.preventDefault();
-              $(this).closest('form').submit();
+              event.target.closest('form').submit();
             }
           });
         });
       </script>
+      
       
     
 </article>

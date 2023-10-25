@@ -4,7 +4,6 @@ const app = express();
 
 app.use(express.static("public"));
 app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'));
-app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'));
 app.use('/bootstrapIcons', express.static(__dirname + '/node_modules/bootstrap-icons/icons'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
