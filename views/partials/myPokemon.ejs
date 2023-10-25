@@ -1,0 +1,26 @@
+<div class="col-12 col-sm-12 col-md-4 col-xl-5 mt-5">
+    <a href="/pokemonDetail"><img id="myPokemonList"
+            src="<%= img %>"
+            , class="" alt="Pokemon Image"></a>
+
+    <table id="pokemonDetailTables" class="table table-hover">
+        <tbody>
+            <tr>
+                <th>Nummer:</th>
+                <td><%= id %></td>
+            </tr>
+            <tr>
+                <th>Naam:</th>
+                <td class="d-flex d-flex justify-content-between"><%= name %>
+                </td>
+            </tr>
+            <tr>
+                <td>Kies als huidige Pokémon</td>
+                <td> <form>
+                    <input id="myPokemonSelection" class="form-check-input" type="checkbox" value="" />
+                </form></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
