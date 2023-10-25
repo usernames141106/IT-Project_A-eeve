@@ -14,9 +14,14 @@ html {
 
 main {
   min-height: 84.8vh;  /* fix for the navbar */
+  padding-block: min(10vh,10rem);
+ 
+}
+aside{
+  padding-block: min(10vh,10rem);
 }
 
-h1 {
+h1, .h1 {
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   font-size: xx-large;
@@ -26,12 +31,6 @@ h3 {
   text-transform: uppercase;
   letter-spacing: 0.2rem;
 
-}
-
-.h1 {
-  text-transform: uppercase;
-  letter-spacing: 0.2rem;
-  font-size: xx-large;
 }
 
 a {
@@ -66,10 +65,6 @@ footer {
 
 caption {
   color: black;
-}
-
-.height-20 {
-  /* height: 5vh; */  /*  */
 }
 
 .card {
@@ -126,15 +121,16 @@ caption {
 
 /*---------- Pokemon detail ----------*/
 
-th {
+th{
   text-transform: uppercase;
   letter-spacing: 0.2rem;
 }
 
-td {
+td,label{
   text-transform: uppercase;
   letter-spacing: 0.2rem;
 }
+
 
 
 #arrowDown {
