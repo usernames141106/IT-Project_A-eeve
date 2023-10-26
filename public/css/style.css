@@ -34,7 +34,7 @@ h3 {
 }
 
 a {
-  color: black;
+  color: inherit;
   text-decoration: none;
 }
 
@@ -64,7 +64,7 @@ footer {
 }
 
 caption {
-  color: black;
+  color: inherit;
 }
 
 .card {
@@ -169,16 +169,16 @@ td,label{
 
 #hp-bar {
   font-weight: bold;
-  border: 3px solid black;
-  color: black;
+  border: 3px solid inherit;
+  color: inherit;
   width: 0%;
   transition: 2s ease-in-out;
 }
 
 #hp-bar-enemy {
   font-weight: bold;
-  border: 3px solid black;
-  color: black;
+  border: 3px solid inherit;
+  color: inherit;
   width: 0%;
   transition: 2s ease-in-out;
 }
