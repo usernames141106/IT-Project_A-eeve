@@ -13,7 +13,7 @@ html {
 }
 
 main {
-  min-height: 84.8vh;  /* fix for the navbar & footer */
+  /* min-height: 84.8vh; */  /* fix for the navbar & footer */
   padding-block: min(10vh,10rem);
  
 }
@@ -183,10 +183,14 @@ td,label{
   transition: 2s ease-in-out;
 }
 
+#zoekPokemon {
+  text-align: left;
+}
+
 #fightButton {
   border: 1px solid lightgrey;
   position: relative;
-  width: 150px;
+  width: 200px;
   transition: 0.3s;
 }
 
