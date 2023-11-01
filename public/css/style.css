@@ -173,6 +173,7 @@ td,label{
   color: inherit;
   width: 0%;
   transition: 2s ease-in-out;
+  background-color: red;
 }
 
 #hp-bar-enemy {
@@ -181,6 +182,7 @@ td,label{
   color: inherit;
   width: 0%;
   transition: 2s ease-in-out;
+  background-color: red;
 }
 
 #HPLabel, #HPLabelEnemy {
