@@ -16,11 +16,11 @@
               <h5 class="card-title">Pikachu</h5>
             </div>
             <div class="hp"> <!-- HP bar own Pokémon -->
-              <table class="table caption-top mx-auto table-sm table table-hover">
+              <table class="table caption-top mx-auto table-sm table-hover">
                 <tbody>
                   <tr>
                     <th class="ps-4" style="text-align: start;">HP</th>
-                    <td style="text-align: center;">100</td>
+                    <td id="HPLabel">100</td>
                   </tr>
                 </tbody>
               </table>
@@ -38,8 +38,8 @@
                 <input type="search" id="zoekPokemon" class="form-control" placeholder="Zoek Pokémon" aria-label="Search"
                   list="pokemonlist" />
                 <datalist id="pokemonlist">
-                  <option value="pikachu"></option>
-                  <option value="charizard"></option>
+                  <option value="Pikachu"></option>
+                  <option value="Charizard"></option>
                 </datalist>
                 <button id="buttonW" type="button" method="post" class="btn btn-primary buttonForm1"><svg
                     xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
@@ -52,11 +52,11 @@
             </div>
 
             <div class="hp"> <!-- HP bar enemy Pokémon -->
-              <table class="table caption-top mx-auto table-sm table table-hover">
+              <table class="table caption-top mx-auto table-sm table-hover">
                 <tbody>
                   <tr>
                     <th class="ps-4" style="text-align: start;">HP</th>
-                    <td style="text-align: center;">100</td>
+                    <td id="HPLabelEnemy">100</td>
                   </tr>
                 </tbody>
               </table>
@@ -67,11 +67,7 @@
 
           </div>
         </article>
-
       </section>
-
-
-
 
       <section class="text-center container mb-3"> <!-- Section fightButton -->
         <button class="btn" id="fightButton">

@@ -20,11 +20,11 @@ app.get("/home",(req,res)=>{
 })
 
 app.get("/pokemonBattle",(req,res)=>{
-    res.render("pokemonbattle")
+    res.render("pokemonBattle")
 })
 
 app.get("/whosthatpokemon",(req,res)=>{
-    res.render("whosthatpokemon")
+    res.render("whosThatPokemon")
 })
 
 app.post("/pokemonCatch",(req,res)=>{

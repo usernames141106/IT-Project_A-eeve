@@ -1,8 +1,9 @@
 // Function to update the HP bar and change the color depending on the value (currently not working)
 function updateHPBar(percentage) {
   const hpBar = document.getElementById("hp-bar");
+  let label = document.getElementById("HPLabel");
   hpBar.style.width = percentage + "%";
-  // hpBar.textContent = percentage;
+  label.textContent = percentage;
 
   if (percentage <= 10) {
     hpBar.style.backgroundColor = "RGB(255,105,105)";
@@ -15,8 +16,9 @@ function updateHPBar(percentage) {
 
 function updateHPBarEnemy(percentage) {
   const hpBar = document.getElementById("hp-bar-enemy");
+  let labelEnemy = document.getElementById("HPLabelEnemy");
   hpBar.style.width = percentage + "%";
-  // hpBar.textContent = percentage;
+  labelEnemy.textContent = percentage;
 
   if (percentage <= 10) {
     hpBar.style.backgroundColor = "RGB(255,105,105)";

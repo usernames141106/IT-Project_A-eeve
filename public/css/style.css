@@ -183,6 +183,10 @@ td,label{
   transition: 2s ease-in-out;
 }
 
+#HPLabel, #HPLabelEnemy {
+  text-align: center;
+}
+
 #zoekPokemon {
   text-align: left;
 }
