@@ -8,20 +8,25 @@
 
 body,
 html {
-  overflow-x: hidden; /* Fix for the H scrollbar */
-  /* min-height: 100vh; */ /* fix for the footer */
+  overflow-x: hidden;
+  /* Fix for the H scrollbar */
+  /* min-height: 100vh; */
+  /* fix for the footer */
 }
 
 main {
-  /* min-height: 84.8vh; */  /* fix for the navbar & footer */
-  padding-block: min(10vh,10rem);
- 
-}
-aside{
-  padding-block: min(10vh,10rem);
+  /* min-height: 84.8vh; */
+  /* fix for the navbar & footer */
+  padding-block: min(10vh, 10rem);
+
 }
 
-h1, .h1 {
+aside {
+  padding-block: min(10vh, 10rem);
+}
+
+h1,
+.h1 {
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   font-size: xx-large;
@@ -125,12 +130,13 @@ caption {
 
 /*---------- Pokemon detail ----------*/
 
-th{
+th {
   text-transform: uppercase;
   letter-spacing: 0.2rem;
 }
 
-td,label{
+td,
+label {
   text-transform: uppercase;
   letter-spacing: 0.2rem;
 }
@@ -150,7 +156,8 @@ td,label{
 }
 
 /*---------- Pokemon battle ----------*/
-#ownPokemon:hover, #enemyPokemon:hover {
+#ownPokemon:hover,
+#enemyPokemon:hover {
   transform: none;
 }
 
@@ -184,7 +191,8 @@ td,label{
   background-color: red;
 }
 
-#HPLabel, #HPLabelEnemy {
+#HPLabel,
+#HPLabelEnemy {
   text-align: center;
 }
 
@@ -260,18 +268,18 @@ td,label{
 @media (max-width: 991px) {
   .card:hover {
     transform: none;
-    
+
   }
 
-  #navbar_list li{
-
+  #navbar_list li {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
   }
+
   .custom-class {
-    width:fit-content;
+    width: fit-content;
   }
 }
