@@ -80,12 +80,17 @@ caption {
   transition: 0.2s;
 }
 
-.logoHome {
+.homebtn {
   margin: 15px;
   margin-left: 5rem;
 }
 
 /*..........Header.............*/
+
+.eeveeLogo {
+  height: 65px;
+  padding-top: 5px;
+}
 
 #emaila,
 #emailb {
@@ -258,7 +263,7 @@ label {
 
 /*---------- Media queries ----------*/
 @media (max-width: 1000px) {
-  .logoHome {
+  .homebtn {
     margin-left: 2rem;
   }
 }
