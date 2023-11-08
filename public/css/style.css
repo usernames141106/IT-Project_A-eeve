@@ -289,6 +289,10 @@ label {
   .custom-aside{
     border: none;
   }
+  .custom-paside{
+    padding-left: 3.9rem;
+    padding-right: 3.9rem;
+  }
   .custom-class {
     width: fit-content;
   }

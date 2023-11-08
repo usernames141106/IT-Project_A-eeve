@@ -3,8 +3,8 @@
     <h2 class="h1">Huidige Pokémon</h2>
     <img class="img-fluid rounded-circl mt-3" src="/images/pikachu.png" alt="huidige pokemon" width="100px">
     <h3 class="mt-2">Pikachu</h3>
-    
-    <table class="table caption-top mx-auto table-sm table-hover">
+    <div class="container custom-paside">
+    <table class="table caption-top  mx-auto  table-sm table-hover">
         <caption class="text-center"><h3 class="mt-2">Statistieken</h3></caption>
         <tbody>
             <tr>
@@ -24,6 +24,7 @@
             </tr>
         </tbody>
     </table>
+    </div>
     <% if(myPokemonPagina) {%>
     <form class="align-items-start mt-4">
         <label for="">Bekijk alle pokémon</label>
@@ -31,4 +32,3 @@
     </form>
    <% } %>
     </aside>
-    
