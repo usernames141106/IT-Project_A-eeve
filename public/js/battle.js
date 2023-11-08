@@ -43,9 +43,6 @@ function attackOwnPokemon() {
   } else if (enemyPokemonHP <= 0) {
     enemyPokemonHP = 0;
     updateHPBar(enemyPokemonHP, "hp-bar-enemy");
-    // setTimeout(() => {
-      // alert("Je Pokémon is gewonnen! De vijand Pokémon is toegevoegd aan je collectie.");
-    // }, 1000);
     return;
   }
 }
@@ -60,10 +57,6 @@ function attackEnemyPokemon() {
   } else if (ownPokemonHP <= 0) {
     ownPokemonHP = 0;
     updateHPBar(ownPokemonHP, "hp-bar");
-    // setTimeout(() => {
-      // alert("Je pokémon is verloren! Game over.");
-    // }, 1000);
-    // return;
   }
 }
 
@@ -93,8 +86,6 @@ function battle() {
     }
   }, 1500); // wait for 1.5 seconds between each attack
 }
-
-
 
 // start the fight
 const fightButton = document.getElementById("fightButton");
