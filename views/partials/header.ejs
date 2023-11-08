@@ -22,9 +22,9 @@
         <nav class="navbar navbar-expand-lg d-flex flex-column p-0">
 
 
+            <% if(secondRow) {%><a class="text-center position-absolute top-10 start-50 translate-middle-x" href="/home"><img src="/images/eevee_logo.png" height="60px"></a> <%}%>
             <div class="container-fluid <%= secondRow ? "border-bottom" : "" %>">
                 <a class="logoHome navbar-brand" href="/"><img src="/bootstrapIcons/house.svg" height="30px"></a>
-                <% if(secondRow) {%><a class="text-center position-absolute top-10 start-50 translate-middle-x" href="/home"><img src="/images/eevee_logo.png" height="60px"></a> <%}%>
 
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
