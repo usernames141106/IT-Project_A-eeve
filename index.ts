@@ -1,4 +1,5 @@
 import express from "express";
+var session = require('express-session');
 import { pokemon } from "./interfaces";
 const app = express();
 
@@ -7,6 +8,8 @@ app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist')
 app.use('/bootstrapIcons', express.static(__dirname + '/node_modules/bootstrap-icons/icons'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
 
 app.set("view engine", "ejs");
 app.set("port", 3000);
