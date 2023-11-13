@@ -16,7 +16,7 @@ const pokemonSchema = new Schema<Ipokemon>({
     captureDate: {required: false, type: Date}
 });
 
-const Pokemon = mongoose.model("Pokemon", pokemonSchema);
+const Pokemon = mongoose.model<Ipokemon>("Pokemon", pokemonSchema);
 
 export async function loadPokemon() {
     await mongoose.connect(url);
