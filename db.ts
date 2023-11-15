@@ -4,40 +4,40 @@ import { IUser, IPokemon } from './interface';
 const url: string = "mongodb+srv://itProject:f5pajH6wH8eHzpI5@cluster0.jnpguhk.mongodb.net/?retryWrites=true&w=majority";
 
 const pokemonSchema = new Schema<IPokemon>({
-    id: {required: true, type: Number},
-    name: {required: true, type: String},
-    image: {required: true, type: String},
-    height: {required: true, type: Number},
-    weight: {required: true, type: Number},
-    maxHP: {required: true, type: Number},
-    currentHp: {required: false, type: Number},
-    wins: {required: true, type: Number},
-    losses: {required: true, type: Number},
-    captureDate: {required: false, type: Date}
+    id: { required: true, type: Number },
+    name: { required: true, type: String },
+    image: { required: true, type: String },
+    height: { required: true, type: Number },
+    weight: { required: true, type: Number },
+    maxHP: { required: true, type: Number },
+    currentHp: { required: false, type: Number },
+    wins: { required: true, type: Number },
+    losses: { required: true, type: Number },
+    captureDate: { required: false, type: Date }
 });
 const userSchema = new Schema<IUser>({
-    name: {required: true, type: String},
-    passwordHash: {required: true, type: String},
-    pokemons: {required: true, type: Types.DocumentArray<IPokemon>},
-    currentPokemon: {required: true, type: Number}
+    name: { required: true, type: String },
+    passwordHash: { required: true, type: String },
+    pokemons: { required: true, type: Types.DocumentArray<IPokemon> },
+    currentPokemon: { required: true, type: Number }
 });
 
 const Pokemon = mongoose.model<IPokemon>("Pokemon", pokemonSchema);
-const User = mongoose.model<IUser>("User");
+const User = mongoose.model<IUser>("User", userSchema);
 
 // creates a hash
-function cyrb53(str:string, seed:number = 0) {
+function cyrb53(str: string, seed: number = 0) {
     let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
-    for(let i = 0, ch; i < str.length; i++) {
+    for (let i = 0, ch; i < str.length; i++) {
         ch = str.charCodeAt(i);
         h1 = Math.imul(h1 ^ ch, 2654435761);
         h2 = Math.imul(h2 ^ ch, 1597334677);
     }
-    h1  = Math.imul(h1 ^ (h1 >>> 16), 2246822507);
+    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507);
     h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);
-    h2  = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
+    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
     h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
-  
+
     return 4294967296 * (2097151 & h2) + (h1 >>> 0);
 };
 
@@ -57,9 +57,14 @@ export async function loadPokemon() {
                 currentHP: undefined,
                 wins: 0,
                 losses: 0,
-                captureDate:undefined
+                captureDate: undefined
             });
             await pokemon.save();
         }
     }
+}
+
+export async function getPokemonById(id:number):Promise<IPokemon | null> {
+   await mongoose.connect(url);
+   return await Pokemon.findOne({id: id});
 }
