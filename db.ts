@@ -69,7 +69,7 @@ export async function RegisterUserInDB(name: string, password: string) {
     try {
         await client.connect();
         const passwordHash: number = cyrb53(password);
-        
+
         const collection: Collection = await getUserCollectionFromMongoDB();
         const user: IUser = {
             name: name,
@@ -102,3 +102,12 @@ function cyrb53(str: string, seed: number = 531): number {
 
     return 4294967296 * (2097151 & h2) + (h1 >>> 0);
 };
+
+
+///////////////////////// Test Functies ////////////////////////////////////////////////////
+async function testPokemonAPI() {
+    await GetPokemonFromApi();
+    console.table(PokemonList)
+}
+
+testPokemonAPI();
