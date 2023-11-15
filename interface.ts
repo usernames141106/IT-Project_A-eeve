@@ -1,3 +1,5 @@
+import { ObjectId } from "bson"
+
 export interface IPokemon{
     id: number,
     name: string,
