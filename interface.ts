@@ -7,6 +7,8 @@ export interface IPokemon{
     height: number,
     weight: number,
     maxHP: number,
+    attack:number,
+    defence:number,
     currentHp?:number,
     wins:number,
     losses:number,

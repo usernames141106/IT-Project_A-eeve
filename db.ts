@@ -4,7 +4,7 @@ import { IPokemon, IUser } from "./interface";
 const uri: string = "mongodb+srv://itProject:f5pajH6wH8eHzpI5@cluster0.jnpguhk.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 
-let PokemonList: IPokemon[] = []; //variable pokemons from api
+let PokemonList: IPokemon[] = []; // variable pokemons from api
 let User: IUser | null = null; // null betekent uitgelogd
 
 async function getUserCollectionFromMongoDB(): Promise<Collection> {
@@ -22,6 +22,8 @@ export async function GetPokemonFromApi() {
             height: jsonData.height,
             weight: jsonData.weight,
             maxHP: jsonData.stats[0].base_stat,
+            attack: jsonData.stats[1].base_stat,
+            defence: jsonData.stats[2].base_stat,
             currentHp: undefined,
             wins: 0,
             losses: 0,
