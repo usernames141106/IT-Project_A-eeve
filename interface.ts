@@ -19,7 +19,7 @@ export interface IPokemon{
 export interface IUser  {
     _id?: ObjectId,
     name: string,
-    passwordHash: string,
+    passwordHash: number,
     pokemons:IPokemon[],
     currentPokemon?:number
 }

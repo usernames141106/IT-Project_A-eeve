@@ -34,7 +34,7 @@ export async function GetPokemonFromApi() {
 
 export async function LoadUserFromMongoDB(name: string, password: string) {
     try {
-        const passwordHash: string = cyrb53(password);
+        const passwordHash: number = cyrb53(password);
         await client.connect();
 
         const collection: Collection = await getUserCollectionFromMongoDB();
@@ -68,7 +68,7 @@ export async function UpdateUserInDB() {
 export async function RegisterUserInDB(name: string, password: string) {
     try {
         await client.connect();
-        const passwordHash: string = cyrb53(password);
+        const passwordHash: number = cyrb53(password);
         
         const collection: Collection = await getUserCollectionFromMongoDB();
         const user: IUser = {
@@ -88,7 +88,7 @@ export async function RegisterUserInDB(name: string, password: string) {
 }
 
 // zet een string om naar een code om het wachtwoord niet in plain text niet in de db op te slaan (een cyb53 hashalgoritme)
-function cyrb53(str: string, seed: number = 531): string {
+function cyrb53(str: string, seed: number = 531): number {
     let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
     for (let i = 0, ch; i < str.length; i++) {
         ch = str.charCodeAt(i);
@@ -100,5 +100,5 @@ function cyrb53(str: string, seed: number = 531): string {
     h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
     h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
 
-    return String(4294967296 * (2097151 & h2) + (h1 >>> 0));
+    return 4294967296 * (2097151 & h2) + (h1 >>> 0);
 };
