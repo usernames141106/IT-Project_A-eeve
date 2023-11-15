@@ -1,5 +1,5 @@
 import express from "express";
-import { loadPokemon } from "./db";
+import { GetPokemonFromApi } from "./db";
 const app = express();
 
 app.use(express.static("public"));
@@ -57,6 +57,6 @@ app.get("/pokemonvergelijken",(req,res)=> {
 })
 
 app.listen(app.get("port"), async () => {
-    await loadPokemon();
+    await GetPokemonFromApi();
     console.log(`Local url: http://localhost:${app.get("port")}`);
 });
