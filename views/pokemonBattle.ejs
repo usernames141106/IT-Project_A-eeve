@@ -2,70 +2,67 @@
   <script src="/js/battle.js" defer></script>
   <div class="row">
 
-    <main class="container col-9 d-flex flex-row flex-wrap col-md-9 col-sm-12 d-grid">
+    <main class="container col-9 d-flex flex-row flex-wrap col-md-9 col-sm-12 d-grid justify-content-center">
       <h1 class="mx-auto">Pokémon Battle</h1>
 
-      <section class="container d-flex "> <!-- section Pokemon -->
+      <section class="row justify-content-center"> <!-- section Pokemon -->
 
-        <article class="row justify-content-center">
-
-          <div class="card col-md-4 m-3 pb-3 custom-class" id="ownPokemon"> <!-- size and margin of card 1 -->
-            <img src="/images/pikachu.png" alt="Huidige Pokemon">
-            <div class="card-body text-center">
-              <h5 class="card-title">Pikachu</h5>
+        <div class="card col-md-4 m-3 pb-3 custom-class" id="ownPokemon"> <!-- size and margin of card 1 -->
+          <img src="/images/pikachu.png" alt="Huidige Pokemon">
+          <div class="card-body text-center">
+            <h5 class="card-title">Pikachu</h5>
+          </div>
+          <div class="hp"> <!-- HP bar own Pokémon -->
+            <table class="table caption-top mx-auto table-sm table-hover">
+              <tbody>
+                <tr>
+                  <th class="ps-4" style="text-align: start;">HP</th>
+                  <td id="HPLabel">100</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="progress"> <!-- this one is necessary to display a grey outline of the total HP -->
+              <div id="hp-bar" class="progress-bar"></div>
             </div>
-            <div class="hp"> <!-- HP bar own Pokémon -->
-              <table class="table caption-top mx-auto table-sm table-hover">
-                <tbody>
-                  <tr>
-                    <th class="ps-4" style="text-align: start;">HP</th>
-                    <td id="HPLabel">100</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="progress"> <!-- this one is necessary to display a grey outline of the total HP -->
-                <div id="hp-bar" class="progress-bar"></div>
-              </div>
+          </div>
+        </div>
+
+        <div class="card col-md-4 m-3 pb-3 custom-class" id="enemyPokemon"> <!-- size and margin of card 2 -->
+          <img src="/images/empty.png" alt="enemyPokemon">
+          <div class="card-body text-center">
+
+            <form class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2  " method="post">
+              <input type="search" id="zoekPokemon" class="form-control" placeholder="Zoek Pokémon" aria-label="Search"
+                list="pokemonlist" />
+              <datalist id="pokemonlist">
+                <option value="Pikachu"></option>
+                <option value="Charizard"></option>
+              </datalist>
+              <button id="buttonW" type="button" method="post" class="btn btn-primary buttonForm1"><svg
+                  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg></button>
+            </form>
+
+          </div>
+
+          <div class="hp"> <!-- HP bar enemy Pokémon -->
+            <table class="table caption-top mx-auto table-sm table-hover">
+              <tbody>
+                <tr>
+                  <th class="ps-4" style="text-align: start;">HP</th>
+                  <td id="HPLabelEnemy">100</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="progress"> <!-- this one is necessary to display a grey outline of the total HP -->
+              <div id="hp-bar-enemy" class="progress-bar"></div>
             </div>
           </div>
 
-          <div class="card col-md-4 m-3 pb-3 custom-class" id="enemyPokemon"> <!-- size and margin of card 2 -->
-            <img src="/images/empty.png" alt="enemyPokemon">
-            <div class="card-body text-center">
-
-              <form class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2  " method="post">
-                <input type="search" id="zoekPokemon" class="form-control" placeholder="Zoek Pokémon" aria-label="Search"
-                  list="pokemonlist" />
-                <datalist id="pokemonlist">
-                  <option value="Pikachu"></option>
-                  <option value="Charizard"></option>
-                </datalist>
-                <button id="buttonW" type="button" method="post" class="btn btn-primary buttonForm1"><svg
-                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
-                    viewBox="0 0 16 16">
-                    <path
-                      d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                  </svg></button>
-              </form>
-
-            </div>
-
-            <div class="hp"> <!-- HP bar enemy Pokémon -->
-              <table class="table caption-top mx-auto table-sm table-hover">
-                <tbody>
-                  <tr>
-                    <th class="ps-4" style="text-align: start;">HP</th>
-                    <td id="HPLabelEnemy">100</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="progress"> <!-- this one is necessary to display a grey outline of the total HP -->
-                <div id="hp-bar-enemy" class="progress-bar"></div>
-              </div>
-            </div>
-
-          </div>
-        </article>
+        </div>
       </section>
 
       <section class="text-center col-md-3 col-sm-5 container mb-3 mt-3"> <!-- section fightButton -->
@@ -80,6 +77,6 @@
   <%- include("partials/footer"); %>
 
 
-  <!-- BRONNEN -->
-  <!-- Fightbutton afbeelding -->
-  <!-- https://assetsio.reedpopcdn.com/pokemon-go-type-chart-strength-weakness-resistance-super-effective.jpg?width=690&quality=80&format=jpg&auto=webp -->
+    <!-- BRONNEN -->
+    <!-- Fightbutton afbeelding -->
+    <!-- https://assetsio.reedpopcdn.com/pokemon-go-type-chart-strength-weakness-resistance-super-effective.jpg?width=690&quality=80&format=jpg&auto=webp -->

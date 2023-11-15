@@ -13,8 +13,6 @@ export interface IPokemon{
     wins:number,
     losses:number,
     captureDate?:Date
-    // attack: number,
-    // defence: number
 }
 export interface IUser  {
     _id?: ObjectId,
