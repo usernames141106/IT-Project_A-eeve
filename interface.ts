@@ -1,4 +1,4 @@
-export interface Ipokemon{
+export interface IPokemon{
     id: number,
     name: string,
     image: string,
@@ -9,4 +9,10 @@ export interface Ipokemon{
     wins:number,
     losses:number,
     captureDate?:Date
+}
+export interface IUser  {
+    name: string,
+    passwordHash: string,
+    pokemons:IPokemon[],
+    currentPokemon:number
 }

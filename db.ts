@@ -1,9 +1,9 @@
-import mongoose, { Schema } from 'mongoose';
-import { Ipokemon } from './interface';
+import mongoose, { Schema, Types } from 'mongoose';
+import { IUser, IPokemon } from './interface';
 
 const url: string = "mongodb+srv://itProject:f5pajH6wH8eHzpI5@cluster0.jnpguhk.mongodb.net/?retryWrites=true&w=majority";
 
-const pokemonSchema = new Schema<Ipokemon>({
+const pokemonSchema = new Schema<IPokemon>({
     id: {required: true, type: Number},
     name: {required: true, type: String},
     image: {required: true, type: String},
@@ -15,8 +15,15 @@ const pokemonSchema = new Schema<Ipokemon>({
     losses: {required: true, type: Number},
     captureDate: {required: false, type: Date}
 });
+const userSchema = new Schema<IUser>({
+    name: {required: true, type: String},
+    passwordHash: {required: true, type: String},
+    pokemons: {required: true, type: Types.DocumentArray<IPokemon>},
+    currentPokemon: {required: true, type: Number}
+});
 
-const Pokemon = mongoose.model<Ipokemon>("Pokemon", pokemonSchema);
+const Pokemon = mongoose.model<IPokemon>("Pokemon", pokemonSchema);
+const User = mongoose.model<IUser>("User");
 
 // creates a hash
 function cyrb53(str:string, seed:number = 0) {
