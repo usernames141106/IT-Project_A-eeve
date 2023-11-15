@@ -9,10 +9,14 @@ export interface IPokemon{
     wins:number,
     losses:number,
     captureDate?:Date
+    // attack: number,
+    // defence: number
 }
 export interface IUser  {
+    _id?: ObjectId,
     name: string,
     passwordHash: string,
     pokemons:IPokemon[],
-    currentPokemon:number
+    currentPokemon?:number
 }
+
