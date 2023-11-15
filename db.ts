@@ -22,6 +22,7 @@ const userSchema = new Schema<IUser>({
     currentPokemon: { required: true, type: Number }
 });
 
+////pokemons: {required: true, type: new Types.Array<IPokemon>()},
 const Pokemon = mongoose.model<IPokemon>("Pokemon", pokemonSchema);
 const User = mongoose.model<IUser>("User", userSchema);
 
