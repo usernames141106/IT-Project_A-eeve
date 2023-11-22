@@ -6,9 +6,9 @@
       <% if(inBall) { %>
         <script defer>
           document.addEventListener('DOMContentLoaded', function () {
-              var modal = document.getElementById('renameModal');
+              const modal = document.getElementById('renameModal');
               if (modal) {
-                  var bootstrapModal = new bootstrap.Modal(modal);
+                  const bootstrapModal = new bootstrap.Modal(modal);
                   bootstrapModal.show();
               }
           });

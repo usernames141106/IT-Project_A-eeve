@@ -9,13 +9,12 @@
       <img src="/images/Whoisthatpokemon.webp" class="img-fluid  rounded mb-3 col-sm-12 " alt="" >
 
       <!-- Image to layer on top -->
-      <img src="/images/ditto who is.png" class="layered-img" alt=""> {}
+      <img src="/images/ditto who is.png" class="layered-img" alt=""> 
       <div class="pt-5">
       <form class="container form-outline mx-auto p-0 d-flex flex-row gap-1 " method="post">
           <input type="search" id="form1" class="form-control" placeholder="WIE IS DEZE POKEMON?" aria-label="Search" list="pokemonlist" />
           <datalist id="pokemonlist">
-              <option value="Pikachu"></option>
-              <option value="Charizard"></option>
+            <% PokemonList.map(x => {%><option><%= x.name %></option><%}); %>
           </datalist>
           <button id="buttonW" type="button" method="post" class="btn btn-primary buttonForm1">poging</button>
       </form>
@@ -23,7 +22,7 @@
       
       <script defer>
         document.addEventListener('DOMContentLoaded', function() {
-          var form1 = document.getElementById('form1');
+          const form1 = document.getElementById('form1');
       
           form1.addEventListener('keypress', function(event) {
             if (event.which === 13) { // 13 is the key code for "Enter"

@@ -1,15 +1,7 @@
-import { MongoClient, Collection } from "mongodb";
 import { IPokemon, IUser } from "./interface";
 
-const uri: string = "mongodb+srv://itProject:f5pajH6wH8eHzpI5@cluster0.jnpguhk.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri);
 
-export let PokemonList: IPokemon[] = []; // variable pokemons from api
-export let User: IUser | null = null; // null betekent uitgelogd
-
-async function getUserCollectionFromMongoDB(): Promise<Collection> {
-    return await client.db("itProject").collection('Players');
-}
+export let PokemonList: IPokemon[] = []; // constiable pokemons from api
 
 export async function GetPokemonFromApi() {
     for (let index = 1; index <= 151; index++) {
@@ -32,82 +24,9 @@ export async function GetPokemonFromApi() {
     }
 }
 
-export async function LoadUserFromMongoDB(name: string, password: string) {
-    try {
-        const passwordHash: number = cyrb53(password);
-        await client.connect();
-
-        const collection: Collection = await getUserCollectionFromMongoDB();
-        User = await collection.findOne<IUser>({ name: name, passwordHash: passwordHash });
-    }
-    catch (e) {
-        console.error(e);
-    }
-    finally {
-        await client.close();
-    }
-}
-
-export async function UpdateUserInDB() {
-    try {
-        await client.connect();
-
-        const collection: Collection = await getUserCollectionFromMongoDB();
-        if (User != null) {
-            await collection.updateOne({ _id: User?._id }, User);
-        }
-    }
-    catch (e) {
-        console.error(e);
-    }
-    finally {
-        await client.close();
-    }
-}
-
-export async function RegisterUserInDB(name: string, password: string) {
-    try {
-        await client.connect();
-        const passwordHash: number = cyrb53(password);
-
-        const collection: Collection = await getUserCollectionFromMongoDB();
-        const user: IUser = {
-            name: name,
-            passwordHash: passwordHash,
-            pokemons: []
-        }
-        await collection.insertOne(user);
-    }
-    catch (e) {
-        console.error(e);
-    }
-    finally {
-        await client.close();
-        await LoadUserFromMongoDB(name, password);  // geregistreerde gebruiker inloggen
-    }
-}
-
-// zet een string om naar een code om het wachtwoord niet in plain text niet in de db op te slaan (een cyb53 hashalgoritme)
-function cyrb53(str: string, seed: number = 531): number {
-    let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
-    for (let i = 0, ch; i < str.length; i++) {
-        ch = str.charCodeAt(i);
-        h1 = Math.imul(h1 ^ ch, 2654435761);
-        h2 = Math.imul(h2 ^ ch, 1597334677);
-    }
-    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507);
-    h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);
-    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
-    h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
-
-    return 4294967296 * (2097151 & h2) + (h1 >>> 0);
-};
 
 
 ///////////////////////// Test Functies ////////////////////////////////////////////////////
 async function testPokemonAPI() {
-    await GetPokemonFromApi();
     console.table(PokemonList)
 }
-
-testPokemonAPI();
