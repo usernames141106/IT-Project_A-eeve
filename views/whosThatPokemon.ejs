@@ -7,9 +7,9 @@
     <article class="mx-auto flex-column d-flex col-8  relative-position custom-class">
       <!-- Original image -->
       <img src="/images/Whoisthatpokemon.webp" class="img-fluid  rounded mb-3 col-sm-12 " alt="" >
-
+      <% const randomPokemon = PokemonList[Math.floor(Math.random() * PokemonList.length)]; %>
       <!-- Image to layer on top -->
-      <img src="/images/ditto who is.png" class="layered-img" alt=""> 
+      <img src="<%= randomPokemon.image %>" class="layered-img" alt=""> 
       <div class="pt-5">
       <form class="container form-outline mx-auto p-0 d-flex flex-row gap-1 " method="post">
           <input type="search" id="form1" class="form-control" placeholder="WIE IS DEZE POKEMON?" aria-label="Search" list="pokemonlist" />
