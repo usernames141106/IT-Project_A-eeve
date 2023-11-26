@@ -168,7 +168,6 @@ label {
 /*---------- Pokemon battle ----------*/
 #ownPokemon:hover,
 #enemyPokemon:hover {
-  /* turn off hover for these cards */
   transform: none;
 }
 
@@ -221,6 +220,14 @@ label {
   transform: scale(1.1);
   transition: 0.3s;
 }
+
+/* #pokemonlist {
+  text-transform: uppercase;
+}
+
+#pokemonlistnames {
+  text-transform: uppercase;
+} */
 
 /*---------- Pokemon vergelijken ----------*/
 #buttonW {

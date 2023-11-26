@@ -32,11 +32,9 @@
           <div class="card-body text-center">
 
             <form class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2  " method="post">
-              <input type="search" id="zoekPokemon" class="form-control" placeholder="Zoek Pokémon" aria-label="Search"
-                list="pokemonlist" />
+              <input type="search" id="zoekPokemon" class="form-control" placeholder="Zoek Pokémon" aria-label="Search" list="pokemonlist" />
               <datalist id="pokemonlist">
-                <!-- werkt niet -->
-                <% PokemonList.map(x => {%><option><%= x.name %></option><%}); %>  
+                <% PokemonList.map(x => {%><option id="pokemonlistnames"><%= x.name %></option><%}); %>  
               </datalist>
               <button id="buttonW" type="button" method="post" class="btn btn-primary buttonForm1"><svg
                   xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
