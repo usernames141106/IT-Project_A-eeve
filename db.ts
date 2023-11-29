@@ -1,9 +1,8 @@
 import { IPokemon, IUser } from "./interface";
-import bcrypt from 'bcrypt';
 import { MongoClient, Collection } from "mongodb";
 
 
-const uri: string = "mongodb+srv://itProject:f5pajH6wH8eHzpI5@cluster0.jnpguhk.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://berrietalboom:webontwikkeling@cluster0.1xbqwl8.mongodb.net/?retryWrites=true&w=majority"
 const client = new MongoClient(uri);
 
 export let PokemonList: IPokemon[] = []; // constiable pokemons from api
@@ -14,22 +13,20 @@ async function getUserCollectionFromMongoDB(): Promise<Collection> {
 
 export async function RegisterUserInDB(email: string, password: string) {
     try {
-        await client.connect();
-
         const indexOfAtSymbol = email.indexOf("@");
         let username = email.substring(0, indexOfAtSymbol);
 
-        bcrypt.hash(password, 20, async function (err, hash) {
-            const newUser: IUser = {
-                name: username,
-                email: email,
-                passwordHash: hash,
-                pokemons: [],
-                currentPokemon: undefined
-            }
-            const collection: Collection = await getUserCollectionFromMongoDB();
-            await collection.insertOne(newUser);
-        });
+        await client.connect();
+        const newUser: IUser = {
+            name: username,
+            email: email,
+            passwordHash: password,
+            pokemons: [],
+            currentPokemon: undefined
+        }
+
+        const collection: Collection = await getUserCollectionFromMongoDB();
+        await collection.insertOne(newUser);
     }
     catch (e) {
         console.error(e);
@@ -39,19 +36,14 @@ export async function RegisterUserInDB(email: string, password: string) {
     }
 }
 
+
+
 export async function LoadUserFromMongoDB(email: string, password: string): Promise<IUser | null> {
     let outputUser: IUser | null = null;
     try {
         await client.connect();
         const collection: Collection = await getUserCollectionFromMongoDB();
-        let user: any = await collection.findOne({ email: email });
-        if (user != null) {
-            bcrypt.compare(password, user.passwordHash, function (err, result) {
-                if (result) {
-                    outputUser = user;
-                }
-            });
-        }
+        outputUser = await collection.findOne<IUser>({ email: email });
     }
     catch (e) {
         console.error(e);
@@ -61,7 +53,6 @@ export async function LoadUserFromMongoDB(email: string, password: string): Prom
         return outputUser;
     }
 }
-
 
 export async function GetPokemonFromApi() {
     for (let index = 1; index <= 151; index++) {
