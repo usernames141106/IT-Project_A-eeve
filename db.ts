@@ -1,13 +1,12 @@
 import { IPokemon, IUser } from "./interface";
-import { MongoClient, Collection } from "mongodb";
-
+import { MongoClient, Collection, ConnectionCheckOutFailedEvent } from "mongodb";
 
 const uri = "mongodb+srv://berrietalboom:webontwikkeling@cluster0.1xbqwl8.mongodb.net/?retryWrites=true&w=majority"
 const client = new MongoClient(uri);
 
 export let PokemonList: IPokemon[] = []; // constiable pokemons from api
 
-async function getUserCollectionFromMongoDB(): Promise<Collection> {
+async function getUserCollection(): Promise<Collection> {
     return await client.db("itProject").collection('Players');
 }
 
@@ -25,7 +24,7 @@ export async function RegisterUserInDB(email: string, password: string) {
             currentPokemon: undefined
         }
 
-        const collection: Collection = await getUserCollectionFromMongoDB();
+        const collection: Collection = await getUserCollection();
         await collection.insertOne(newUser);
     }
     catch (e) {
@@ -36,13 +35,11 @@ export async function RegisterUserInDB(email: string, password: string) {
     }
 }
 
-
-
 export async function LoadUserFromMongoDB(email: string, password: string): Promise<IUser | null> {
     let outputUser: IUser | null = null;
     try {
         await client.connect();
-        const collection: Collection = await getUserCollectionFromMongoDB();
+        const collection: Collection = await getUserCollection();
         outputUser = await collection.findOne<IUser>({ email: email });
     }
     catch (e) {
@@ -51,6 +48,18 @@ export async function LoadUserFromMongoDB(email: string, password: string): Prom
     finally {
         await client.close();
         return outputUser;
+    }
+}
+
+export async function UpdateUserInDB(user: IUser) {
+    try {
+        await client.connect();
+        const collection: Collection = await getUserCollection();
+        await collection.updateOne({ _id: user._id }, user);
+    } catch (e) {
+        console.error(e)
+    } finally {
+        await client.close();
     }
 }
 

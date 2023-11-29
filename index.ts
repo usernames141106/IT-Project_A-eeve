@@ -1,7 +1,7 @@
 import express from 'express';
 import session from 'express-session';
 import { IPokemon, IUser } from './interface';
-import { GetPokemonFromApi, PokemonList } from './db';
+import { GetPokemonFromApi, LoadUserFromMongoDB, PokemonList, UpdateUserInDB } from './db';
 import { RegisterUserInDB } from './db';
 
 const app = express();
@@ -42,6 +42,21 @@ app.get("/pokemonBattle", (req, res) => {
 app.get("/whosthatpokemon", (req, res) => {
     res.render("whosThatPokemon", { PokemonList: PokemonList });
 });
+app.post("/whosthatpokemon", async (req, res) => {
+    if (req.session.currentUser?.email) {
+        let currentUser: IUser = req.session.currentUser;
+        const { test } = req.body;
+        currentUser.email = String(test);
+
+        try {
+            await UpdateUserInDB(currentUser)
+        }
+        catch(e) {
+            console.error(e);
+        }
+        
+    }
+});
 
 app.post("/pokemonCatch", (req, res) => {
     const nickname: string | undefined = req.body.nickname;
@@ -72,10 +87,23 @@ app.get("/pokemonvergelijken", (req, res) => {
     res.render("pokemonvergelijken");
 });
 
-app.post("/login", (req, res) => {
+app.post("/login", async (req, res) => {
     const { email, password } = req.body;
-    console.table([email, password]);
-    res.redirect("/");
+    //check if excists
+    let user: IUser | null = await LoadUserFromMongoDB(email, password);
+    if (user != null) {
+        const userS: IUser = user;
+        req.session.regenerate(err => {
+            req.session.currentUser = userS;
+            res.redirect("/home"); //later te verranderen 
+        });
+    }
+    else {
+        req.session.destroy(err => {
+            console.log("user not found")
+            res.redirect("/");
+        })
+    }
 });
 
 app.post("/register", async (req, res) => {

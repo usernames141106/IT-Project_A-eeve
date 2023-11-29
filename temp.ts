@@ -13,7 +13,7 @@ export async function RegisterUserInDB(email: string, password: string) {
                 pokemons: [],
                 currentPokemon: undefined
             }
-            const collection: Collection = await getUserCollectionFromMongoDB();
+            const collection: Collection = await getUserCollection();
             await collection.insertOne(newUser);
         });
     }

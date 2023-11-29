@@ -11,13 +11,17 @@
       <!-- Image to layer on top -->
       <img src="<%= randomPokemon.image %>" class="layered-img" alt=""> 
       <div class="pt-5">
-      <form class="container form-outline mx-auto p-0 d-flex flex-row gap-1 " method="post">
-          <input type="search" id="form1" class="form-control" placeholder="WIE IS DEZE POKEMON?" aria-label="Search" list="pokemonlist" />
+
+
+      <form class="container form-outline mx-auto p-0 d-flex flex-row gap-1 " method="post" action="/whosthatpokemon">
+          <input type="search" id="form1" class="form-control" placeholder="WIE IS DEZE POKEMON?" aria-label="Search" list="pokemonlist" name="test"/>
           <datalist id="pokemonlist">
             <% PokemonList.map(x => {%><option><%= x.name %></option><%}); %>
           </datalist>
           <button id="buttonW" type="button" method="post" class="btn btn-primary buttonForm1">poging</button>
       </form>
+
+
     </div>
       
       <script defer>
