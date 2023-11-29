@@ -43,12 +43,12 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <form class="d-flex flex-column">
+                                        <form class="d-flex flex-column" action="/login" method="post">
                                             <div class="mb-3">
-                                              <input type="email" class="form-outline border border-0 border-bottom ms-2" id="emaila" aria-describedby="emailHelp" placeholder="Email">
+                                              <input type="email" class="form-outline border border-0 border-bottom ms-2" id="emaila" aria-describedby="emailHelp" placeholder="Email" name="email">
                                             </div>
                                             <div class="mb-3">
-                                              <input type="password" class="form-outline border border-0 border-bottom ms-2" id="password" placeholder="paswoord">
+                                              <input type="password" class="form-outline border border-0 border-bottom ms-2" id="password" placeholder="paswoord" name="password">
                                             </div>
                                             <button type="submit" class="btn btn-outline-primary text-uppercase fs-6">Login</button>
                                           </form>
@@ -62,15 +62,15 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <form class="d-flex flex-column">
+                                        <form class="d-flex flex-column" action="/register" method="post">
                                             <div class="mb-3">
-                                              <input type="email" class="form-outline border border-0 border-bottom ms-2" id="emailb" aria-describedby="emailHelp" placeholder="Email">
+                                              <input type="email" class="form-outline border border-0 border-bottom ms-2" id="emailb" aria-describedby="emailHelp" placeholder="Email" name="email">
                                             </div>
                                             <div class="mb-3">
-                                              <input type="password" class="form-outline border border-0 border-bottom ms-2" id="passworda" placeholder="paswoord">
+                                              <input type="password" class="form-outline border border-0 border-bottom ms-2" id="passworda" placeholder="paswoord" name="passworda">
                                             </div>
                                             <div class="mb-3">
-                                                <input type="password" class="form-outline border border-0 border-bottom ms-2" id="passwordb" placeholder="Herhaal paswoord">
+                                                <input type="password" class="form-outline border border-0 border-bottom ms-2" id="passwordb" placeholder="Herhaal paswoord" name="passwordb">
                                               </div>
                                             <button type="submit" class="btn btn-outline-primary text-uppercase fs-6">Registreer</button>
                                           </form>

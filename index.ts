@@ -2,6 +2,7 @@ import express from 'express';
 import session from 'express-session';
 import { IPokemon, IUser } from './interface';
 import { GetPokemonFromApi, PokemonList } from './db';
+import { RegisterUserInDB } from './db';
 
 const app = express();
 
@@ -9,11 +10,10 @@ app.use(session({
     secret: 'blabla',
     resave: false,
     saveUninitialized: false
-}))
+}));
 
 declare module 'express-session' {
     interface SessionData {
-        views: number,
         currentUser?: IUser
     }
 }
@@ -32,15 +32,15 @@ app.get("/", (req, res) => {
 });
 
 app.get("/home", (req, res) => {
-    res.render("home")
+    res.render("home");
 });
 
 app.get("/pokemonBattle", (req, res) => {
-    res.render("pokemonBattle", {PokemonList: PokemonList})
+    res.render("pokemonBattle", { PokemonList: PokemonList });
 });
 
 app.get("/whosthatpokemon", (req, res) => {
-    res.render("whosThatPokemon" , {PokemonList: PokemonList})
+    res.render("whosThatPokemon", { PokemonList: PokemonList });
 });
 
 app.post("/pokemonCatch", (req, res) => {
@@ -53,23 +53,37 @@ app.post("/pokemonCatch", (req, res) => {
 });
 
 app.post("/pokemonCatch/useDefault", (req, res) => {
-    res.render("pokemonCatch", { inBall: false, name: "eevee" })
+    res.render("pokemonCatch", { inBall: false, name: "eevee" });
 });
 
 app.get("/pokemonCatch", (req, res) => {
-    res.render("pokemonCatch", { inBall: false, name: "eevee" , PokemonList : PokemonList})
+    res.render("pokemonCatch", { inBall: false, name: "eevee", PokemonList: PokemonList });
 });
 
 app.get("/pokemondetail", (req, res) => {
-    res.render("pokemonDetail")
+    res.render("pokemonDetail");
 });
 
 app.get("/mypokemon", (req, res) => {
-    res.render("myPokemon")
+    res.render("myPokemon");
 });
 
 app.get("/pokemonvergelijken", (req, res) => {
-    res.render("pokemonvergelijken")
+    res.render("pokemonvergelijken");
+});
+
+app.post("/login", (req, res) => {
+    const { email, password } = req.body;
+    console.table([email, password]);
+    res.redirect("/");
+});
+
+app.post("/register", async (req, res) => {
+    const { email, passworda, passwordb } = req.body;
+    if (passworda == passwordb && passworda != undefined) {
+        await RegisterUserInDB(email, passworda);
+    }
+    res.redirect("/");
 });
 
 app.listen(app.get("port"), async () => {

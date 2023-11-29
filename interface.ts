@@ -17,7 +17,8 @@ export interface IPokemon{
 export interface IUser  {
     _id?: ObjectId,
     name: string,
-    passwordHash: number,
+    email: string,
+    passwordHash: any,
     pokemons:IPokemon[],
     currentPokemon?:number
 }
