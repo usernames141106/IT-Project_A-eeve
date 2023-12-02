@@ -25,7 +25,10 @@ export async function RegisterUserInDB(email: string, password: string) {
         }
 
         const collection: Collection = await getUserCollection();
-        await collection.insertOne(newUser);
+        const existingUser = await collection.findOne({email: email});
+        if(!(existingUser)) { // maakt zeker dat er geen nieuwe user gemaakt word met een bestaande email
+            await collection.insertOne(newUser);
+        }
     }
     catch (e) {
         console.error(e);
@@ -51,11 +54,25 @@ export async function LoadUserFromMongoDB(email: string, password: string): Prom
     }
 }
 
+// functie aangepest om email te gebruiken als unieke identifier en limieten te zeten op wat kan geupdate worden
+/* gebruiksvoorbeeld in post of get functie
+if(req.session.currentUser) {
+    req.session.currentUser.name = newName;
+    await UpdateUserInDB(req.session.currentUser);
+}
+*/
 export async function UpdateUserInDB(user: IUser) {
     try {
         await client.connect();
         const collection: Collection = await getUserCollection();
-        await collection.updateOne({ _id: user._id }, user);
+        await collection.updateOne({ email: user.email }, {
+            $set: {
+                name: user.name,
+                passwordHash: user.passwordHash,
+                pokemons: user.pokemons,
+                currentPokemon: user.currentPokemon
+            }
+        });
     } catch (e) {
         console.error(e)
     } finally {

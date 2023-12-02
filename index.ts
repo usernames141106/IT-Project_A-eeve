@@ -32,6 +32,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/home", (req, res) => {
+    console.log(req.session.currentUser);
     res.render("home");
 });
 
@@ -43,22 +44,23 @@ app.get("/whosthatpokemon", (req, res) => {
     res.render("whosThatPokemon", { PokemonList: PokemonList });
 });
 app.post("/whosthatpokemon", async (req, res) => {
-    if (req.session.currentUser?.email) {
-        let currentUser: IUser = req.session.currentUser;
-        const { test } = req.body;
-        currentUser.email = String(test);
+    // onderstaande is testcode
+    // if (req.session.currentUser?.email) {
+    //     let currentUser: IUser = req.session.currentUser;
+    //     const { test } = req.body;
+    //     currentUser.email = String(test);
 
-        try {
-            await UpdateUserInDB(currentUser)
-        }
-        catch(e) {
-            console.error(e);
-        }
+    //     try {
+    //         await UpdateUserInDB(currentUser)
+    //     }
+    //     catch(e) {
+    //         console.error(e);
+    //     }
         
-    }
+    // }
 });
 
-app.post("/pokemonCatch", (req, res) => {
+app.post("/pokemonCatch", async (req, res) => {
     const nickname: string | undefined = req.body.nickname;
     if (nickname == undefined) {
         res.render("pokemonCatch", { inBall: true, name: "eevee" });
