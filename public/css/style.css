@@ -210,6 +210,16 @@ label {
   text-align: left;
 }
 
+#buttonSearch {
+  background-color: #5e727d;
+  border-color: #5e727d;
+}
+
+#buttonSearch:hover {
+  background-color: #dee2e6;
+  color: #5e727d;
+}
+
 #fightButton {
   border: 1px solid lightgrey;
   position: relative;
@@ -220,14 +230,6 @@ label {
   transform: scale(1.1);
   transition: 0.3s;
 }
-
-/* #pokemonlist {
-  text-transform: uppercase;
-}
-
-#pokemonlistnames {
-  text-transform: uppercase;
-} */
 
 /*---------- Pokemon vergelijken ----------*/
 #buttonW {
