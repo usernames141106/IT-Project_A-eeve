@@ -1,17 +1,19 @@
 <%- include("partials/header",{title: "Pokemon vergelijken" , secondRow:true }); %>
-        <script src="/js/search.js" defer></script>
-        <main class="container flex-column d-flex col-9 col-md-9 col-sm-12 d-grid gap-4 ">
+    <script src="/js/search.js" defer></script>
+    <main class="container flex-column d-flex col-9 col-md-9 col-sm-12 d-grid gap-4">
         <h1 class="mx-auto text-center ">Pokémon vergelijken</h1>
 
-            <div class="row-cols-1 row-cols-md-2 d-flex flex-row flex-wrap  justify-content-evenly ">
+        <div class="row-cols-1 row-cols-md-2 d-flex flex-row flex-wrap  justify-content-evenly">
             <article class="col-md-9 col-lg-4 col-sm-7 d-flex flex-column">
                 <div class="">
-                    <form class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2  " method="post">
+                    <form class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2" method="post">
                         <input type="search" id="form1" class="form-control" placeholder="Zoek Pokémon"
                             aria-label="Search" list="pokemonlist" />
                         <datalist id="pokemonlist">
-                            <option value="Pikachu"></option>
-                            <option value="Charizard"></option>
+                            <% PokemonList.map(x=> {%><option key="index">
+                                    <%= x.name %>
+                                </option>
+                                <%}); %>
                         </datalist>
                         <button id="buttonW" type="button" method="post" class="btn btn-primary buttonForm1"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -22,8 +24,8 @@
                     </form>
                 </div>
 
-                <a href="/pokemonCatch" class="h-50 d-flex justify-content-center"><img src="/images/pikachu.png" class="img-fluid mx-auto rounded"
-                        alt=""></a>
+                <a href="/pokemonCatch" class="h-50 d-flex justify-content-center"><img src="/images/empty.png"
+                        class="img-fluid mx-auto rounded" alt=""></a>
 
                 <table class="table caption-top  table table-hover">
                     <caption>
@@ -67,18 +69,20 @@
                     </tbody>
                 </table>
             </article>
-        
+
             <article class="col-md-9 col-lg-4 col-sm-7 d-flex flex-column">
 
                 <div class="">
-                    <form class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2  " method="post">
+                    <form class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2" method="post">
                         <input type="search" id="form2" class="form-control" placeholder="Zoek Pokémon"
                             aria-label="Search" list="pokemonlist" />
                         <datalist id="pokemonlist">
-                            <option value="pikachu"></option>
-                            <option value="charizard"></option>
+                            <% PokemonList.map(x=> {%><option key="index">
+                                    <%= x.name %>
+                                </option>
+                                <%}); %>
                         </datalist>
-                        <button id="buttonW" type="button" method="post"  class=" btn btn-primary buttonForm2"><svg
+                        <button id="buttonW" type="button" method="post" class=" btn btn-primary buttonForm2"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-search" viewBox="0 0 16 16">
                                 <path
@@ -87,10 +91,10 @@
                     </form>
                 </div>
 
-                <a href="/pokemonCatch" class="h-50 d-flex justify-content-center"><img src="/images/pikachu.png" class="img-fluid mx-auto rounded"
-                        alt=""></a>
+                <a href="/pokemonCatch" class="h-50 d-flex justify-content-center"><img src="/images/empty.png"
+                        class="img-fluid mx-auto rounded" alt=""></a>
 
-                <table class="table caption-top  mx-auto table table-hover" >
+                <table class="table caption-top mx-auto table table-hover">
                     <caption>
                         <h1>Statistieken</h1>
                     </caption>
@@ -99,43 +103,43 @@
                             <th style="text-align: start;">HP</th>
                             <td>10
                             </td>
-                        </tr>
-                        <tr>
-                            <th style="text-align: start;">Aanval</th>
-                            <td>10
-                                <button class="ms-2">
-                                    <img src="/images/arrow.png" height="20px" style="background-color: brown;"
-                                        class="rounded-circle">
-                                </button>
+                            </tr>
+                            <tr>
+                                <th style="text-align: start;">Aanval</th>
+                                <td>10
+                                    <button class="ms-2">
+                                        <img src="/images/arrow.png" height="20px" style="background-color: brown;"
+                                            class="rounded-circle">
+                                    </button>
 
-                                <button class="ms-2">
-                                    <img src="/images/arrow.png" height="20px" style="background-color: brown;"
-                                        class="rounded-circle" id="arrowDown">
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th style="text-align: start;">Verdediging</th>
-                            <td>10
-                                <button class="ms-2">
-                                    <img src="/images/arrow.png" height="20px" style="background-color: brown;"
-                                        class="rounded-circle">
-                                </button>
+                                    <button class="ms-2">
+                                        <img src="/images/arrow.png" height="20px" style="background-color: brown;"
+                                            class="rounded-circle" id="arrowDown">
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: start;">Verdediging</th>
+                                <td>10
+                                    <button class="ms-2">
+                                        <img src="/images/arrow.png" height="20px" style="background-color: brown;"
+                                            class="rounded-circle">
+                                    </button>
 
-                                <button class="ms-2 mirror">
-                                    <img src="/images/arrow.png" height="20px" style="background-color: brown;"
-                                        class="rounded-circle">
-                                </button>
+                                    <button class="ms-2 mirror">
+                                        <img src="/images/arrow.png" height="20px" style="background-color: brown;"
+                                            class="rounded-circle">
+                                    </button>
 
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
                     </tbody>
                 </table>
             </article>
-            </div>
+        </div>
 
-        </main>
-    
+    </main>
+
 
 
     <%- include("partials/aside",{myPokemonPagina: false}); %>

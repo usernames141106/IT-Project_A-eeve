@@ -65,7 +65,6 @@ nav {
 footer {
   background-color: #5e727d;
   color: white;
-  /* padding: 30px; */
 }
 
 #footerlink {
@@ -116,7 +115,7 @@ caption {
 }
 
 
-/*..........MyPokemon.............*/
+/*..........My Pokemon.............*/
 
 #myPokemonList {
   transition: 0.5s ease;
@@ -231,7 +230,7 @@ label {
   transition: 0.3s;
 }
 
-/*---------- Pokemon vergelijken ----------*/
+/*---------- compare Pokémon ----------*/
 #buttonW {
   background-color: #5e727d;
   border-color: #5e727d;

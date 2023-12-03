@@ -86,7 +86,7 @@ app.get("/mypokemon", (req, res) => {
 });
 
 app.get("/pokemonvergelijken", (req, res) => {
-    res.render("pokemonvergelijken");
+    res.render("pokemonvergelijken", { PokemonList: PokemonList });
 });
 
 app.post("/login", async (req, res) => {

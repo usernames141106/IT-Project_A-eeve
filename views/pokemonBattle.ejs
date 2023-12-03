@@ -1,4 +1,19 @@
 <%- include("partials/header",{title: "Pokemon Battle" , secondRow:true }); %>
+
+<script>
+  let PokemonList = <%= JSON.stringify(PokemonList) %>;
+
+  document.getElementById('buttonSearch').addEventListener('click', function() {
+  var selectedPokemon = document.getElementById('zoekPokemon').value;
+  console.log(selectedPokemon);
+ 
+  var pokemon = PokemonList.find(p => p.name === selectedPokemon);
+ 
+  if(pokemon) {
+    document.getElementById('pokemonImage').src = pokemon.image;
+  }
+ });
+</script>
  
   <script src="/js/battle.js" defer></script>
   <script src="/js/loadPokemon.js" defer></script>
