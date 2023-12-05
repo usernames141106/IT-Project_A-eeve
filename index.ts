@@ -56,7 +56,7 @@ app.post("/whosthatpokemon", async (req, res) => {
     //     catch(e) {
     //         console.error(e);
     //     }
-        
+
     // }
 });
 
@@ -74,7 +74,13 @@ app.post("/pokemonCatch/useDefault", (req, res) => {
 });
 
 app.get("/pokemonCatch", (req, res) => {
-    res.render("pokemonCatch", { inBall: false, name: "eevee", PokemonList: PokemonList });
+    if (req.session.currentUser) {
+        const pokemonId: Number = Number(req.query.id);
+        let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
+        pokemon = pokemon ? pokemon : PokemonList[132];
+        res.render("pokemonCatch", { inBall: req.session.currentUser.pokemons.every(x => x.id != pokemon?.id), Pokemon: pokemon });
+    }
+    res.redirect("/home");
 });
 
 app.get("/pokemondetail", (req, res) => {
