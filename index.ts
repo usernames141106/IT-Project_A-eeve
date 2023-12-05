@@ -40,6 +40,11 @@ app.get("/pokemonBattle", (req, res) => {
     res.render("pokemonBattle", { PokemonList: PokemonList });
 });
 
+app.get("/pokemonList", (req, res) => {
+    res.type('application/json');
+    res.json(PokemonList);
+})
+
 app.get("/whosthatpokemon", (req, res) => {
     res.render("whosThatPokemon", { PokemonList: PokemonList });
 });
