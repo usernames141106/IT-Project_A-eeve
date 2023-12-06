@@ -1,25 +1,26 @@
 <aside class="container text-center col-lg-3  col-md-9 col-sm-9  d-flex flex-column align-items-center custom-aside">
 
+    <% const currentPokemon = currentUser.pokemons[currentUser.currentPokemon]; %>
     <h2 class="h1">Huidige Pokémon</h2>
-    <img class="img-fluid rounded-circl mt-3" src="/images/pikachu.png" alt="huidige pokemon" width="100px">
-    <h3 class="mt-2">Crabominable</h3>
+    <img class="img-fluid rounded-circl mt-3" src="<%= currentPokemon ? currentPokemon.image : "/images/empty.png" %>" alt="huidige pokemon" width="100px">
+    <h3 class="mt-2"><%= currentPokemon ? currentPokemon.name : "Geen pok" %></h3>
     <div class="container custom-paside">
     <table class="table caption-top  mx-auto  table-sm table-hover">
         <caption class="text-center"><h3 class="fs-5">Statistieken</h3></caption>
         <tbody>
             <tr>
                 <th id="asideTH" class="ps-4" style="text-align: start;">HP</th>
-                <td style="text-align: start;" >100
+                <td style="text-align: start;" ><%= currentPokemon ? currentPokemon.maxHp : "???" %>
                 </td>
             </tr>
             <tr>
                 <th id="asideTH" class="ps-4"  style="text-align: start;">Aanval</th>
-                <td style="text-align: start;">10
+                <td style="text-align: start;"><%= currentPokemon ? currentPokemon.attack : "???" %>
                 </td>
             </tr>
             <tr>
                 <th id="asideTH" class="ps-4"  style="text-align: start;">Verdediging</th>
-                <td style="text-align: start;" >10  
+                <td style="text-align: start;" ><%= currentPokemon ? currentPokemon.defence : "???" %>
                 </td>
             </tr>
         </tbody>

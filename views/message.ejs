@@ -1,0 +1,24 @@
+<%- include("partials/header",{title: `message -- ${title}`, secondRow:false}); %>
+  <main class="container-fluid col-12 d-flex justify-content-center">
+    <article class="card mb-3 col-12 col-sm6" style="max-width: 450px;">
+      <a class="row g-0" href="/">
+        <div class="col-md-4">
+          <img src="/images/proj_eevee.jpg" class="img-fluid rounded-start" alt="Eevee">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= title %>
+            </h5>
+            <p class="card-text">
+              <%= message %>
+            </p>
+            <p>
+              Klik hier om terug te keren naar de project pagina.
+            </p>
+          </div>
+        </div>
+      </a>
+    </article>
+  </main>
+  <%- include("partials/footer"); %>

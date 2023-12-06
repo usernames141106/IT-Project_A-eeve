@@ -3,7 +3,6 @@ fetch("/pokemonList")
   .then(PokemonList => {
     document.getElementById('buttonSearch').addEventListener('click', function () {
       var selectedPokemon = document.getElementById('zoekPokemon').value;
-      console.log(selectedPokemon);
 
       var pokemon = PokemonList.find(p => p.name === selectedPokemon);
 

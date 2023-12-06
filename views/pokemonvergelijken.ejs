@@ -3,19 +3,20 @@
     <main class="container flex-column d-flex col-9 col-md-9 col-sm-12 d-grid gap-4">
         <h1 class="mx-auto text-center ">Pokémon vergelijken</h1>
 
-        <div class="row-cols-1 row-cols-md-2 d-flex flex-row flex-wrap  justify-content-evenly">
+        <div class="row-cols-1 row-cols-md-2 d-flex flex-row flex-wrap justify-content-evenly">
             <article class="col-md-9 col-lg-4 col-sm-7 d-flex flex-column">
-                <div class="">
-                    <form class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2" method="post">
-                        <input type="search" id="form1" class="form-control" placeholder="Zoek Pokémon"
-                            aria-label="Search" list="pokemonlist" />
+
+                <div class="d-flex gap-1">
+                    <form class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2" method="post" action="/pokemonvergelijken">
+                        <input type="search" id="name1" class="form-control" placeholder="Zoek Pokémon"
+                            aria-label="Search" list="pokemonlist" name="name1" />
                         <datalist id="pokemonlist">
                             <% PokemonList.map(x=> {%><option key="index">
                                     <%= x.name %>
                                 </option>
                                 <%}); %>
                         </datalist>
-                        <button id="buttonW" type="button" method="post" class="btn btn-primary buttonForm1"><svg
+                        <button id="buttonW" type="submit" method="post" class=" btn btn-primary buttonForm2"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-search" viewBox="0 0 16 16">
                                 <path
@@ -24,65 +25,66 @@
                     </form>
                 </div>
 
-                <a href="/pokemonCatch" class="h-50 d-flex justify-content-center"><img src="/images/empty.png"
+                <% let pokemn1 = PokemonList.find(x => x.name == pokemon1)  %>
+                <a href="<%= pokemn1 ? `/pokemonCatch?id=${pokemn1.id}` : "#" %>" class="h-50 d-flex justify-content-center "><img src="<%= pokemn1 ? pokemn1.image : "/images/empty.png"  %>" 
                         class="img-fluid mx-auto rounded" alt=""></a>
 
-                <table class="table caption-top  table table-hover">
+                <table class="table caption-top mx-auto table table-hover">
                     <caption>
                         <h1>Statistieken</h1>
                     </caption>
                     <tbody>
-                        <tr>
+                        <tr">
                             <th style="text-align: start;">HP</th>
                             <td>10
                             </td>
-                        </tr>
-                        <tr>
-                            <th style="text-align: start;">Aanval</th>
-                            <td>10
-                                <button class="ms-2">
-                                    <img src="/images/arrow.png" height="20px" style="background-color: brown;"
-                                        class="rounded-circle">
-                                </button>
+                            </tr>
+                            <tr>
+                                <th style="text-align: start;">Aanval</th>
+                                <td>10
+                                    <button class="ms-2">
+                                        <img src="/images/arrow.png" height="20px" style="background-color: brown;"
+                                            class="rounded-circle">
+                                    </button>
 
-                                <button class="ms-2">
-                                    <img src="/images/arrow.png" height="20px" style="background-color: brown;"
-                                        class="rounded-circle" id="arrowDown">
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th style="text-align: start;">Verdediging</th>
-                            <td>10
-                                <button class="ms-2">
-                                    <img src="/images/arrow.png" height="20px" style="background-color: brown;"
-                                        class="rounded-circle">
-                                </button>
+                                    <button class="ms-2">
+                                        <img src="/images/arrow.png" height="20px" style="background-color: brown;"
+                                            class="rounded-circle" id="arrowDown">
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: start;">Verdediging</th>
+                                <td>10
+                                    <button class="ms-2">
+                                        <img src="/images/arrow.png" height="20px" style="background-color: brown;"
+                                            class="rounded-circle">
+                                    </button>
 
-                                <button class="ms-2 mirror">
-                                    <img src="/images/arrow.png" height="20px" style="background-color: brown;"
-                                        class="rounded-circle">
-                                </button>
+                                    <button class="ms-2 mirror">
+                                        <img src="/images/arrow.png" height="20px" style="background-color: brown;"
+                                            class="rounded-circle">
+                                    </button>
 
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
                     </tbody>
                 </table>
             </article>
 
             <article class="col-md-9 col-lg-4 col-sm-7 d-flex flex-column">
 
-                <div class="">
-                    <form class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2" method="post">
-                        <input type="search" id="form2" class="form-control" placeholder="Zoek Pokémon"
-                            aria-label="Search" list="pokemonlist" />
+                <div class="d-flex gap-1">
+                    <form class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2" method="post" action="/pokemonvergelijken">
+                        <input type="search" id="name2" class="form-control" placeholder="Zoek Pokémon"
+                            aria-label="Search" list="pokemonlist" name="name2" />
                         <datalist id="pokemonlist">
                             <% PokemonList.map(x=> {%><option key="index">
                                     <%= x.name %>
                                 </option>
                                 <%}); %>
                         </datalist>
-                        <button id="buttonW" type="button" method="post" class=" btn btn-primary buttonForm2"><svg
+                        <button id="buttonW" type="submit" method="post" class=" btn btn-primary buttonForm2"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-search" viewBox="0 0 16 16">
                                 <path
@@ -91,7 +93,8 @@
                     </form>
                 </div>
 
-                <a href="/pokemonCatch" class="h-50 d-flex justify-content-center"><img src="/images/empty.png"
+                <% let pokemn2 = PokemonList.find(x => x.name == pokemon2)  %>
+                <a href="<%= pokemn2 ? `/pokemonCatch?id=${pokemn2.id}` : "#" %>" class="h-50 d-flex justify-content-center "><img src="<%= pokemn2 ? pokemn2.image : "/images/empty.png"  %>" 
                         class="img-fluid mx-auto rounded" alt=""></a>
 
                 <table class="table caption-top mx-auto table table-hover">

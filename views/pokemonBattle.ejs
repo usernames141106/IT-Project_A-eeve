@@ -1,7 +1,7 @@
 <%- include("partials/header",{title: "Pokemon Battle" , secondRow:true }); %>
 
   <script src="/js/battle.js" defer></script>
-  <script src="/js/loadPokemon.js" defer></script>
+  <!-- <script src="/js/loadPokemon.js" defer></script> -->
   <div class="row">
 
     <main class="container col-9 d-flex flex-row flex-wrap col-md-9 col-sm-12 d-grid justify-content-center">
@@ -30,10 +30,11 @@
         </div>
 
         <div class="card col-md-4 m-3 pb-3 custom-class" id="enemyPokemon"> <!-- size and margin of card 2 -->
-          <img src="/images/empty.png" alt="enemyPokemon" id="pokemonImage">
+          <% let pokemn1 = PokemonList.find(x => x.name == pokemon1) %>
+          <img src="<%= pokemn1 ? pokemn1.image : "/images/empty.png" %> alt="enemyPokemon" id="pokemonImage">
           <div class="card-body text-center">
 
-            <form class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2  " method="post">
+            <form class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2" method="post">
               <input type="search" id="zoekPokemon" class="form-control" placeholder="Zoek Pokémon" aria-label="Search"
                 list="pokemonlist" />
               <datalist id="pokemonlist">
