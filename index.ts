@@ -31,12 +31,19 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
+function isAuthenticated (req:any, res:any, next:any) {
+    if(req.session.currentUser) {
+        next();
+    } else {
+        res.redirect("/home");
+    }
+}
+
 app.get("/home", (req, res) => {
-    console.log(req.session.currentUser);
     res.render("home");
 });
 
-app.get("/pokemonBattle", (req, res) => {
+app.get("/pokemonBattle", isAuthenticated, (req, res) => {
     res.render("pokemonBattle", { PokemonList: PokemonList });
 });
 
@@ -45,10 +52,10 @@ app.get("/pokemonList", (req, res) => {
     res.json(PokemonList);
 })
 
-app.get("/whosthatpokemon", (req, res) => {
+app.get("/whosthatpokemon", isAuthenticated, (req, res) => {
     res.render("whosThatPokemon", { PokemonList: PokemonList });
 });
-app.post("/whosthatpokemon", async (req, res) => {
+app.post("/whosthatpokemon",isAuthenticated, async (req, res) => {
     // onderstaande is testcode
     // if (req.session.currentUser?.email) {
     //     let currentUser: IUser = req.session.currentUser;
@@ -65,7 +72,7 @@ app.post("/whosthatpokemon", async (req, res) => {
     // }
 });
 
-app.post("/pokemonCatch", async (req, res) => {
+app.post("/pokemonCatch", isAuthenticated, async (req, res) => {
     const nickname: string | undefined = req.body.nickname;
     if (nickname == undefined) {
         res.render("pokemonCatch", { inBall: true, name: "eevee" });
@@ -74,11 +81,11 @@ app.post("/pokemonCatch", async (req, res) => {
     }
 });
 
-app.post("/pokemonCatch/useDefault", (req, res) => {
+app.post("/pokemonCatch/useDefault", isAuthenticated, (req, res) => {
     res.render("pokemonCatch", { inBall: false, name: "eevee" });
 });
 
-app.get("/pokemonCatch", (req, res) => {
+app.get("/pokemonCatch",isAuthenticated, (req, res) => {
     if (req.session.currentUser) {
         const pokemonId: Number = Number(req.query.id);
         let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
@@ -88,15 +95,15 @@ app.get("/pokemonCatch", (req, res) => {
     res.redirect("/home");
 });
 
-app.get("/pokemondetail", (req, res) => {
+app.get("/pokemondetail", isAuthenticated,(req, res) => {
     res.render("pokemonDetail");
 });
 
-app.get("/mypokemon", (req, res) => {
+app.get("/mypokemon", isAuthenticated, (req, res) => {
     res.render("myPokemon");
 });
 
-app.get("/pokemonvergelijken", (req, res) => {
+app.get("/pokemonvergelijken", isAuthenticated, (req, res) => {
     res.render("pokemonvergelijken", { PokemonList: PokemonList });
 });
 
