@@ -62,8 +62,8 @@ app.get("/noAccess", (req, res) => {
 app.get("/pokemonBattle", isAuthenticated, (req, res) => {
     res.render("pokemonBattle", {
         PokemonList: PokemonList,
-        pokemon1:undefined,
-        pokemon2:undefined,
+        pokemon1: undefined,
+        pokemon2: undefined,
         currentUser: req.session.currentUser
     });
 });
@@ -98,17 +98,13 @@ app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
 
 app.post("/pokemonCatch", isAuthenticated, async (req, res) => {
     const nickname: string | undefined = req.body.nickname;
-    if (nickname == undefined) {
-        res.render("pokemonCatch", {
-            inBall: true,
-            name: "eevee"
-        });
-    } else {
-        res.render("pokemonCatch", {
-            inBall: false,
-            name: nickname
-        });
+    const pokemonId: Number = Number(req.body.id);
+    let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
+    if(pokemon) {
+        pokemon.name = nickname ? nickname : pokemon.name;
+        !req.session.currentUser?.pokemons.push(pokemon); 
     }
+    res.redirect("/mypokemon");
 });
 
 app.post("/pokemonCatch/useDefault", isAuthenticated, (req, res) => {
@@ -119,17 +115,14 @@ app.post("/pokemonCatch/useDefault", isAuthenticated, (req, res) => {
 });
 
 app.get("/pokemonCatch", isAuthenticated, (req, res) => {
-    if (req.session.currentUser) {
-        const pokemonId: Number = Number(req.query.id);
-        let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
-        pokemon = pokemon ? pokemon : PokemonList[132];
-        res.render("pokemonCatch", {
-            inBall: false,
-            Pokemon: pokemon,
-            currentUser: req.session.currentUser
-        });
-    }
-    res.redirect("/home");
+    const pokemonId: Number = Number(req.query.id);
+    let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
+    pokemon = pokemon ? pokemon : PokemonList[132];
+    res.render("pokemonCatch", {
+        inBall: false,
+        Pokemon: pokemon,
+        currentUser: req.session.currentUser
+    });
 });
 
 app.get("/pokemondetail", isAuthenticated, (req, res) => {
@@ -147,8 +140,8 @@ app.get("/mypokemon", isAuthenticated, (req, res) => {
 app.get("/pokemonvergelijken", isAuthenticated, (req, res) => {
     res.render("pokemonvergelijken", {
         PokemonList: PokemonList,
-        pokemon1:undefined,
-        pokemon2:undefined,
+        pokemon1: undefined,
+        pokemon2: undefined,
         currentUser: req.session.currentUser
     });
 });
@@ -161,8 +154,8 @@ app.post("/pokemonvergelijken", isAuthenticated, (req, res) => {
             res.redirect("/error"); // Redirect to an error page or handle as needed
             return;
         }
-        
-        const {name1, name2} = req.body;
+
+        const { name1, name2 } = req.body;
 
         // Render the same route after the session has been saved
         res.render("pokemonvergelijken", {

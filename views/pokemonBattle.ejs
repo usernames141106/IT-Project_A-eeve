@@ -30,8 +30,7 @@
         </div>
 
         <div class="card col-md-4 m-3 pb-3 custom-class" id="enemyPokemon"> <!-- size and margin of card 2 -->
-          <% let pokemn1 = PokemonList.find(x => x.name == pokemon1) %>
-          <img src="<%= pokemn1 ? pokemn1.image : "/images/empty.png" %> alt="enemyPokemon" id="pokemonImage">
+          <img src="/images/empty.png" alt="enemyPokemon" id="pokemonImage">
           <div class="card-body text-center">
 
             <form class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2" method="post">

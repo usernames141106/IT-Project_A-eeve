@@ -14,17 +14,18 @@
           });
        </script>
         <img src="/images/pokeBallGreen.png" width="150px" alt="pokeball">
-        <form method="post" action="/pokemonCatch" class="modal fade" id="renameModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="renameModalLabel" aria-hidden="true">
+        <form method="post" action="/pokemonCatch?id=<%= Pokemon.id %>" class="modal fade" id="renameModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="renameModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                 <h1 class="modal-title fs-5" id="renameModalLabel">Bijnaam Pokemon</h1>
               </div>
               <div class="modal-body">
-                <input class="border-bottom" type="text" name="nickname" id="nickname" value="<%= name %>" />
+                <input class="border-bottom" type="text" name="nickname" id="nickname" value="<%= Pokemon.name %>" />
               </div>
               <div class="modal-footer">
-                <button type="submit" class="btn btn-secondary" formaction="/pokemonCatch/useDefault">Gebruik standaard</button>
+                <input type="hidden" name="pokemon" value="<%= Pokemon.id  %>">
+                <button type="submit" class="btn btn-secondary" formaction="/pokemonCatch/useDefault?id=<%= Pokemon.id %>">Gebruik standaard</button>
                 <button type="submit" class="btn btn-primary">Bewaar naam</button>
               </div>
             </div>
