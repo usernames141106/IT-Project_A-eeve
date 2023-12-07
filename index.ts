@@ -96,7 +96,7 @@ app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
     // }
 });
 
-app.post("/pokemonCatch", isAuthenticated, async (req, res) => {
+app.post("/pokemonCatchSuccess", isAuthenticated, async (req, res) => {
     const nickname: string | undefined = req.body.nickname;
     const pokemonId: Number = Number(req.body.id);
     let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
@@ -105,20 +105,20 @@ app.post("/pokemonCatch", isAuthenticated, async (req, res) => {
         !req.session.currentUser?.pokemons.push(pokemon);
     }
     pokemon = pokemon ? pokemon : PokemonList[132];
-    res.render("pokemonCatch", {
+    res.render("pokemonCatchSuccess", {
         Pokemon: pokemon,
         currentUser: req.session.currentUser
     });
 });
 
-app.post("/pokemonCatch/useDefault", isAuthenticated, (req, res) => {
+app.post("/pokemonCatchSuccess/useDefault", isAuthenticated, (req, res) => {
     const pokemonId: Number = Number(req.body.id);
     let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
     if (pokemon) {
         !req.session.currentUser?.pokemons.push(pokemon);
     }
     pokemon = pokemon ? pokemon : PokemonList[132];
-    res.render("pokemonCatch", {
+    res.render("pokemonCatchSuccess", {
         Pokemon: pokemon,
         currentUser: req.session.currentUser
     });

@@ -1,0 +1,19 @@
+<%- include("partials/header",{title: "Pokemon vangen geef ze een naam" , secondRow:true }); %>
+    <main class="container-fluid col-12 d-flex justify-content-center">
+        <article class="card mb-3 col-12 col-sm6 d-flex justify-content-center" style="max-width: 450px;">
+            <form class="row g-0" method="post" action="/pokemonCatchSuccess">
+                <div class=".col md-4">
+                    <img src="<%= Pokemon.image %>" class="img-fluid rounded-start" alt="<%= Pokemon.name %>">
+                </div>
+                <div class="">
+                    <div class="card-body">
+                        <h5 class="text-center">
+                            Weet je zeker dat je <%= Pokemon.name %> wil vrijlaaten je ziet hem nooit terug.
+                        </h5>
+                    </div>
+                </div>
+                <button type="submit" id="buttonW" class="btn btn-primary">Ja ik weet het zeker</button>
+            </form>
+        </article>
+    </main>
+    <%- include("partials/footer"); %>

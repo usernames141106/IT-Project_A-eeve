@@ -4,33 +4,8 @@
       <h1><%= Pokemon.name %></h1>
       <img src="<%= Pokemon.image %>" alt="<%= Pokemon.name %>" width="400px">
       <% if(currentUser.pokemons.find(x => x.id == Pokemon.id)) { %>
-        <script defer>
-          document.addEventListener('DOMContentLoaded', function () {
-              const modal = document.getElementById('renameModal');
-              if (modal) {
-                  const bootstrapModal = new bootstrap.Modal(modal);
-                  bootstrapModal.show();
-              }
-          });
-       </script>
-        <img src="/images/pokeBallGreen.png" width="150px" alt="pokeball">
-        <form method="post" action="/pokemonCatch?id=<%= Pokemon.id %>" class="modal fade" id="renameModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="renameModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="renameModalLabel">Bijnaam Pokemon</h1>
-              </div>
-              <div class="modal-body">
-                <input class="border-bottom" type="text" name="nickname" id="nickname" value="<%= Pokemon.name %>" />
-              </div>
-              <div class="modal-footer">
-                <input type="hidden" name="pokemon" value="<%= Pokemon.id  %>">
-                <button type="submit" class="btn btn-secondary" formaction="/pokemonCatch/useDefault?id=<%= Pokemon.id %>">Gebruik standaard</button>
-                <button type="submit" class="btn btn-primary">Bewaar naam</button>
-              </div>
-            </div>
-          </div>
-        </form>
+          <form action="/pokemonCatch" method="post"><button><img src="/images/pokeBallGreen.png"
+                width="150px" alt="pokeball"></button></form>
         <% } else { %>
           <form action="/pokemonCatch" method="post"><button><img src="/images/pokeBall.png"
                 width="150px" alt="pokeball"></button></form>
