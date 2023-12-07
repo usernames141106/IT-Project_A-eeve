@@ -2,14 +2,14 @@
     <script src="/js/search.js" defer></script>
     <main class="container flex-column d-flex col-9 col-md-9 col-sm-12 d-grid gap-4">
         <h1 class="mx-auto text-center ">Pokémon vergelijken</h1>
-
+        <form  class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2" method="post" action="/pokemonvergelijken">
         <div class="row-cols-1 row-cols-md-2 d-flex flex-row flex-wrap justify-content-evenly">
             <article class="col-md-9 col-lg-4 col-sm-7 d-flex flex-column">
 
                 <div class="d-flex gap-1">
-                    <form  class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2" method="post" action="/pokemonvergelijken">
+                    
 
-                        <input type="search" id="form1" class="form-control" placeholder="Zoek Pokémon" aria-label="Search" list="pokemonlist" name="name1"/>
+                        <input type="search" id="form1" class="form-control" placeholder="Zoek Pokémon" aria-label="Search" list="pokemonlist" name="name1" value="<%= pokemon1 ? pokemon1 : "" %>"/>
                     
 
                         <datalist id="pokemonlist">
@@ -21,7 +21,7 @@
 
 
 
-                        <button id="buttonW" type="submit" method="post" class=" btn btn-primary buttonForm1"><svg
+                        <button id="buttonW" type="submit" class=" btn btn-primary buttonForm1" formaction="/pokemonvergelijken" value="button1"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-search" viewBox="0 0 16 16">
                                 <path
@@ -29,7 +29,7 @@
                             </svg></button>
 
 
-                    </form>
+               
                 </div>
 
                 <% let pokemn1 = PokemonList.find(x => x.name == pokemon1)  %>
@@ -81,10 +81,10 @@
             <article class="col-md-9 col-lg-4 col-sm-7 d-flex flex-column">
 
                 <div class="d-flex gap-1">
-                    <form  class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2" method="post" action="/pokemonvergelijken">
+                  
 
                         <input type="search" id="form2" class="form-control" placeholder="Zoek Pokémon"
-                            aria-label="Search" list="pokemonlist" name="name2" />
+                            aria-label="Search" list="pokemonlist" name="name2" value="<%= pokemon2 ? pokemon2 : "" %>"/>
 
                         <datalist id="pokemonlist">
                             <% PokemonList.map(x=> {%><option key="index">
@@ -94,7 +94,7 @@
                         </datalist>
 
 
-                        <button id="buttonW" type="submit" method="post" class=" btn btn-primary buttonForm2"><svg
+                        <button id="buttonW" type="submit" class=" btn btn-primary buttonForm2" formaction="/pokemonvergelijken" value="button2"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-search" viewBox="0 0 16 16">
                                 <path
@@ -102,7 +102,7 @@
                             </svg></button>
 
 
-                    </form>
+                 
                 </div>
 
                 <% let pokemn2 = PokemonList.find(x => x.name == pokemon2)  %>
@@ -152,6 +152,7 @@
                 </table>
             </article>
         </div>
+    </form>
     </main>
 
     <%- include("partials/aside",{myPokemonPagina: false}); %>
