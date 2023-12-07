@@ -225,6 +225,13 @@ app.post("/logout", async (req, res) => {
         res.redirect("/");
     }
 });
+app.use((req, res, next) => { 
+    res.status(404).render("message",{
+        title: "404 Error",
+        message: "Deze pagina is niet gevonden.",
+        currentUser: req.session.currentUser
+    });
+});
 
 app.listen(app.get("port"), async () => {
     await GetPokemonFromApi();
