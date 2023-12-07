@@ -147,25 +147,31 @@ app.get("/pokemonvergelijken", isAuthenticated, (req, res) => {
 });
 
 app.post("/pokemonvergelijken", isAuthenticated, (req, res) => {
-    req.session.save(err => {
+    console.log(req.body.name1 +"  test"); 
+    req.session.save(async (err) => {
         if (err) {
             // Handle the error if session save fails
             console.error(err);
-            res.redirect("/error"); // Redirect to an error page or handle as needed
-            return;
+            return res.render("pokemonvergelijken", {
+                PokemonList: PokemonList,
+                currentUser: req.session.currentUser,
+                pokemon1: req.body.name1,
+                pokemon2: req.body.name2,
+                errorMessage: "An error occurred during session save."
+            });
         }
-
-        const { name1, name2 } = req.body;
 
         // Render the same route after the session has been saved
         res.render("pokemonvergelijken", {
             PokemonList: PokemonList,
             currentUser: req.session.currentUser,
-            pokemon1: name1,
-            pokemon2: name2,
+            pokemon1: req.body.name1,
+            pokemon2: req.body.name2
         });
     });
 });
+
+
 
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;
@@ -196,13 +202,17 @@ app.post("/register", async (req, res) => {
 
 app.post("/logout", async (req, res) => {
     if (req.session.currentUser) {
+        // Update user in MongoDB and destroy session
         await UpdateUserInDB(req.session.currentUser);
         req.session.destroy(err => {
             console.log(err);
             res.redirect("/");
         });
+    } else {
+        // Redirect to "/" if no currentUser in session
+        res.redirect("/");
     }
-})
+});
 
 app.listen(app.get("port"), async () => {
     await GetPokemonFromApi();

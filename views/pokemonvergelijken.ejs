@@ -8,20 +8,28 @@
 
                 <div class="d-flex gap-1">
                     <form  class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2" method="post" action="/pokemonvergelijken">
+
                         <input type="search" id="form1" class="form-control" placeholder="Zoek Pokémon"
-                            aria-label="Search" list="pokemonlist" name="name1" />
+                            aria-label="Search" list="pokemonlist" name="name1"/>
+                    
+
                         <datalist id="pokemonlist">
                             <% PokemonList.map(x=> {%><option key="index">
                                     <%= x.name %>
                                 </option>
                                 <%}); %>
                         </datalist>
+
+
+
                         <button id="buttonW" type="submit" method="post" class=" btn btn-primary buttonForm1"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-search" viewBox="0 0 16 16">
                                 <path
                                     d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                             </svg></button>
+
+
                     </form>
                 </div>
 
@@ -75,20 +83,26 @@
 
                 <div class="d-flex gap-1">
                     <form  class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2" method="post" action="/pokemonvergelijken">
+
                         <input type="search" id="form2" class="form-control" placeholder="Zoek Pokémon"
                             aria-label="Search" list="pokemonlist" name="name2" />
+
                         <datalist id="pokemonlist">
                             <% PokemonList.map(x=> {%><option key="index">
                                     <%= x.name %>
                                 </option>
                                 <%}); %>
                         </datalist>
+
+
                         <button id="buttonW" type="submit" method="post" class=" btn btn-primary buttonForm2"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-search" viewBox="0 0 16 16">
                                 <path
                                     d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                             </svg></button>
+
+
                     </form>
                 </div>
 
