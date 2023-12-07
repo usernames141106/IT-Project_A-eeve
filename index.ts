@@ -141,8 +141,11 @@ app.get("/pokemondetail", isAuthenticated, (req, res) => {
 });
 
 app.get("/mypokemon", isAuthenticated, (req, res) => {
+    const owned: boolean = req.query.owned == "true";
     res.render("myPokemon", {
-        currentUser: req.session.currentUser
+        currentUser: req.session.currentUser,
+        PokemonList: PokemonList,
+        viewAllPokemon: owned
     });
 });
 

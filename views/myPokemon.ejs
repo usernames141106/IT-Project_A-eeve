@@ -6,7 +6,17 @@
                 <h1 class="text-center p-0">Mijn Collectie</h1>
 
             </div>
-           <% currentUser.pokemons.map(pokemon => include("partials/myPokemon",{name: pokemon.name, img: pokemon.image, id: pokemon.id})) %> 
+            <% if(viewAllPokemon) {
+                PokemonList.map(pokemon => { 
+                   const owned = currentUser.pokemons.find(x => x.id == pokemon.id); 
+                    %>
+                    <%- include("partials/myPokemon",{name: pokemon.name, img: pokemon.image, id: pokemon.id, owned:owned}) %>
+                <%})
+             } else {
+                currentUser.pokemons.map(pokemon => { %>
+                    <%- include("partials/myPokemon",{name: pokemon.name, img: pokemon.image, id: pokemon.id, owned:true}) %>
+                <%})
+           } %> 
         </div>
 
     </main>
