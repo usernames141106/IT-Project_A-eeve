@@ -3,7 +3,7 @@
     <div class="container col-6 d-flex flex-column align-items-center">
       <h1><%= Pokemon.name %></h1>
       <img src="<%= Pokemon.image %>" alt="<%= Pokemon.name %>" width="400px">
-      <% if(inBall) { %>
+      <% if(currentUser.pokemons.find(x => x.id == Pokemon.id)) { %>
         <script defer>
           document.addEventListener('DOMContentLoaded', function () {
               const modal = document.getElementById('renameModal');

@@ -100,17 +100,27 @@ app.post("/pokemonCatch", isAuthenticated, async (req, res) => {
     const nickname: string | undefined = req.body.nickname;
     const pokemonId: Number = Number(req.body.id);
     let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
-    if(pokemon) {
+    if (pokemon) {
         pokemon.name = nickname ? nickname : pokemon.name;
-        !req.session.currentUser?.pokemons.push(pokemon); 
+        !req.session.currentUser?.pokemons.push(pokemon);
     }
-    res.redirect("/mypokemon");
+    pokemon = pokemon ? pokemon : PokemonList[132];
+    res.render("pokemonCatch", {
+        Pokemon: pokemon,
+        currentUser: req.session.currentUser
+    });
 });
 
 app.post("/pokemonCatch/useDefault", isAuthenticated, (req, res) => {
+    const pokemonId: Number = Number(req.body.id);
+    let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
+    if (pokemon) {
+        !req.session.currentUser?.pokemons.push(pokemon);
+    }
+    pokemon = pokemon ? pokemon : PokemonList[132];
     res.render("pokemonCatch", {
-        inBall: false,
-        name: "eevee"
+        Pokemon: pokemon,
+        currentUser: req.session.currentUser
     });
 });
 
@@ -119,7 +129,6 @@ app.get("/pokemonCatch", isAuthenticated, (req, res) => {
     let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
     pokemon = pokemon ? pokemon : PokemonList[132];
     res.render("pokemonCatch", {
-        inBall: false,
         Pokemon: pokemon,
         currentUser: req.session.currentUser
     });
@@ -138,7 +147,7 @@ app.get("/mypokemon", isAuthenticated, (req, res) => {
 });
 
 app.get("/pokemonvergelijken", isAuthenticated, (req, res) => {
-    
+
     res.render("pokemonvergelijken", {
         PokemonList: PokemonList,
         pokemon1: undefined,
@@ -148,7 +157,7 @@ app.get("/pokemonvergelijken", isAuthenticated, (req, res) => {
 });
 
 app.post("/pokemonvergelijken", isAuthenticated, (req, res) => {
-    console.log(req.body +"  test"); 
+    console.log(req.body + "  test");
     console.log(req.body.name1 + " Name 1");
     console.log(req.body.name2 + " Name 2");
     req.session.save(async (err) => {

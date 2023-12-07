@@ -1,5 +1,6 @@
 import { IPokemon, IUser } from "./interface";
-import { MongoClient, Collection, ConnectionCheckOutFailedEvent } from "mongodb";
+import { MongoClient, Collection } from "mongodb";
+import crypto from "node:crypto";
 
 const uri = "mongodb+srv://berrietalboom:webontwikkeling@cluster0.1xbqwl8.mongodb.net/?retryWrites=true&w=majority"
 const client = new MongoClient(uri);
@@ -15,11 +16,16 @@ export async function RegisterUserInDB(email: string, password: string) {
         const indexOfAtSymbol = email.indexOf("@");
         let username = email.substring(0, indexOfAtSymbol);
 
+        const salt:string = crypto.randomBytes(16).toString('hex');
+        const hash:string = crypto.pbkdf2Sync(password, salt,
+        1000, 64, `sha512`).toString(`hex`);
+
         await client.connect();
         const newUser: IUser = {
             name: username,
             email: email,
-            passwordHash: password,
+            salt: salt,
+            hash: hash,
             pokemons: [],
             currentPokemon: undefined
         }
@@ -50,7 +56,14 @@ export async function LoadUserFromMongoDB(email: string, password: string): Prom
     }
     finally {
         await client.close();
-        return outputUser;
+        if(outputUser != null) {
+            const hash: string = crypto.pbkdf2Sync(password,
+            outputUser.salt, 1000, 64, `sha512`).toString(`hex`);
+            if(outputUser.hash == hash) {
+                return outputUser;
+            }
+        }
+        return null;
     }
 }
 
@@ -68,7 +81,6 @@ export async function UpdateUserInDB(user: IUser) {
         await collection.updateOne({ email: user.email }, {
             $set: {
                 name: user.name,
-                passwordHash: user.passwordHash,
                 pokemons: user.pokemons,
                 currentPokemon: user.currentPokemon
             }

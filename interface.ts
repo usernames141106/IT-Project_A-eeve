@@ -18,7 +18,8 @@ export interface IUser  {
     _id?: ObjectId,
     name: string,
     email: string,
-    passwordHash: any,
+    salt:string
+    hash: string,
     pokemons:IPokemon[],
     currentPokemon?:number
 }
