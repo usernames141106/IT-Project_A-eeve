@@ -138,6 +138,7 @@ app.get("/mypokemon", isAuthenticated, (req, res) => {
 });
 
 app.get("/pokemonvergelijken", isAuthenticated, (req, res) => {
+    
     res.render("pokemonvergelijken", {
         PokemonList: PokemonList,
         pokemon1: undefined,
@@ -147,7 +148,9 @@ app.get("/pokemonvergelijken", isAuthenticated, (req, res) => {
 });
 
 app.post("/pokemonvergelijken", isAuthenticated, (req, res) => {
-    console.log(req.body.name1 +"  test"); 
+    console.log(req.body +"  test"); 
+    console.log(req.body.name1 + " Name 1");
+    console.log(req.body.name2 + " Name 2");
     req.session.save(async (err) => {
         if (err) {
             // Handle the error if session save fails
