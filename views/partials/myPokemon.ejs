@@ -1,25 +1,28 @@
+<% const owned = currentUser.pokemons.find(x => x.id == Pokemon.id) %>
 <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 mt-5">
-    <a href="/pokemonDetail?id=<%= id %>"><img id="myPokemonList"
-            src="<%= img %>"
+    <a href="/pokemonDetail?id=<%= Pokemon.id %>"><img id="myPokemonList"
+            src="<%= Pokemon.image %>"
             , class="<%= owned ? "" : "opacity-50" %>" alt="Pokemon Image"></a>
 
     <table id="pokemonDetailTables" class="table table-hover">
         <tbody>
             <tr>
                 <th>Nummer</th>
-                <td><%= id %></td>
+                <td><%= Pokemon.id %></td>
             </tr>
             <tr>
                 <th>Naam</th>
-                <td class="d-flex d-flex justify-content-between"><%= name %>
+                <td class="d-flex d-flex justify-content-between"><%= Pokemon.name %>
                 </td>
             </tr>
             <% if(owned) { %>
             <tr>
                 <td>Kies als huidige Pokémon</td>
-                <td> <form>
-                    <input id="myPokemonSelection" class="form-check-input" type="checkbox" value="" />
-                </form></td>
+                <td>
+                <a href="/mypokemon?owned=<%= viewAllPokemon %>&newCurrentPokemon=<%= Pokemon.id %>">
+                    <input id="myPokemonSelection" class="form-check-input" type="checkbox" <%= currentUser.currentPokemon ? currentUser.pokemons[currentUser.currentPokemon].id == Pokemon.id ? "checked" : "" : "" %> disabled/>
+                </a>
+                </td>
             </tr>
             <% } %>
         </tbody>

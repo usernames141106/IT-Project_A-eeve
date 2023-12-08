@@ -201,8 +201,13 @@ app.get("/pokemondetail", isAuthenticated, (req, res) => {
     });
 });
 
-app.get("/mypokemon", isAuthenticated, (req, res) => {
+app.get("/mypokemon", isAuthenticated, async (req, res) => {
     const owned: boolean = req.query.owned == "true";
+    const newCurrentPokemon: number | undefined = req.session.currentUser?.pokemons.findIndex(x => x.id == Number(req.query.newCurrentPokemon));
+    if(newCurrentPokemon && newCurrentPokemon != -1 && req.session.currentUser) {
+        req.session.currentUser.currentPokemon = newCurrentPokemon;
+        await UpdateUserInDB(req.session.currentUser);
+    }
     res.render("myPokemon", {
         currentUser: req.session.currentUser,
         PokemonList: PokemonList,

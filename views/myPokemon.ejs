@@ -7,14 +7,12 @@
 
             </div>
             <% if(viewAllPokemon) {
-                PokemonList.map(pokemon => { 
-                   const owned = currentUser.pokemons.find(x => x.id == pokemon.id); 
-                    %>
-                    <%- include("partials/myPokemon",{name: pokemon.name, img: pokemon.image, id: pokemon.id, owned:owned}) %>
+                PokemonList.map(pokemon => { %>
+                    <%- include("partials/myPokemon",{Pokemon:pokemon}) %>
                 <%})
              } else {
                 currentUser.pokemons.map(pokemon => { %>
-                    <%- include("partials/myPokemon",{name: pokemon.name, img: pokemon.image, id: pokemon.id, owned:true}) %>
+                    <%- include("partials/myPokemon",{Pokemon:pokemon}) %>
                 <%})
            } %> 
         </div>
