@@ -4,11 +4,9 @@
       <h1><%= Pokemon.name %></h1>
       <img src="<%= Pokemon.image %>" alt="<%= Pokemon.name %>" width="400px">
       <% if(currentUser.pokemons.find(x => x.id == Pokemon.id)) { %>
-          <form action="/pokemonCatch" method="post"><button><img src="/images/pokeBallGreen.png"
-                width="150px" alt="pokeball"></button></form>
+          <a href="/pokemonRelease?id=<%= Pokemon.id %>"><img src="/images/pokeBallGreen.png" width="150px" alt="pokeball"></a>
         <% } else { %>
-          <form action="/pokemonCatch" method="post"><button><img src="/images/pokeBall.png"
-                width="150px" alt="pokeball"></button></form>
+          <a href="/pokemonCatch?attempt=<%= attempt + 1 %>&id=<%= Pokemon.id %>"><img src="/images/pokeBall.png" width="150px" alt="pokeball"></a>
           <% } %>
     </div>
   </main>

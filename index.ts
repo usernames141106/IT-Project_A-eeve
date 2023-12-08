@@ -78,7 +78,7 @@ app.get("/whosthatpokemon", isAuthenticated, (req, res) => {
     res.render("whosThatPokemon", {
         PokemonList: PokemonList,
         searchvalue: undefined,
-        correctpokemon : undefined,
+        correctpokemon: undefined,
         message: undefined,
         currentUser: req.session.currentUser
     });
@@ -88,7 +88,7 @@ app.get("/whosthatpokemon", isAuthenticated, (req, res) => {
 app.post("/whosthatpokemon", isAuthenticated, (req, res) => {
 
     // Get the correct Pokemon name from the form
-    const correctPokemonName : number | undefined  = req.body.correctPokemon;
+    const correctPokemonName: number | undefined = req.body.correctPokemon;
     console.log(correctPokemonName)
     // Get the guessed Pokemon name from the form
     const guessedPokemonName = req.body.pokeGuess;
@@ -100,22 +100,22 @@ app.post("/whosthatpokemon", isAuthenticated, (req, res) => {
     const haspokemonselected = !(req.session.currentUser?.currentPokemon == undefined)
     console.log(haspokemonselected);
 
-    let test : IPokemon[] | undefined = req.session.currentUser?.pokemons
-    let testcurrentpok : number | undefined = req.session.currentUser?.currentPokemon
-    
+    let test: IPokemon[] | undefined = req.session.currentUser?.pokemons
+    let testcurrentpok: number | undefined = req.session.currentUser?.currentPokemon
+
     console.log(test + "---------------------------------");
 
     let message
 
-    if(isCorrectGuess == true && haspokemonselected == true){
+    if (isCorrectGuess == true && haspokemonselected == true) {
         message = "Correct"
-        
+
         console.log("pokemon stats need to be +1");
     }
-    else if (isCorrectGuess == true && haspokemonselected == false){
+    else if (isCorrectGuess == true && haspokemonselected == false) {
         message = "Correct"
     }
-    else{
+    else {
         message = "Incorrect"
     }
 
@@ -126,43 +126,73 @@ app.post("/whosthatpokemon", isAuthenticated, (req, res) => {
     });
 });
 
-
-app.post("/pokemonCatchSuccess", isAuthenticated, async (req, res) => {
-    const nickname: string | undefined = req.body.nickname;
-    const pokemonId: Number = Number(req.body.id);
-    let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
-    if (pokemon) {
-        pokemon.name = nickname ? nickname : pokemon.name;
-        !req.session.currentUser?.pokemons.push(pokemon);
+app.post("/pokemonRelease", isAuthenticated, async (req, res) => {
+    const pokemonId: Number = Number(req.body.pokemon);
+    if (req.session.currentUser) {
+        req.session.currentUser.pokemons = req.session.currentUser.pokemons.filter(x => x.id != pokemonId);
+        await UpdateUserInDB(req.session.currentUser);
     }
-    pokemon = pokemon ? pokemon : PokemonList[132];
-    res.render("pokemonCatchSuccess", {
-        Pokemon: pokemon,
-        currentUser: req.session.currentUser
-    });
+    res.redirect(`/pokemonCatch?id=${pokemonId}`);
 });
 
-app.post("/pokemonCatchSuccess/useDefault", isAuthenticated, (req, res) => {
-    const pokemonId: Number = Number(req.body.id);
-    let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
+app.get("/pokemonRelease", isAuthenticated, (req, res) => {
+    const pokemonId: Number = Number(req.query.id);
+    let pokemon: IPokemon | undefined = req.session.currentUser?.pokemons.find(x => x.id == pokemonId);
     if (pokemon) {
-        !req.session.currentUser?.pokemons.push(pokemon);
+        res.render("pokemonRelease", {
+            Pokemon: pokemon,
+            currentUser: req.session.currentUser
+        });
     }
-    pokemon = pokemon ? pokemon : PokemonList[132];
-    res.render("pokemonCatchSuccess", {
-        Pokemon: pokemon,
-        currentUser: req.session.currentUser
-    });
+    else {
+        res.redirect(`/pokemonCatch?id=${pokemonId}`);
+    }
+});
+
+app.post("/pokemonCatchSuccess", isAuthenticated, async (req, res) => {
+    const pokemonId: Number = Number(req.body.pokemon);
+    let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
+    if (pokemon && req.session.currentUser) {
+        pokemon.name = req.query.useDefault == "true" ? pokemon.name : req.body.name;
+        req.session.currentUser?.pokemons.push(pokemon);
+        await UpdateUserInDB(req.session.currentUser);
+    }
+    res.redirect(`/pokemonCatch?id=${pokemonId}`);
 });
 
 app.get("/pokemonCatch", isAuthenticated, (req, res) => {
     const pokemonId: Number = Number(req.query.id);
     let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
     pokemon = pokemon ? pokemon : PokemonList[132];
-    res.render("pokemonCatch", {
-        Pokemon: pokemon,
-        currentUser: req.session.currentUser
-    });
+
+    const attempt: number = req.query.attempt ? Number(req.query.attempt) : 0;
+    if (attempt >= 1 && req.session.currentUser) {
+        if (attempt >= 3) {
+            res.redirect("/mypokemon");
+        }
+        const currentPokemonAttack: number = req.session.currentUser.currentPokemon ? req.session.currentUser.pokemons[req.session.currentUser.currentPokemon].attack : 0;
+        const chance: number = ((100 - pokemon.defence) + currentPokemonAttack) / 100;
+        if (Math.random() <= chance) {
+            res.render("pokemonCatchSuccess", {
+                Pokemon: pokemon,
+                currentUser: req.session.currentUser
+            });
+        }
+        else {
+            res.render("pokemonCatch", {
+                attempt: attempt,
+                Pokemon: pokemon,
+                currentUser: req.session.currentUser
+            });
+        }
+    }
+    else {
+        res.render("pokemonCatch", {
+            attempt: attempt,
+            Pokemon: pokemon,
+            currentUser: req.session.currentUser
+        });
+    }
 });
 
 app.get("/pokemondetail", isAuthenticated, (req, res) => {
@@ -256,8 +286,8 @@ app.post("/logout", async (req, res) => {
         res.redirect("/");
     }
 });
-app.use((req, res, next) => { 
-    res.status(404).render("message",{
+app.use((req, res, next) => {
+    res.status(404).render("message", {
         title: "404 Error",
         message: "Deze pagina is niet gevonden.",
         currentUser: req.session.currentUser
