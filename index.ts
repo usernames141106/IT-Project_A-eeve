@@ -88,7 +88,7 @@ app.get("/whosthatpokemon", isAuthenticated, (req, res) => {
 app.post("/whosthatpokemon", isAuthenticated, (req, res) => {
 
     // Get the correct Pokemon name from the form
-    const correctPokemonName = req.body.correctPokemon;
+    const correctPokemonName : number | undefined  = req.body.correctPokemon;
     console.log(correctPokemonName)
     // Get the guessed Pokemon name from the form
     const guessedPokemonName = req.body.pokeGuess;
@@ -100,13 +100,19 @@ app.post("/whosthatpokemon", isAuthenticated, (req, res) => {
     const haspokemonselected = !(req.session.currentUser?.currentPokemon == undefined)
     console.log(haspokemonselected);
 
+    let test : IPokemon[] | undefined = req.session.currentUser?.pokemons
+    let testcurrentpok : number | undefined = req.session.currentUser?.currentPokemon
+    
+    console.log(test + "---------------------------------");
+
     let message
 
     if(isCorrectGuess == true && haspokemonselected == true){
         message = "Correct"
+        
         console.log("pokemon stats need to be +1");
     }
-    else if (isCorrectGuess == true){
+    else if (isCorrectGuess == true && haspokemonselected == false){
         message = "Correct"
     }
     else{
