@@ -74,27 +74,52 @@ app.get("/pokemonList", (req, res) => {
 })
 
 app.get("/whosthatpokemon", isAuthenticated, (req, res) => {
+
     res.render("whosThatPokemon", {
         PokemonList: PokemonList,
+        searchvalue: undefined,
+        correctpokemon : undefined,
+        message: undefined,
         currentUser: req.session.currentUser
     });
 });
-app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
-    // onderstaande is testcode
-    // if (req.session.currentUser?.email) {
-    //     let currentUser: IUser = req.session.currentUser;
-    //     const { test } = req.body;
-    //     currentUser.email = String(test);
 
-    //     try {
-    //         await UpdateUserInDB(currentUser)
-    //     }
-    //     catch(e) {
-    //         console.error(e);
-    //     }
 
-    // }
+app.post("/whosthatpokemon", isAuthenticated, (req, res) => {
+
+    // Get the correct Pokemon name from the form
+    const correctPokemonName = req.body.correctPokemon;
+    console.log(correctPokemonName)
+    // Get the guessed Pokemon name from the form
+    const guessedPokemonName = req.body.pokeGuess;
+    console.log(guessedPokemonName)
+    // Check if the guessed Pokemon is correct
+    const isCorrectGuess = (correctPokemonName === guessedPokemonName);
+    console.log(isCorrectGuess);
+    //check if user has current pokemon 
+    const haspokemonselected = !(req.session.currentUser?.currentPokemon == undefined)
+    console.log(haspokemonselected);
+
+    let message
+
+    if(isCorrectGuess == true && haspokemonselected == true){
+        message = "Correct"
+        console.log("pokemon stats need to be +1");
+    }
+    else if (isCorrectGuess == true){
+        message = "Correct"
+    }
+    else{
+        message = "Incorrect"
+    }
+
+    res.render("whosThatPokemon", {
+        PokemonList: PokemonList,
+        currentUser: req.session.currentUser,
+        message: message,
+    });
 });
+
 
 app.post("/pokemonCatchSuccess", isAuthenticated, async (req, res) => {
     const nickname: string | undefined = req.body.nickname;
@@ -160,9 +185,6 @@ app.get("/pokemonvergelijken", isAuthenticated, (req, res) => {
 });
 
 app.post("/pokemonvergelijken", isAuthenticated, (req, res) => {
-    console.log(req.body + "  test");
-    console.log(req.body.name1 + " Name 1");
-    console.log(req.body.name2 + " Name 2");
     req.session.save(async (err) => {
         if (err) {
             // Handle the error if session save fails
