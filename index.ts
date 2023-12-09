@@ -2,7 +2,8 @@ import express from 'express';
 import session from 'express-session';
 import { IPokemon, IUser } from './interface';
 import { GetPokemonFromApi, LoadUserFromMongoDB, PokemonList, UpdateUserInDB } from './db';
-import { RegisterUserInDB } from './db';
+import { RegisterUserInDB, coinFlip } from './db';
+
 
 const app = express();
 
@@ -138,7 +139,7 @@ app.get("/whosthatpokemon", isAuthenticated, (req, res) => {
 });
 
 
-app.post("/whosthatpokemon", isAuthenticated, (req, res) => {
+app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
 
     // Get the correct Pokemon name from the form
     const correctPokemonName: number | undefined = req.body.correctPokemon;
@@ -157,7 +158,21 @@ app.post("/whosthatpokemon", isAuthenticated, (req, res) => {
     if (isCorrectGuess == true && haspokemonselected == true) {
         message = "Correct"
         if (currentpok !== undefined && req.session.currentUser?.pokemons !== undefined) {
-            console.log(req.session.currentUser?.pokemons[currentpok]?.name);
+            let coinflip : number = coinFlip();
+            console.log(coinflip);
+            if (coinflip === 0) {
+                if (req.session.currentUser && req.session.currentUser.pokemons && req.session.currentUser.pokemons[currentpok]) {
+                    req.session.currentUser.pokemons[currentpok].attack += 1; // Increment attack
+                    await UpdateUserInDB(req.session.currentUser);
+                }
+                
+            } else if (coinflip === 1) {
+                if (req.session.currentUser && req.session.currentUser.pokemons && req.session.currentUser.pokemons[currentpok]) {
+                    req.session.currentUser.pokemons[currentpok].defence += 1; // Increment defence
+                    await UpdateUserInDB(req.session.currentUser);
+                }
+            }
+            
         }
     }
     else if (isCorrectGuess == true && haspokemonselected == false) {

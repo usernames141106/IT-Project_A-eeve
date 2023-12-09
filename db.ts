@@ -115,3 +115,11 @@ export async function GetPokemonFromApi() {
         });
     }
 }
+
+//Extra functie voor pokemon battle 
+export function coinFlip() : number {
+    // Generate a random number (0 or 1)
+    const randomNumber = Math.floor(Math.random() * 2);
+   
+    return randomNumber;
+}
