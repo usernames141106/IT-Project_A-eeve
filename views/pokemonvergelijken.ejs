@@ -27,7 +27,7 @@
                 </div>
 
                 <% let pokemn1 = PokemonList.find(x => x.name == pokemon1)  %>
-                <a href="<%= pokemn1 ? `/pokemonCatch?id=${pokemn1.id}` : "#" %>" class="h-50 d-flex justify-content-center "><img src="<%= pokemn1 ? pokemn1.image : "/images/empty.png"  %>" 
+                <a href="<%= pokemn1 ? `/pokemonCatch?id=${pokemn1.id}` : "#" %>" class="h-50 d-flex justify-content-center"><img src="<%= pokemn1 ? pokemn1.image : "/images/empty.png"  %>" 
                         class="img-fluid mx-auto rounded" alt=""></a>
 
                 <table class="table caption-top mx-auto table table-hover">

@@ -63,8 +63,29 @@ app.get("/pokemonBattle", isAuthenticated, (req, res) => {
     res.render("pokemonBattle", {
         PokemonList: PokemonList,
         pokemon1: undefined,
-        pokemon2: undefined,
         currentUser: req.session.currentUser
+    });
+});
+
+app.post("/pokemonBattle", isAuthenticated, (req, res) => {
+    req.session.save(async (err) => {
+        if (err) {
+            // Handle the error if session save fails
+            console.error(err);
+            return res.render("pokemonBattle", {
+                PokemonList: PokemonList,
+                currentUser: req.session.currentUser,
+                pokemon1: req.body.name1,
+                errorMessage: "An error occurred during session save."
+            });
+        }
+
+        // Render the same route after the session has been saved
+        res.render("pokemonBattle", {
+            PokemonList: PokemonList,
+            currentUser: req.session.currentUser,
+            pokemon1: req.body.name1
+        });
     });
 });
 

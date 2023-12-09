@@ -30,41 +30,43 @@
         </div>
 
         <div class="card col-md-4 m-3 pb-3 custom-class" id="enemyPokemon"> <!-- size and margin of card 2 -->
-          <img src="/images/empty.png" alt="enemyPokemon" id="pokemonImage">
-          <div class="card-body text-center">
+          <% let pokemn1 = PokemonList.find(x => x.name == pokemon1) %>
+            <img src="<%= pokemn1 ? pokemn1.image : " /images/empty.png" %>"
+            class="img-fluid mx-auto rounded" alt=""></a>
+            <div class="card-body text-center">
 
-            <form class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2" method="post">
-              <input type="search" id="zoekPokemon" class="form-control" placeholder="Zoek Pokémon" aria-label="Search"
-                list="pokemonlist" />
-              <datalist id="pokemonlist">
-                <% PokemonList.map(x=> {%><option key="index">
-                    <%= x.name %>
-                  </option>
-                  <%}); %>
-              </datalist>
-              <button id="buttonSearch" type="button" method="post" class="btn btn-primary buttonForm1"><svg
-                  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
-                  viewBox="0 0 16 16">
-                  <path
-                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                </svg></button>
-            </form>
+              <form class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2" method="post" action="/pokemonBattle">
+                <input type="search" id="form1" class="form-control" placeholder="Zoek Pokémon"
+                  aria-label="Search" list="pokemonlist" name="name1" value="<%= pokemon1 ? pokemon1 : "" %>" />
+                <datalist id="pokemonlist">
+                  <% PokemonList.map(x=> {%><option key="index">
+                      <%= x.name %>
+                    </option>
+                    <%}); %>
+                </datalist>
+                <button id="buttonW" type="submit" method="post" class="btn btn-primary buttonForm1" formaction="/pokemonBattle"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+                    viewBox="0 0 16 16">
+                    <path
+                      d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                  </svg></button>
+              </form>
 
-          </div>
-
-          <div class="hp"> <!-- HP bar enemy Pokémon -->
-            <table class="table caption-top mx-auto table-sm table-hover">
-              <tbody>
-                <tr>
-                  <th class="ps-4" style="text-align: start;">HP</th>
-                  <td id="HPLabelEnemy">100</td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="progress"> <!-- this one is necessary to display a grey outline of the total HP -->
-              <div id="hp-bar-enemy" class="progress-bar"></div>
             </div>
-          </div>
+
+            <div class="hp"> <!-- HP bar enemy Pokémon -->
+              <table class="table caption-top mx-auto table-sm table-hover">
+                <tbody>
+                  <tr>
+                    <th class="ps-4" style="text-align: start;">HP</th>
+                    <td id="HPLabelEnemy">100</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="progress"> <!-- this one is necessary to display a grey outline of the total HP -->
+                <div id="hp-bar-enemy" class="progress-bar"></div>
+              </div>
+            </div>
 
         </div>
       </section>
