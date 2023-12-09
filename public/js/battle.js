@@ -1,6 +1,6 @@
 // initialize HP values
-let ownPokemonHP = 100;
-let enemyPokemonHP = 100;
+// let ownPokemonHP = 100;
+// let enemyPokemonHP = 100;
 let isOwnPokemonTurn = true;
 
 // set initial value for own HP bar

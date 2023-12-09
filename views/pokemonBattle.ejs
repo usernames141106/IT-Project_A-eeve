@@ -1,8 +1,8 @@
 <%- include("partials/header",{title: "Pokemon Battle" , secondRow:true }); %>
 
   <script src="/js/battle.js" defer></script>
-  <!-- <script src="/js/loadPokemon.js" defer></script> -->
   <div class="row">
+    <% const currentPokemon = currentUser.pokemons[currentUser.currentPokemon]; %>
 
     <main class="container col-9 d-flex flex-row flex-wrap col-md-9 col-sm-12 d-grid justify-content-center">
       <h1 class="mx-auto">Pokémon Battle</h1>
@@ -10,16 +10,16 @@
       <section class="row justify-content-center"> <!-- section Pokemon -->
 
         <div class="card col-md-4 m-3 pb-3 custom-class" id="ownPokemon"> <!-- size and margin of card 1 -->
-          <img src="/images/pikachu.png" alt="Huidige Pokemon">
+          <img src="<%= currentPokemon ? currentPokemon.image : " /images/empty.png" %>" alt="Huidige Pokemon">
           <div class="card-body text-center">
-            <h5 class="card-title">Pikachu</h5>
+            <h5 class="card-title"><%= currentPokemon ? currentPokemon.name : "Geen huidige pokemon" %></h5>
           </div>
           <div class="hp"> <!-- HP bar own Pokémon -->
             <table class="table caption-top mx-auto table-sm table-hover">
               <tbody>
                 <tr>
                   <th class="ps-4" style="text-align: start;">HP</th>
-                  <td id="HPLabel">100</td>
+                  <td id="HPLabel"><%= currentPokemon ? currentPokemon.maxHP : "???" %></td>
                 </tr>
               </tbody>
             </table>
@@ -59,7 +59,7 @@
                 <tbody>
                   <tr>
                     <th class="ps-4" style="text-align: start;">HP</th>
-                    <td id="HPLabelEnemy">100</td>
+                    <td id="HPLabelEnemy"><%= pokemn1 ? pokemn1.maxHP : "???" %></td>
                   </tr>
                 </tbody>
               </table>
