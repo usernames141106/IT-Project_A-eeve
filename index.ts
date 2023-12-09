@@ -76,7 +76,7 @@ app.post("/pokemonBattle", isAuthenticated, (req, res) => {
                 PokemonList: PokemonList,
                 currentUser: req.session.currentUser,
                 pokemon1: req.body.name1,
-                errorMessage: "An error occurred during session save."
+                errorMessage: "Er is iets fout gegaan, probeer het opnieuw."
             });
         }
 
@@ -85,6 +85,38 @@ app.post("/pokemonBattle", isAuthenticated, (req, res) => {
             PokemonList: PokemonList,
             currentUser: req.session.currentUser,
             pokemon1: req.body.name1
+        });
+    });
+});
+
+app.post("/battle", isAuthenticated, (req, res) => {
+    // const form: HTMLElement | null = document.getElementById("form1");
+    // const pokemonName = form?.textContent;
+    const pokemonName: String | undefined = req.body.btnFight;
+    if (pokemonName) {
+        let enemyPokemon: IPokemon | undefined = PokemonList.find(x => x.name == pokemonName);
+        console.log(pokemonName);
+    } else {
+        console.log("niet gelukt");
+    }
+    
+    req.session.save(async (err) => {
+        if (err) {
+            // Handle the error if session save fails
+            console.error(err);
+            return res.render("pokemonBattle", {
+                PokemonList: PokemonList,
+                currentUser: req.session.currentUser,
+                pokemon1: pokemonName,
+                errorMessage: "Er is iets fout gegaan, probeer het opnieuw."
+            });
+        }
+
+        // Render the same route after the session has been saved
+        res.render("pokemonBattle", {
+            PokemonList: PokemonList,
+            currentUser: req.session.currentUser,
+            pokemon1: pokemonName
         });
     });
 });
@@ -261,7 +293,7 @@ app.post("/pokemonvergelijken", isAuthenticated, (req, res) => {
                 currentUser: req.session.currentUser,
                 pokemon1: req.body.name1,
                 pokemon2: req.body.name2,
-                errorMessage: "An error occurred during session save."
+                errorMessage: "Er is iets fout gegaan, probeer het opnieuw."
             });
         }
 
@@ -290,7 +322,7 @@ app.post("/login", async (req, res) => {
     }
     else {
         req.session.destroy(err => {
-            console.log("user not found")
+            console.log("gebruiker niet gevonden")
             res.redirect("/");
         })
     }
