@@ -150,7 +150,12 @@ app.post("/whosthatpokemon", isAuthenticated, (req, res) => {
 app.post("/pokemonRelease", isAuthenticated, async (req, res) => {
     const pokemonId: Number = Number(req.body.pokemon);
     if (req.session.currentUser) {
+        const currentPokemonIndex: number | undefined = req.session.currentUser.currentPokemon !== undefined ? req.session.currentUser.pokemons[req.session.currentUser.currentPokemon].id : undefined;
         req.session.currentUser.pokemons = req.session.currentUser.pokemons.filter(x => x.id != pokemonId);
+        if(currentPokemonIndex !== undefined) {
+            const newCurrentPokemonIndex = req.session.currentUser.pokemons.findIndex(x => currentPokemonIndex == x.id);
+            req.session.currentUser.currentPokemon = newCurrentPokemonIndex !== -1 ? newCurrentPokemonIndex : undefined;
+        }
         await UpdateUserInDB(req.session.currentUser);
     }
     res.redirect(`/pokemonCatch?id=${pokemonId}`);
