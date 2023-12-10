@@ -21,7 +21,6 @@
 
         <nav class="navbar navbar-expand-lg d-flex flex-column p-0">
 
-
             <% if(secondRow) {%><a class="eeveeLogo text-center position-absolute top-10 start-50 translate-middle-x" href="/home"><img src="/images/eevee_logo.png"></a> <%}%>
             <div class="container-fluid <%= secondRow ? "border-bottom" : "" %>">
                 <a class="homebtn navbar-brand" href="/"><img src="/bootstrapIcons/house.svg" height="30px"></a>
@@ -33,9 +32,13 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <% if(currentUser) { %>
-                    <form action="/logout" method="post" class="pe-5 d-flex gap-4 align-items-center">
-                        <p class="m-0 ">Je bent ingelogd <%= currentUser.name %></p>
+                    <div class="collapse navbar-collapse justify-content-end pe-5" id="navbarSupportedContent">
+                         <form action="/logout" method="post" class="nav-item dropdown pe-5 d-flex gap-4 align-items-center">
+                        <p class="m-2 ">Je bent ingelogd <%= currentUser.name %></p>
                         <button id="buttonW" class="btn btn-primary">UITLOGGEN</button>
+                        </form>
+                    </div>
+                   
                     </div>
                 <% } else { %>
                 <div class="collapse navbar-collapse justify-content-end pe-5" id="navbarSupportedContent">
@@ -96,7 +99,7 @@
                     <li><a href="/pokemonBattle"><img src="/images/icon_battle.png" height="15px" style="vertical-align: text-top;" class="pe-2">Pokémon battle</a></li>
                     <li><a href="/myPokemon"><img src="/bootstrapIcons/card-list.svg" height="15px" style="vertical-align: text-top;" class="pe-2">Mijn Pokémon</a></li>
                     <li><a href="/pokemonvergelijken"><img src="/bootstrapIcons/journals.svg" height="15px" style="vertical-align: text-top;" class="pe-2">Pokémon vergelijken</a></li>
-                    <li></li>
+                    
                 </ul>
                 
                 
