@@ -1,8 +1,8 @@
-<% const owned = currentUser.pokemons.find(x => x.id == Pokemon.id) %>
+<% const ownedPokemon = currentUser.pokemons.find(x => x.id == Pokemon.id) %>
 <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 mt-5">
     <a href="/pokemonDetail?id=<%= Pokemon.id %>"><img id="myPokemonList"
             src="<%= Pokemon.image %>"
-            , class="<%= owned ? "" : "opacity-50" %>" alt="Pokemon Image"></a>
+            , class="<%= ownedPokemon ? "" : "opacity-50" %>" alt="Pokemon Image"></a>
 
     <table id="pokemonDetailTables" class="table table-hover">
         <tbody>
@@ -12,17 +12,27 @@
             </tr>
             <tr>
                 <th>Naam</th>
-                <td class="d-flex d-flex justify-content-between"><%= Pokemon.name %>
+                <td class="d-flex d-flex justify-content-between"><%= PokemonList.find(x => x.id == Pokemon.id).name %>
                 </td>
             </tr>
-            <% if(owned) { %>
+            <% if(ownedPokemon) { %>
+            <tr>
+                <th>Bijnaam:</th>
+                <td>
+                    <form method="post" action="/rename">
+                        <input type="hidden" name="pokemonId" value="<%= ownedPokemon.id %>">
+                        <input type="text" name="nickname" value="<%= ownedPokemon.name %>">
+                        <button type="submit"><img src="/bootstrapIcons/pen.svg" alt="Pen" width="20" height="20"></button>
+                    </form>
+                </td>
+            </tr>
             <tr>
                 <td>Kies als huidige Pokémon</td>
                 <td>
                 <a href="/mypokemon?owned=<%= viewAllPokemon %>&newCurrentPokemon=<%= Pokemon.id %>">
                     <input id="myPokemonSelection" class="form-check-input" type="checkbox" <%= 
                         currentUser.currentPokemon !== undefined ? 
-                            owned.id == currentUser.pokemons[currentUser.currentPokemon].id ? "checked" : ""
+                            ownedPokemon.id == currentUser.pokemons[currentUser.currentPokemon].id ? "checked" : ""
                          : "" %> disabled/>
                 </a>
                 </td>

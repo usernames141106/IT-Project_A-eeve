@@ -189,6 +189,15 @@ app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
     });
 });
 
+app.post("/rename", isAuthenticated, async (req,res) => {
+    const targetPokemon: IPokemon | undefined = req.session.currentUser?.pokemons.find(x => x.id == Number(req.body.pokemonId));
+    if(targetPokemon && req.session.currentUser) {
+        targetPokemon.name = String(req.body.nickname);
+        await UpdateUserInDB(req.session.currentUser);
+    }
+    res.redirect(`back`);
+});
+
 app.post("/pokemonRelease", isAuthenticated, async (req, res) => {
     const pokemonId: Number = Number(req.body.pokemon);
     if (req.session.currentUser) {

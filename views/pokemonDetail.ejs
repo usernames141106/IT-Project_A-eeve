@@ -28,8 +28,11 @@
                                 <tr>
                                     <th id="asideTH" class="ps-4">Bijnaam:</th>
                                     <td>
-                                        <%= ownedPokemon.name %>
-                                            <img src="/bootstrapIcons/pen.svg" alt="Pen" width="20" height="20">
+                                        <form method="post" action="/rename">
+                                            <input type="hidden" name="pokemonId" value="<%= ownedPokemon.id %>">
+                                            <input type="text" name="nickname" value="<%= ownedPokemon.name %>">
+                                            <button type="submit"><img src="/bootstrapIcons/pen.svg" alt="Pen" width="20" height="20"></button>
+                                        </form>
                                     </td>
                                 </tr>
                                 <%}%>
