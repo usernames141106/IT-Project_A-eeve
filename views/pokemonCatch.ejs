@@ -7,6 +7,7 @@
           <a href="/pokemonRelease?id=<%= Pokemon.id %>"><img src="/images/pokeBallGreen.png" width="150px" alt="pokeball"></a>
         <% } else { %>
           <a href="/pokemonCatch?attempt=<%= attempt + 1 %>&id=<%= Pokemon.id %>"><img src="/images/pokeBall.png" width="150px" alt="pokeball"></a>
+          <p>Je hebt nog <%= 3 - attempt %> pogingen over.</p>
           <% } %>
     </div>
   </main>
