@@ -1,118 +1,135 @@
 <%- include("partials/header",{title: "Home" , secondRow: true }); %>
-    <main class="col-12 col-sm-12 col-md-12 col-xl-9 d-flex d-flex justify-content-center">
+    <% const ownedPokemon = currentUser.pokemons.find(x=> x.id == Pokemon.id) %>
+        <main class="col-12 col-sm-12 col-md-12 col-xl-9 d-flex d-flex justify-content-center">
 
-        <div class="row d-flex d-flex justify-content-center">
-            <div class="col-12 col-sm-12 d-flex flex-column">
-                <h1 class="text-center pt-3">Pokémon Details</h1>
-            </div>
-            <div class="col-12 col-sm-12 col-md-6 col-xl-5 mt-1 d-flex flex-column align-items-center">
-                <figure class="">
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png"
-                        class="" alt="Pokemon Image">
-                </figure>
-                <table id="pokemonDetailTables" class="table caption-top table-sm table table-hover">
-                    <tbody>
-                        <tr>
-                            <th id="asideTH" class="ps-4">Nummer:</th>
-                            <td>132</td>
-                        </tr>
-                        <tr>
-                            <th id="asideTH" class="ps-4">Naam:</th>
-                            <td>Ditto</td>
-                        </tr>
-                        <tr>
-                            <th id="asideTH" class="ps-4">Bijnaam:</th>
-                            <td>mijn lievelingspokemon
-                                <img src="/bootstrapIcons/pen.svg" alt="Pen" width="20" height="20">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-            </div>
-            <div class="col-12 col-sm-12 col-md-6 col-xl-5 mt-5">
-                <div class="col-12 d-flex d-flex flex-column align-items-left">
-                    <table id="pokemonDetailTables" class="table caption-top mx-auto table-sm table table-hover">
-                        <caption class="text-center">
-                            <h3 class="h1 mt-5 p-2">Statistieken</h3>
-                        </caption>
+            <div class="row d-flex d-flex justify-content-center">
+                <div class="col-12 col-sm-12 d-flex flex-column">
+                    <h1 class="text-center pt-3">Pokémon Details</h1>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-xl-5 mt-1 d-flex flex-column align-items-center">
+                    <figure class="">
+                        <img src="<%= Pokemon.image %>" class="" alt="Pokemon Image">
+                    </figure>
+                    <table id="pokemonDetailTables" class="table caption-top table-sm table table-hover">
                         <tbody>
                             <tr>
-                                <th id="asideTH" class="ps-4" style="text-align: start;">HP</th>
-                                <td>10
+                                <th id="asideTH" class="ps-4">Nummer:</th>
+                                <td>
+                                    <%= Pokemon.id %>
                                 </td>
                             </tr>
                             <tr>
-                                <th id="asideTH" class="ps-4" style="text-align: start;">Aanval</th>
-                                <td>20
+                                <th id="asideTH" class="ps-4">Naam:</th>
+                                <td>
+                                    <%= Pokemon.name %>
                                 </td>
                             </tr>
-                            <tr>
-                                <th id="asideTH" class="ps-4" style="text-align: start;">Verdediging</th>
-                                <td>15
-                                </td>
-                            </tr>
-                            <tr>
-                                <th id="asideTH" class="ps-4" style="text-align: start;">Datum Vangst</th>
-                                <td>10/10/2023
-                                </td>
-                            </tr>
-                            <tr>
-                                <th id="asideTH" class="ps-4" style="text-align: start;">Gewonnen</th>
-                                <td>5
-                                    <button class="ms-2">
-                                        <img src="/images/arrow.png" height="20px" style="background-color: brown;"
-                                            class="rounded-circle">
-                                    </button>
+                            <% if(ownedPokemon !== undefined) { %>
+                                <tr>
+                                    <th id="asideTH" class="ps-4">Bijnaam:</th>
+                                    <td>
+                                        <%= ownedPokemon.name %>
+                                            <img src="/bootstrapIcons/pen.svg" alt="Pen" width="20" height="20">
+                                    </td>
+                                </tr>
+                                <%}%>
 
-                                    <button class="ms-2">
-                                        <img src="/images/arrow.png" height="20px" style="background-color: brown;"
-                                            class="rounded-circle" id="arrowDown">
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th id="asideTH" class="ps-4" style="text-align: start;">Verloren</th>
-                                <td>2
-                                    <button class="ms-2">
-                                        <img src="/images/arrow.png" height="20px" style="background-color: brown;"
-                                            class="rounded-circle">
-                                    </button>
-
-                                    <button class="ms-2 mirror">
-                                        <img src="/images/arrow.png" height="20px" style="background-color: brown;"
-                                            class="rounded-circle">
-                                    </button>
-
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
+
                 </div>
-                <div class="col-12 d-flex flex-column d-flex align-items-left mt-5 pt-5">
-                    <div>
-                        <h1 class="h1 text-center">Evolutiepad</h1>
-                        <div class="d-flex justify-content-center mt-4">
-                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png"
-                                width="150px">
-                            <img src="/images/arrow.png" width="30px" height="30px" class="align-self-center"
-                                id="arrowRight">
-                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png"
-                                width="150px">
-                            <img src="/images/arrow.png" width="30px" height="30px" class="align-self-center"
-                                id="arrowRight">
-                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png"
-                                width="150px">
+                <div class="col-12 col-sm-12 col-md-6 col-xl-5 mt-5">
+                    <div class="col-12 d-flex d-flex flex-column align-items-left">
+                        <table id="pokemonDetailTables" class="table caption-top mx-auto table-sm table table-hover">
+                            <caption class="text-center">
+                                <h3 class="h1 mt-5 p-2">Statistieken</h3>
+                            </caption>
+                            <tbody>
+                                <tr>
+                                    <th id="asideTH" class="ps-4" style="text-align: start;">HP</th>
+                                    <td>
+                                        <%= ownedPokemon ? ownedPokemon.maxHP : Pokemon.maxHP %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th id="asideTH" class="ps-4" style="text-align: start;">Aanval</th>
+                                    <td>
+                                        <%= ownedPokemon ? ownedPokemon.attack : Pokemon.attack %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th id="asideTH" class="ps-4" style="text-align: start;">Verdediging</th>
+                                    <td>
+                                        <%= ownedPokemon ? ownedPokemon.defence : Pokemon.defence %>
+                                    </td>
+                                </tr>
+                                <% if(ownedPokemon) { %>
+                                <tr>
+                                    <th id="asideTH" class="ps-4" style="text-align: start;">Datum Vangst</th>
+                                    <td>
+                                        <%= ownedPokemon.captureDate !== null ? ownedPokemon.captureDate.toString() : "???" %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th id="asideTH" class="ps-4" style="text-align: start;">Gewonnen</th>
+                                    <td>
+                                        <%= ownedPokemon.wins %>
+                                            <button class="ms-2">
+                                                <img src="/images/arrow.png" height="20px"
+                                                    style="background-color: brown;" class="rounded-circle">
+                                            </button>
+
+                                            <button class="ms-2">
+                                                <img src="/images/arrow.png" height="20px"
+                                                    style="background-color: brown;" class="rounded-circle"
+                                                    id="arrowDown">
+                                            </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th id="asideTH" class="ps-4" style="text-align: start;">Verloren</th>
+                                    <td>
+                                        <%= ownedPokemon.losses %>
+                                            <button class="ms-2">
+                                                <img src="/images/arrow.png" height="20px"
+                                                    style="background-color: brown;" class="rounded-circle">
+                                            </button>
+
+                                            <button class="ms-2 mirror">
+                                                <img src="/images/arrow.png" height="20px"
+                                                    style="background-color: brown;" class="rounded-circle">
+                                            </button>
+
+                                    </td>
+                                </tr>
+                                <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-12 d-flex flex-column d-flex align-items-left mt-5 pt-5">
+                        <div>
+                            <h1 class="h1 text-center">Evolutiepad</h1>
+                            <div class="d-flex justify-content-center mt-4">
+                                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png"
+                                    width="150px">
+                                <img src="/images/arrow.png" width="30px" height="30px" class="align-self-center"
+                                    id="arrowRight">
+                                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png"
+                                    width="150px">
+                                <img src="/images/arrow.png" width="30px" height="30px" class="align-self-center"
+                                    id="arrowRight">
+                                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png"
+                                    width="150px">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
 
 
 
-    </main>
+        </main>
 
-    <%- include("partials/aside",{myPokemonPagina: false}); %>
-        <%- include("partials/footer"); %>
+        <%- include("partials/aside",{myPokemonPagina: false}); %>
+            <%- include("partials/footer"); %>

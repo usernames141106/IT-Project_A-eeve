@@ -12,7 +12,7 @@ export interface IPokemon{
     currentHp?:number,
     wins:number,
     losses:number,
-    captureDate?:Date
+    captureDate:Date | null
 }
 export interface IUser  {
     _id?: ObjectId,

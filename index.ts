@@ -222,7 +222,7 @@ app.post("/pokemonCatchSuccess", isAuthenticated, async (req, res) => {
     let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
     if (pokemon && req.session.currentUser) {
         pokemon.name = req.query.useDefault == "true" ? pokemon.name : req.body.name;
-        req.session.currentUser?.pokemons.push(pokemon);
+        req.session.currentUser?.pokemons.push({...pokemon,captureDate: new Date(Date.now())});
         await UpdateUserInDB(req.session.currentUser);
     }
     res.redirect(`/pokemonCatch?id=${pokemonId}`);
@@ -264,8 +264,13 @@ app.get("/pokemonCatch", isAuthenticated, (req, res) => {
 });
 
 app.get("/pokemondetail", isAuthenticated, (req, res) => {
+    const pokemonId: Number = Number(req.query.id);
+    let pokemon: IPokemon | undefined = [...PokemonList].find(x => x.id == pokemonId);
+    pokemon = pokemon ? pokemon : PokemonList[132];
+
     res.render("pokemonDetail", {
-        currentUser: req.session.currentUser
+        currentUser: req.session.currentUser,
+        Pokemon: pokemon
     });
 });
 

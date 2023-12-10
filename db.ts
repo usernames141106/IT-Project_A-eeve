@@ -111,7 +111,7 @@ export async function GetPokemonFromApi() {
             currentHp: undefined,
             wins: 0,
             losses: 0,
-            captureDate: undefined
+            captureDate: null
         });
     }
 }
