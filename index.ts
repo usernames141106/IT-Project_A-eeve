@@ -198,6 +198,17 @@ app.post("/rename", isAuthenticated, async (req,res) => {
     res.redirect(`back`);
 });
 
+app.get("/alterWinsAndLosses",isAuthenticated, async (req, res) => {
+    const {id, wins, add} = req.query;
+    const pokemon: IPokemon | undefined = req.session.currentUser?.pokemons.find(x => x.id == Number(id));
+    if(pokemon && req.session.currentUser) {
+        const winsOrLosses = wins == "true" ? "wins" : "losses";
+        pokemon[winsOrLosses] += add == "true" ? 1 : pokemon[winsOrLosses] <= 0 ? 0 : -1;
+        await UpdateUserInDB(req.session.currentUser);
+    }
+    res.redirect(`back`);
+});
+
 app.post("/pokemonRelease", isAuthenticated, async (req, res) => {
     const pokemonId: Number = Number(req.body.pokemon);
     if (req.session.currentUser) {

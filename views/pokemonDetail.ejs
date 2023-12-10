@@ -77,32 +77,32 @@
                                     <th id="asideTH" class="ps-4" style="text-align: start;">Gewonnen</th>
                                     <td>
                                         <%= ownedPokemon.wins %>
-                                            <button class="ms-2">
+                                            <a href="/alterWinsAndLosses?id=<%= ownedPokemon.id %>&wins=true&add=true" class="ms-2">
                                                 <img src="/images/arrow.png" height="20px"
                                                     style="background-color: brown;" class="rounded-circle">
-                                            </button>
+                                            </a>
 
-                                            <button class="ms-2">
+                                            <a href="/alterWinsAndLosses?id=<%= ownedPokemon.id %>&wins=true&add=false" class="ms-2">
                                                 <img src="/images/arrow.png" height="20px"
                                                     style="background-color: brown;" class="rounded-circle"
                                                     id="arrowDown">
-                                            </button>
+                                            </a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th id="asideTH" class="ps-4" style="text-align: start;">Verloren</th>
                                     <td>
                                         <%= ownedPokemon.losses %>
-                                            <button class="ms-2">
+                                            <a href="/alterWinsAndLosses?id=<%= ownedPokemon.id %>&wins=false&add=true" class="ms-2">
                                                 <img src="/images/arrow.png" height="20px"
                                                     style="background-color: brown;" class="rounded-circle">
-                                            </button>
+                                            </a>
 
-                                            <button class="ms-2 mirror">
+                                            <a href="/alterWinsAndLosses?id=<%= ownedPokemon.id %>&wins=false&add=false" class="ms-2">
                                                 <img src="/images/arrow.png" height="20px"
-                                                    style="background-color: brown;" class="rounded-circle">
-                                            </button>
-
+                                                    style="background-color: brown;" class="rounded-circle"
+                                                    id="arrowDown">
+                                            </a>
                                     </td>
                                 </tr>
                                 <%}%>
