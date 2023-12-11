@@ -1,7 +1,7 @@
 import express from 'express';
 import session from 'express-session';
 import { IPokemon, IUser } from './interface';
-import { GetPokemonFromApi, LoadUserFromMongoDB, PokemonList, UpdateUserInDB } from './db';
+import { GetPokemonFromApi, LoadUserFromMongoDB, PokemonList, UpdateUserInDB,GetEvolutions } from './db';
 import { RegisterUserInDB, coinFlip } from './db';
 
 
@@ -292,6 +292,10 @@ app.get("/pokemondetail", isAuthenticated, (req, res) => {
         Pokemon: pokemon
     });
 });
+
+//////////////////////
+GetEvolutions('charmeleon');
+///////////////
 
 app.get("/mypokemon", isAuthenticated, async (req, res) => {
     const owned: boolean = req.query.owned == "true";

@@ -1,4 +1,4 @@
-import { IPokemon, IUser } from "./interface";
+import { IPokemon, IUser, IPokemonSpeciesResponse, IEvolutionChain } from "./interface";
 import { MongoClient, Collection } from "mongodb";
 import crypto from "node:crypto";
 
@@ -115,6 +115,30 @@ export async function GetPokemonFromApi() {
         });
     }
 }
+
+export async function GetEvolutions(params: string) {
+    const pokemonName = params;
+    const apiUrl = `https://pokeapi.co/api/v2/pokemon-species/${pokemonName}/`;
+  
+    try {
+      const response = await fetch(apiUrl);
+      const data: IPokemonSpeciesResponse = await response.json();
+  
+      // Access the evolution chain data
+      const evolutionChainData: IEvolutionChain = data.chain;
+  
+      // Check if evolves_to exists
+      if (evolutionChainData && evolutionChainData.evolves_to) {
+        // Now you can safely access evolutionChainData.evolves_to
+        const evolvesToData = evolutionChainData.evolves_to;
+        console.log(evolvesToData);
+      } else {
+        console.error('Evolution data is undefined or does not have evolves_to property');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
 
 //Extra functie voor pokemon battle 
 export function coinFlip() : number {
