@@ -165,14 +165,13 @@ app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
                     req.session.currentUser.pokemons[currentpok].attack += 1; // Increment attack
                     await UpdateUserInDB(req.session.currentUser);
                 }
-                
+
             } else if (coinflip === 1) {
                 if (req.session.currentUser && req.session.currentUser.pokemons && req.session.currentUser.pokemons[currentpok]) {
                     req.session.currentUser.pokemons[currentpok].defence += 1; // Increment defence
                     await UpdateUserInDB(req.session.currentUser);
                 }
             }
-            
         }
     }
     else if (isCorrectGuess == true && haspokemonselected == false) {
