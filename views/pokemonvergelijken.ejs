@@ -36,35 +36,24 @@
                         <h1>Statistieken</h1>
                     </caption>
                     <tbody>
-                        <tr">
+                        <tr>
                             <th style="text-align: start;">HP</th>
-                            <% if(pokemn1.maxHP > pokemn2.maxHP ){%>
-                                <td class="text-success">  <%=pokemn1.maxHP  %> </td>
-                                <%}else if(pokemn1.maxHP  < pokemn2.maxHP  ){ %>
-                                <td class="text-danger">  <%=pokemn1.maxHP  %> </td>
-                                <% }else{ %>
-                                <td>  <%=pokemn1.maxHP %> </td>
-                                <% } %>
+                            <td class="<%= (pokemn1 && pokemn2 && pokemn1.maxHP > pokemn2.maxHP) ? 'text-success' : (pokemn1 && pokemn2 && pokemn1.maxHP < pokemn2.maxHP) ? 'text-danger' : '' %>">
+                                <%= (pokemn1 && pokemn1.maxHP !== undefined) ? pokemn1.maxHP : '???' %>
+                            </td>
                             </tr>
                             <tr>
                                 <th style="text-align: start;">Aanval</th>
-                                <% if(pokemn1.attack > pokemn2.attack){%>
-                                    <td class="text-success">  <%=pokemn1.attack %> </td>
-                                    <%}else if(pokemn1.attack < pokemn2.attack ){ %>
-                                    <td class="text-danger">  <%=pokemn1.attack %> </td>
-                                    <% }else{ %>
-                                    <td>  <%=pokemn1.attack%> </td>
-                                    <% } %>
+                                <td class="<%= (pokemn1 && pokemn2 && pokemn1.attack > pokemn2.attack) ? 'text-success' : (pokemn1 && pokemn2 && pokemn1.attack < pokemn2.attack) ? 'text-danger' : '' %>">
+                                    <%= (pokemn1 && pokemn1.attack !== undefined) ? pokemn1.attack : '???' %>
+                                </td>
                             </tr>
                             <tr>
                                 <th style="text-align: start;">Verdediging</th>
-                                <% if(pokemn1.defence > pokemn2.defence ){%>
-                                    <td class="text-success">  <%=pokemn1.defence %> </td>
-                                    <%}else if(pokemn1.defence < pokemn2.defence ){ %>
-                                    <td class="text-danger">  <%=pokemn1.defence %> </td>
-                                    <% }else{ %>
-                                    <td>  <%=pokemn1.defence%> </td>
-                                    <% } %>
+                                <td class="<%= (pokemn1 && pokemn2 && pokemn1.defence > pokemn2.defence) ? 'text-success' : (pokemn1 && pokemn2 && pokemn1.defence < pokemn2.defence) ? 'text-danger' : '' %>">
+                                    <%= (pokemn1 && pokemn1.defence !== undefined) ? pokemn1.defence : '???' %>
+                                </td>
+                                
                             </tr>
                     </tbody>
                 </table>
@@ -107,36 +96,21 @@
                     <tbody>
                         <tr">
                             <th style="text-align: start;">HP</th>
-                            <% if(pokemn1.maxHP < pokemn2.maxHP){%>
-                            <td class="text-success">  <%=pokemn2.maxHP%> </td>
-                            <%}else if(pokemn1.maxHP > pokemn2.maxHP){ %>
-                            <td class="text-danger">  <%=pokemn2.maxHP%> </td>
-                            <% }else{ %>
-                                <td>  <%=pokemn2.maxHP%> </td>
-                            <% } %>
+                            <td class="<%= (pokemn1 && pokemn2 && pokemn1.maxHP < pokemn2.maxHP) ? 'text-success' : (pokemn1 && pokemn2 && pokemn1.maxHP > pokemn2.maxHP) ? 'text-danger' : '' %>">
+                                <%= (pokemn2 && pokemn2.maxHP !== undefined) ? pokemn2.maxHP : '???' %>
+                            </td>
                             </tr>
                             <tr>
                                 <th style="text-align: start;">Aanval</th>
-                                <% if(pokemn1.attack < pokemn2.attack){%>
-                                    <td class="text-success">  <%=pokemn2.attack%> </td>
-                                    <%}else if(pokemn1.attack > pokemn2.attack){ %>
-                                    <td class="text-danger">  <%=pokemn2.attack%> </td>
-                                    <% }else{ %>
-                                        <td>  <%=pokemn2.attack%> </td>
-                                    <% } %>
+                                <td class="<%= (pokemn1 && pokemn2 && pokemn1.attack < pokemn2.attack) ? 'text-success' : (pokemn1 && pokemn2 && pokemn1.attack > pokemn2.attack) ? 'text-danger' : '' %>">
+                                    <%= (pokemn2 && pokemn2.attack !== undefined) ? pokemn2.attack : '???' %>
                                 </td>
                             </tr>
                             <tr>
                                 <th style="text-align: start;">Verdediging</th>
-                                <% if(pokemn1.defence < pokemn2.defence ){%>
-                                    <td class="text-success">  <%=pokemn2.defence %> </td>
-                                    <%}else if(pokemn1.defence  > pokemn2.defence ){ %>
-                                    <td class="text-danger">  <%=pokemn2.defence %> </td>
-                                    <% }else if (pokemn1.defence == pokemn2.defence){ %>
-                                        <td class="text-black">  <%=pokemn2.defence%> </td>
-                                    <% }%>
-
-                                </td>
+                                <td class="<%= (pokemn1 && pokemn2 && pokemn1.defence < pokemn2.defence) ? 'text-success' : (pokemn1 && pokemn2 && pokemn1.defence > pokemn2.defence) ? 'text-danger' : (pokemn1 && pokemn2 && pokemn1.defence === pokemn2.defence) ? 'text-black' : '' %>">
+                                    <%= (pokemn2 && pokemn2.defence !== undefined) ? pokemn2.defence : '???' %>
+                                </td>                            
                             </tr>
                     </tbody>
                 </table>
