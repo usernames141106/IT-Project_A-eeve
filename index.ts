@@ -98,7 +98,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
         let enemyPokemon: IPokemon | undefined = PokemonList.find(x => x.name == pokemonName);
         console.log(pokemonName);
     } else {
-        console.log("niet gelukt");
+        console.log("Pokemon niet gevonden");
     }
     
     req.session.save(async (err) => {

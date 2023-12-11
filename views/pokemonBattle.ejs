@@ -6,9 +6,9 @@
     <% const currentPokemon=currentUser.pokemons[currentUser.currentPokemon]; %>
 
       <main class="container col-9 d-flex flex-row flex-wrap col-md-9 col-sm-12 d-grid justify-content-center">
-        <h1 class="mx-auto">Pokémon Battle</h1>
+        <h1 class="mx-auto d-flex">Pokémon Battle</h1>
 
-        <section class="row justify-content-center"> <!-- section Pokemon -->
+        <section class="row justify-content-center mx-auto flex"> <!-- section Pokemon -->
 
           <div class="card col-md-4 m-3 pb-3 custom-class" id="ownPokemon"> <!-- size and margin of card 1 -->
             <img src="<%= currentPokemon ? currentPokemon.image : " /images/empty.png" %>" alt="Huidige Pokemon">
@@ -42,7 +42,7 @@
 
                 <form class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2" method="post"
                   action="/pokemonBattle">
-                  <input type="search" id="form1" class="form-control" placeholder="Zoek Pokémon" aria-label="Search"
+                  <input type="search" id="form1" class="form-control text-center" placeholder="Zoek Pokémon" aria-label="Search"
                     list="pokemonlist" name="name1" value="<%= pokemon1 ? pokemon1.toUpperCase(): "" %>" />
                   <datalist id="pokemonlist">
                     <% PokemonList.map(x=> {%><option key="index">
