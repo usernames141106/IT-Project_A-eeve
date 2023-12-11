@@ -2,7 +2,7 @@
     <script src="/js/search.js" defer></script>
     <main class="container flex-column d-flex col-9 col-md-9 col-sm-12 d-grid gap-4">
         <h1 class="mx-auto text-center ">Pokémon vergelijken</h1>
-        <form  class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2" method="post" action="/pokemonvergelijken">
+        <form  class="container form-outline mx-auto pt-5 p-sm-1 d-flex justify-content-center flex-row gap-2" method="post" action="/pokemonvergelijken">
         <div class="row-cols-1 row-cols-md-2 d-flex flex-row flex-wrap justify-content-evenly">
             <article class="col-md-9 col-lg-4 col-sm-7 d-flex flex-column">
 
@@ -27,6 +27,7 @@
                 </div>
 
                 <% let pokemn1 = PokemonList.find(x => x.name == pokemon1)  %>
+                <% let pokemn2 = PokemonList.find(x => x.name == pokemon2)  %>
                 <a href="<%= pokemn1 ? `/pokemonCatch?id=${pokemn1.id}` : "#" %>" class="h-50 d-flex justify-content-center"><img src="<%= pokemn1 ? pokemn1.image : "/images/empty.png"  %>" 
                         class="img-fluid mx-auto rounded" alt=""></a>
 
@@ -37,37 +38,33 @@
                     <tbody>
                         <tr">
                             <th style="text-align: start;">HP</th>
-                            <td>10
-                            </td>
+                            <% if(pokemn1.maxHP > pokemn2.maxHP ){%>
+                                <td class="text-success">  <%=pokemn1.maxHP  %> </td>
+                                <%}else if(pokemn1.maxHP  < pokemn2.maxHP  ){ %>
+                                <td class="text-danger">  <%=pokemn1.maxHP  %> </td>
+                                <% }else{ %>
+                                <td>  <%=pokemn1.maxHP %> </td>
+                                <% } %>
                             </tr>
                             <tr>
                                 <th style="text-align: start;">Aanval</th>
-                                <td>10
-                                    <button class="ms-2">
-                                        <img src="/images/arrow.png" height="20px" style="background-color: brown;"
-                                            class="rounded-circle">
-                                    </button>
-
-                                    <button class="ms-2">
-                                        <img src="/images/arrow.png" height="20px" style="background-color: brown;"
-                                            class="rounded-circle" id="arrowDown">
-                                    </button>
-                                </td>
+                                <% if(pokemn1.attack > pokemn2.attack){%>
+                                    <td class="text-success">  <%=pokemn1.attack %> </td>
+                                    <%}else if(pokemn1.attack < pokemn2.attack ){ %>
+                                    <td class="text-danger">  <%=pokemn1.attack %> </td>
+                                    <% }else{ %>
+                                    <td>  <%=pokemn1.attack%> </td>
+                                    <% } %>
                             </tr>
                             <tr>
                                 <th style="text-align: start;">Verdediging</th>
-                                <td>10
-                                    <button class="ms-2">
-                                        <img src="/images/arrow.png" height="20px" style="background-color: brown;"
-                                            class="rounded-circle">
-                                    </button>
-
-                                    <button class="ms-2 mirror">
-                                        <img src="/images/arrow.png" height="20px" style="background-color: brown;"
-                                            class="rounded-circle">
-                                    </button>
-
-                                </td>
+                                <% if(pokemn1.defence > pokemn2.defence ){%>
+                                    <td class="text-success">  <%=pokemn1.defence %> </td>
+                                    <%}else if(pokemn1.defence < pokemn2.defence ){ %>
+                                    <td class="text-danger">  <%=pokemn1.defence %> </td>
+                                    <% }else{ %>
+                                    <td>  <%=pokemn1.defence%> </td>
+                                    <% } %>
                             </tr>
                     </tbody>
                 </table>
@@ -99,7 +96,7 @@
                  
                 </div>
 
-                <% let pokemn2 = PokemonList.find(x => x.name == pokemon2)  %>
+               
                 <a href="<%= pokemn2 ? `/pokemonCatch?id=${pokemn2.id}` : "#" %>" class="h-50 d-flex justify-content-center "><img src="<%= pokemn2 ? pokemn2.image : "/images/empty.png"  %>" 
                         class="img-fluid mx-auto rounded" alt=""></a>
 
@@ -110,35 +107,34 @@
                     <tbody>
                         <tr">
                             <th style="text-align: start;">HP</th>
-                            <td>10
-                            </td>
+                            <% if(pokemn1.maxHP < pokemn2.maxHP){%>
+                            <td class="text-success">  <%=pokemn2.maxHP%> </td>
+                            <%}else if(pokemn1.maxHP > pokemn2.maxHP){ %>
+                            <td class="text-danger">  <%=pokemn2.maxHP%> </td>
+                            <% }else{ %>
+                                <td>  <%=pokemn2.maxHP%> </td>
+                            <% } %>
                             </tr>
                             <tr>
                                 <th style="text-align: start;">Aanval</th>
-                                <td>10
-                                    <button class="ms-2">
-                                        <img src="/images/arrow.png" height="20px" style="background-color: brown;"
-                                            class="rounded-circle">
-                                    </button>
-
-                                    <button class="ms-2">
-                                        <img src="/images/arrow.png" height="20px" style="background-color: brown;"
-                                            class="rounded-circle" id="arrowDown">
-                                    </button>
+                                <% if(pokemn1.attack < pokemn2.attack){%>
+                                    <td class="text-success">  <%=pokemn2.attack%> </td>
+                                    <%}else if(pokemn1.attack > pokemn2.attack){ %>
+                                    <td class="text-danger">  <%=pokemn2.attack%> </td>
+                                    <% }else{ %>
+                                        <td>  <%=pokemn2.attack%> </td>
+                                    <% } %>
                                 </td>
                             </tr>
                             <tr>
                                 <th style="text-align: start;">Verdediging</th>
-                                <td>10
-                                    <button class="ms-2">
-                                        <img src="/images/arrow.png" height="20px" style="background-color: brown;"
-                                            class="rounded-circle">
-                                    </button>
-
-                                    <button class="ms-2 mirror">
-                                        <img src="/images/arrow.png" height="20px" style="background-color: brown;"
-                                            class="rounded-circle">
-                                    </button>
+                                <% if(pokemn1.defence < pokemn2.defence ){%>
+                                    <td class="text-success">  <%=pokemn2.defence %> </td>
+                                    <%}else if(pokemn1.defence  > pokemn2.defence ){ %>
+                                    <td class="text-danger">  <%=pokemn2.defence %> </td>
+                                    <% }else if (pokemn1.defence == pokemn2.defence){ %>
+                                        <td class="text-black">  <%=pokemn2.defence%> </td>
+                                    <% }%>
 
                                 </td>
                             </tr>
