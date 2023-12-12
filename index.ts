@@ -96,7 +96,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
     const pokemonName: String | undefined = req.body.btnFight;
     if (pokemonName) {
         let enemyPokemon: IPokemon | undefined = PokemonList.find(x => x.name == pokemonName);
-        console.log(pokemonName);
+        console.log(enemyPokemon?.name);
     } else {
         console.log("Pokemon niet gevonden");
     }
