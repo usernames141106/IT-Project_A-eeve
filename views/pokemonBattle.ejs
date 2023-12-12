@@ -10,7 +10,7 @@
 
         <section class="row justify-content-center mx-auto flex"> <!-- section Pokemon -->
 
-          <div class="card col-md-4 m-3 pb-3 custom-class" id="ownPokemon"> <!-- size and margin of card 1 -->
+          <div class="card col-md-5 m-3 pb-3 custom-class" id="ownPokemon"> <!-- size and margin of card 1 -->
             <img src="<%= currentPokemon ? currentPokemon.image : " /images/empty.png" %>" alt="Huidige Pokemon">
             <div class="card-body text-center">
               <h5 class="card-title">
@@ -34,7 +34,7 @@
             </div>
           </div>
 
-          <div class="card col-md-4 m-3 pb-3 custom-class" id="enemyPokemon"> <!-- size and margin of card 2 -->
+          <div class="card col-md-5 m-3 pb-3 custom-class" id="enemyPokemon"> <!-- size and margin of card 2 -->
             <% let pokemn1=PokemonList.find(x=> x.name == pokemon1) %>
               <img src="<%= pokemn1 ? pokemn1.image : " /images/empty.png" %>"
               class="img-fluid mx-auto rounded" alt=""></a>
