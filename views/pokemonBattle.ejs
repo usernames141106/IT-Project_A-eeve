@@ -1,7 +1,7 @@
 <%- include("partials/header",{title: "Pokemon Battle" , secondRow:true }); %>
 
   <!-- <script src="/js/battle.js" defer></script> -->
-  <% if (req.method==='POST' && (!errorMessage)) { %>
+  <% if (req.method==='POST' && (!message)) { %>
     <script src="/js/loadHPbar.js" defer></script>
     <% } %>
 
@@ -11,8 +11,8 @@
           <main class="container col-9 d-flex flex-row flex-wrap col-md-9 col-sm-12 d-grid justify-content-center">
             <div>
               <h1 class="mx-auto d-flex text-center justify-content-center">Pokémon Battle</h1>
-              <% if (errorMessage) { %>
-                <div class="errorMessage text-center justify-content-center"><%= errorMessage %></div>
+              <% if (message) { %>
+                <div class="errorMessage text-center justify-content-center"><%= message %></div>
               <% } %>
             </div>
 
@@ -21,7 +21,7 @@
               <div class="card col-md-4 m-3 pb-3 custom-class" id="ownPokemon"> <!-- size and margin of card 1 -->
 
                 <img src="<%= currentPokemon ? currentPokemon.image : " /images/empty.png" %>" alt="Huidige Pokemon">
-                <div class="card-body text-center">
+                <div class="card-body text-center centered-title">
                   <h5 class="card-title">
                     <%= currentPokemon ? currentPokemon.name.toUpperCase() : "Geen huidige pokemon" %>
                   </h5>
@@ -92,7 +92,7 @@
             <section class="text-center col-md-3 col-sm-5 container mb-3 mt-3"> <!-- section fightButton -->
               <form method="post" action="/battle">
                 <button class="btn" id="fightButton" type="submit" method="post" action="/battle" name="btnFight"
-                  value="<%= pokemon1 ? pokemon1 : "" %>" <%=req.path==='/battle' && (!errorMessage) ? 'disabled' : ''
+                  value="<%= pokemon1 ? pokemon1 : "" %>" <%=req.path==='/battle' && (!message) ? 'disabled' : ''
                   %>>
                   <input type="hidden" name="ownPokemon" value="<%= currentPokemon.id %>">
                   <img src="/images/fightbutton.png" alt="fightButton">
@@ -109,3 +109,6 @@
         <!-- BRONNEN -->
         <!-- Fightbutton afbeelding -->
         <!-- https://assetsio.reedpopcdn.com/pokemon-go-type-chart-strength-weakness-resistance-super-effective.jpg?width=690&quality=80&format=jpg&auto=webp -->
+
+        <!-- Versus logo -->
+        <!-- https://media.istockphoto.com/id/1459545409/vector/vs-versus-icon-logo-black-white-vector-symbol-fight-competition-battle-sport-game-grunge.jpg?s=612x612&w=0&k=20&c=dJPtK0BAzoTM9hI5mNBKg-b1-063mYO3WIBOtgScB3w= -->

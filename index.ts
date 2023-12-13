@@ -61,18 +61,18 @@ app.get("/noAccess", (req, res) => {
 });
 
 app.get("/pokemonBattle", isAuthenticated, (req, res) => {
-    let errorMessage: String | undefined;
+    let message: String | undefined;
     res.render("pokemonBattle", {
         PokemonList: PokemonList,
         pokemon1: undefined,
         currentUser: req.session.currentUser,
         req: req,
-        errorMessage: errorMessage
+        message: message
     });
 });
 
 app.post("/pokemonBattle", isAuthenticated, (req, res) => {
-    let errorMessage: String | undefined;
+    let message: String | undefined;
     req.session.save(async (err) => {
         if (err) {
             // Handle the error if session save fails
@@ -82,7 +82,7 @@ app.post("/pokemonBattle", isAuthenticated, (req, res) => {
                 currentUser: req.session.currentUser,
                 pokemon1: req.body.name1,
                 req: req,
-                errorMessage: "Er is iets fout gegaan, probeer het opnieuw."
+                message: "Er is iets fout gegaan, probeer het opnieuw."
             });
         }
 
@@ -92,22 +92,22 @@ app.post("/pokemonBattle", isAuthenticated, (req, res) => {
             currentUser: req.session.currentUser,
             pokemon1: req.body.name1,
             req: req,
-            errorMessage: errorMessage
+            message: message
         });
     });
 });
 
 app.post("/battle", isAuthenticated, (req, res) => {
-    let errorMessage: String | undefined;
+    let message: String | undefined;
     let winBattle: Boolean = false;
 
     // Initiate own Pokémon stats and enemy Pokémon stats
     const ownPokemonName = req.body.ownPokemon;
     let ownPokemon: IPokemon | undefined = PokemonList.find(x => x.id == ownPokemonName);
-    console.log(ownPokemon);
+    // console.log(ownPokemon);
     const enemyPokemonName: String | undefined = req.body.btnFight;
     let enemyPokemon: IPokemon | undefined = PokemonList.find(x => x.name == enemyPokemonName);
-    console.log(enemyPokemon);
+    // console.log(enemyPokemon);
 
     if (enemyPokemon && ownPokemon) {
         let ownPokemonHP = ownPokemon.maxHP;
@@ -136,6 +136,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
         // Win the battle -> catch the enemy Pokémon
         // Lose the battle -> "try again with another Pokémon"
         if (winBattle) {
+            // setTimeout(() => {}, 10000);
             res.render("pokemonCatchSuccess", {
                 Pokemon: enemyPokemon,
                 currentUser: req.session.currentUser
@@ -146,7 +147,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
                 currentUser: req.session.currentUser,
                 pokemon1: enemyPokemonName,
                 req: req,
-                errorMessage: "Je verliest de strijd. Probeer het met een andere Pokémon of maak je huidige Pokémon sterker."
+                message: "Je verliest de strijd! Probeer het met een andere Pokémon of maak je huidige Pokémon sterker."
             });
         }
     } else if (enemyPokemon == undefined) {
@@ -156,7 +157,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
             currentUser: req.session.currentUser,
             pokemon1: enemyPokemonName,
             req: req,
-            errorMessage: "Selecteer een vijand Pokémon."
+            message: "Selecteer een vijand Pokémon."
         });
     } else if (ownPokemon == undefined) {
         // Return an error when the user has no Pokémon
@@ -165,7 +166,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
             currentUser: req.session.currentUser,
             pokemon1: enemyPokemonName,
             req: req,
-            errorMessage: "Je moet eerst een eigen Pokémon hebben."
+            message: "Je moet een eigen Pokémon hebben om te kunnen vechten."
         });
     }
 
@@ -178,17 +179,16 @@ app.post("/battle", isAuthenticated, (req, res) => {
                 currentUser: req.session.currentUser,
                 pokemon1: enemyPokemonName,
                 req: req,
-                errorMessage: "Er is iets fout gegaan, probeer het opnieuw."
+                message: "Er is iets fout gegaan, probeer het opnieuw."
             });
         }
 
-        // setTimeout(() => {}, 10000);
         res.render("pokemonBattle", {
             PokemonList: PokemonList,
             currentUser: req.session.currentUser,
             pokemon1: enemyPokemonName,
             req: req,
-            errorMessage: errorMessage
+            message: message
         });
     });
 });
