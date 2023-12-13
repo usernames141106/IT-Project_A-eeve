@@ -62,13 +62,23 @@ app.get("/noAccess", (req, res) => {
 
 app.get("/pokemonBattle", isAuthenticated, (req, res) => {
     let message: String | undefined;
-    res.render("pokemonBattle", {
-        PokemonList: PokemonList,
-        pokemon1: undefined,
-        currentUser: req.session.currentUser,
-        req: req,
-        message: message
-    });
+    if (req.session.currentUser && req.session.currentUser.currentPokemon === undefined) {
+        res.render("message", {
+            title: "Selecteer een pokemon",
+            message: "Sorry, je moet een huidige pokemon hebben geselecteerd.",
+            currentUser: req.session.currentUser
+        });
+    }
+    else {
+        res.render("pokemonBattle", {
+            PokemonList: PokemonList,
+            pokemon1: undefined,
+            currentUser: req.session.currentUser,
+            req: req,
+            message: message
+        });
+    }
+
 });
 
 app.post("/pokemonBattle", isAuthenticated, (req, res) => {
@@ -309,7 +319,8 @@ app.get("/pokemonRelease", isAuthenticated, (req, res) => {
 app.post("/pokemonCatchSuccess", isAuthenticated, async (req, res) => {
     const pokemonId: Number = Number(req.body.pokemon);
     let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
-    if (pokemon && req.session.currentUser) {
+    const previouslyOwnedPokemonOfThisType: IPokemon | undefined = req.session.currentUser?.pokemons.find(x => x.id == pokemonId);
+    if (pokemon && req.session.currentUser && previouslyOwnedPokemonOfThisType === undefined) {
         pokemon.name = req.query.useDefault == "true" ? pokemon.name : req.body.name;
         req.session.currentUser?.pokemons.push({ ...pokemon, captureDate: new Date(Date.now()) });
         await UpdateUserInDB(req.session.currentUser);
