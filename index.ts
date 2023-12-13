@@ -325,7 +325,7 @@ app.post("/pokemonCatchSuccess", isAuthenticated, async (req, res) => {
         req.session.currentUser?.pokemons.push({ ...pokemon, captureDate: new Date(Date.now()) });
         await UpdateUserInDB(req.session.currentUser);
     }
-    res.redirect(`/pokemonCatch?id=${pokemonId}`);
+    res.redirect(`back`);
 });
 
 app.get("/pokemonCatch", isAuthenticated, (req, res) => {
