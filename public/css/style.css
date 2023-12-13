@@ -89,6 +89,11 @@ caption {
   margin-left: 5rem;
 }
 
+#loginButton:hover {
+  background-color: #5e727d;
+  border: 1px solid #5e727d;
+}
+
 /*..........Header.............*/
 
 .eeveeLogo {
