@@ -228,6 +228,12 @@ label {
   transition: 0.3s;
 }
 
+.errorMessage {
+  border-radius: 5px;
+  background-color: rgb(255, 200, 200);
+  padding: 0.5rem;
+}
+
 /*---------- compare Pokémon ----------*/
 #buttonW {
   background-color: #5e727d;

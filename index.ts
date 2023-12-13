@@ -1,7 +1,7 @@
 import express from 'express';
 import session from 'express-session';
 import { IPokemon, IUser } from './interface';
-import { GetPokemonFromApi, LoadUserFromMongoDB, PokemonList, UpdateUserInDB,GetEvolutions } from './db';
+import { GetPokemonFromApi, LoadUserFromMongoDB, PokemonList, UpdateUserInDB, GetEvolutions } from './db';
 import { RegisterUserInDB, coinFlip } from './db';
 
 
@@ -61,14 +61,18 @@ app.get("/noAccess", (req, res) => {
 });
 
 app.get("/pokemonBattle", isAuthenticated, (req, res) => {
+    let errorMessage: String | undefined;
     res.render("pokemonBattle", {
         PokemonList: PokemonList,
         pokemon1: undefined,
-        currentUser: req.session.currentUser
+        currentUser: req.session.currentUser,
+        req: req,
+        errorMessage: errorMessage
     });
 });
 
 app.post("/pokemonBattle", isAuthenticated, (req, res) => {
+    let errorMessage: String | undefined;
     req.session.save(async (err) => {
         if (err) {
             // Handle the error if session save fails
@@ -77,6 +81,7 @@ app.post("/pokemonBattle", isAuthenticated, (req, res) => {
                 PokemonList: PokemonList,
                 currentUser: req.session.currentUser,
                 pokemon1: req.body.name1,
+                req: req,
                 errorMessage: "Er is iets fout gegaan, probeer het opnieuw."
             });
         }
@@ -85,23 +90,85 @@ app.post("/pokemonBattle", isAuthenticated, (req, res) => {
         res.render("pokemonBattle", {
             PokemonList: PokemonList,
             currentUser: req.session.currentUser,
-            pokemon1: req.body.name1
+            pokemon1: req.body.name1,
+            req: req,
+            errorMessage: errorMessage
         });
     });
 });
 
 app.post("/battle", isAuthenticated, (req, res) => {
+    let errorMessage: String | undefined;
+    let winBattle: Boolean = false;
+
+    // Initiate own Pokémon stats and enemy Pokémon stats
     const ownPokemonName = req.body.ownPokemon;
-    let ownPokemon: IPokemon | undefined = PokemonList.find(x => x.name == ownPokemonName);
+    let ownPokemon: IPokemon | undefined = PokemonList.find(x => x.id == ownPokemonName);
     console.log(ownPokemon);
     const enemyPokemonName: String | undefined = req.body.btnFight;
-    if (enemyPokemonName) {
-        let enemyPokemon: IPokemon | undefined = PokemonList.find(x => x.name == enemyPokemonName);
-        console.log(enemyPokemon);
-    } else {
-        console.log("Pokemon niet gevonden");
+    let enemyPokemon: IPokemon | undefined = PokemonList.find(x => x.name == enemyPokemonName);
+    console.log(enemyPokemon);
+
+    if (enemyPokemon && ownPokemon) {
+        let ownPokemonHP = ownPokemon.maxHP;
+        let enemyPokemonHP = enemyPokemon.maxHP;
+        // If one Pokémon can't damage the other (attack <= defence), the battle is automaticly decided
+        if (ownPokemon.attack <= enemyPokemon.defence || enemyPokemon.attack <= ownPokemon.defence) {
+            if (ownPokemon.attack <= enemyPokemon.defence) {
+                winBattle = false;
+            } else if (enemyPokemon.attack <= ownPokemon.defence) {
+                winBattle = true;
+            }
+        } else {
+            while (ownPokemonHP > 0 && enemyPokemonHP > 0) {
+                // Own Pokémon attacks
+                enemyPokemonHP -= (ownPokemon.attack - enemyPokemon.defence)
+                // Enemy Pokémon attacks
+                ownPokemonHP -= (enemyPokemon.attack - ownPokemon.defence)
+            }
+            if (ownPokemonHP <= 0) {
+                winBattle = false;
+            } else {
+                winBattle = true;
+            }
+        }
+
+        // Win the battle -> catch the enemy Pokémon
+        // Lose the battle -> "try again with another Pokémon"
+        if (winBattle) {
+            res.render("pokemonCatchSuccess", {
+                Pokemon: enemyPokemon,
+                currentUser: req.session.currentUser
+            });
+        } else {
+            return res.render("pokemonBattle", {
+                PokemonList: PokemonList,
+                currentUser: req.session.currentUser,
+                pokemon1: enemyPokemonName,
+                req: req,
+                errorMessage: "Je verliest de strijd. Probeer het met een andere Pokémon of maak je huidige Pokémon sterker."
+            });
+        }
+    } else if (enemyPokemon == undefined) {
+        // Return an error when the enemy Pokémon is undefined
+        return res.render("pokemonBattle", {
+            PokemonList: PokemonList,
+            currentUser: req.session.currentUser,
+            pokemon1: enemyPokemonName,
+            req: req,
+            errorMessage: "Selecteer een vijand Pokémon."
+        });
+    } else if (ownPokemon == undefined) {
+        // Return an error when the user has no Pokémon
+        return res.render("pokemonBattle", {
+            PokemonList: PokemonList,
+            currentUser: req.session.currentUser,
+            pokemon1: enemyPokemonName,
+            req: req,
+            errorMessage: "Je moet eerst een eigen Pokémon hebben."
+        });
     }
-    
+
     req.session.save(async (err) => {
         if (err) {
             // Handle the error if session save fails
@@ -110,15 +177,18 @@ app.post("/battle", isAuthenticated, (req, res) => {
                 PokemonList: PokemonList,
                 currentUser: req.session.currentUser,
                 pokemon1: enemyPokemonName,
+                req: req,
                 errorMessage: "Er is iets fout gegaan, probeer het opnieuw."
             });
         }
 
-        // Render the same route after the session has been saved
+        // setTimeout(() => {}, 10000);
         res.render("pokemonBattle", {
             PokemonList: PokemonList,
             currentUser: req.session.currentUser,
-            pokemon1: enemyPokemonName
+            pokemon1: enemyPokemonName,
+            req: req,
+            errorMessage: errorMessage
         });
     });
 });
@@ -141,14 +211,13 @@ app.get("/whosthatpokemon", isAuthenticated, (req, res) => {
 
 
 app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
-
     // Get the correct Pokemon name from the form
     const correctPokemonName: number | undefined = req.body.correctPokemon;
     // Get the guessed Pokemon name from the form
     const guessedPokemonName = req.body.pokeGuess;
     // Check if the guessed Pokemon is correct
     const isCorrectGuess = (correctPokemonName === guessedPokemonName);
-    //check if user has current pokemon 
+    // Check if user has current pokemon 
     const haspokemonselected = !(req.session.currentUser?.currentPokemon == undefined);
 
     let test: IPokemon[] | undefined = req.session.currentUser?.pokemons
@@ -159,7 +228,7 @@ app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
     if (isCorrectGuess == true && haspokemonselected == true) {
         message = "Correct"
         if (currentpok !== undefined && req.session.currentUser?.pokemons !== undefined) {
-            let coinflip : number = coinFlip();
+            let coinflip: number = coinFlip();
             console.log(coinflip);
             if (coinflip === 0) {
                 if (req.session.currentUser && req.session.currentUser.pokemons && req.session.currentUser.pokemons[currentpok]) {
@@ -189,19 +258,19 @@ app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
     });
 });
 
-app.post("/rename", isAuthenticated, async (req,res) => {
+app.post("/rename", isAuthenticated, async (req, res) => {
     const targetPokemon: IPokemon | undefined = req.session.currentUser?.pokemons.find(x => x.id == Number(req.body.pokemonId));
-    if(targetPokemon && req.session.currentUser) {
+    if (targetPokemon && req.session.currentUser) {
         targetPokemon.name = String(req.body.nickname);
         await UpdateUserInDB(req.session.currentUser);
     }
     res.redirect(`back`);
 });
 
-app.get("/alterWinsAndLosses",isAuthenticated, async (req, res) => {
-    const {id, wins, add} = req.query;
+app.get("/alterWinsAndLosses", isAuthenticated, async (req, res) => {
+    const { id, wins, add } = req.query;
     const pokemon: IPokemon | undefined = req.session.currentUser?.pokemons.find(x => x.id == Number(id));
-    if(pokemon && req.session.currentUser) {
+    if (pokemon && req.session.currentUser) {
         const winsOrLosses = wins == "true" ? "wins" : "losses";
         pokemon[winsOrLosses] += add == "true" ? 1 : pokemon[winsOrLosses] <= 0 ? 0 : -1;
         await UpdateUserInDB(req.session.currentUser);
@@ -214,7 +283,7 @@ app.post("/pokemonRelease", isAuthenticated, async (req, res) => {
     if (req.session.currentUser) {
         const currentPokemonIndex: number | undefined = req.session.currentUser.currentPokemon !== undefined ? req.session.currentUser.pokemons[req.session.currentUser.currentPokemon].id : undefined;
         req.session.currentUser.pokemons = req.session.currentUser.pokemons.filter(x => x.id != pokemonId);
-        if(currentPokemonIndex !== undefined) {
+        if (currentPokemonIndex !== undefined) {
             const newCurrentPokemonIndex = req.session.currentUser.pokemons.findIndex(x => currentPokemonIndex == x.id);
             req.session.currentUser.currentPokemon = newCurrentPokemonIndex !== -1 ? newCurrentPokemonIndex : undefined;
         }
@@ -242,7 +311,7 @@ app.post("/pokemonCatchSuccess", isAuthenticated, async (req, res) => {
     let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
     if (pokemon && req.session.currentUser) {
         pokemon.name = req.query.useDefault == "true" ? pokemon.name : req.body.name;
-        req.session.currentUser?.pokemons.push({...pokemon,captureDate: new Date(Date.now())});
+        req.session.currentUser?.pokemons.push({ ...pokemon, captureDate: new Date(Date.now()) });
         await UpdateUserInDB(req.session.currentUser);
     }
     res.redirect(`/pokemonCatch?id=${pokemonId}`);
@@ -301,7 +370,7 @@ GetEvolutions('charmeleon');
 app.get("/mypokemon", isAuthenticated, async (req, res) => {
     const owned: boolean = req.query.owned == "true";
     const newCurrentPokemon: number | undefined = req.session.currentUser?.pokemons.findIndex(x => x.id == Number(req.query.newCurrentPokemon));
-    if(newCurrentPokemon !== undefined && newCurrentPokemon != -1 && req.session.currentUser) {
+    if (newCurrentPokemon !== undefined && newCurrentPokemon != -1 && req.session.currentUser) {
         req.session.currentUser.currentPokemon = newCurrentPokemon;
         await UpdateUserInDB(req.session.currentUser);
     }
