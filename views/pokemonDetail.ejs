@@ -113,16 +113,14 @@
                         <div>
                             <h1 class="h1 text-center">Evolutiepad</h1>
                             <div class="d-flex justify-content-center mt-4">
-                                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png"
+                                <% evolutionPath.map((x,i) => { %>
+                                <img src="<%= x.image %>"
                                     width="150px">
+                                    <% if((evolutionPath.length + 1) > i) { %>
                                 <img src="/images/arrow.png" width="30px" height="30px" class="align-self-center"
                                     id="arrowRight">
-                                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png"
-                                    width="150px">
-                                <img src="/images/arrow.png" width="30px" height="30px" class="align-self-center"
-                                    id="arrowRight">
-                                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png"
-                                    width="150px">
+                                <% }
+                                 }) %>
                             </div>
                         </div>
                     </div>

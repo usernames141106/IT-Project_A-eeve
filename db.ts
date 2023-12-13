@@ -1,4 +1,4 @@
-import { IPokemon, IUser, IPokemonSpeciesResponse, IEvolutionChain} from "./interface";
+import { IPokemon, IUser} from "./interface";
 import { MongoClient, Collection } from "mongodb";
 import crypto from "node:crypto";
 
