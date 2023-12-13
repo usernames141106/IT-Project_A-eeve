@@ -10,10 +10,10 @@
       <% const randomPokemon = PokemonList[Math.round(Math.random() * PokemonList.length) - 1]; %>
       <!-- Image to layer on top -->
       <img src="<%= randomPokemon.image %>" class="layered-img" alt=""> 
-      <% if (message == "Correct"){ %>
-      <p class="d-flex justify-content-center m-0 bg-success rounded"><%= message %></p>
+      <% if (message == "FOUT" ){ %>
+      <p class="d-flex justify-content-center m-0 bg-danger text-white rounded"><%= message %></p>
       <% }else{ %>
-      <p class="d-flex justify-content-center m-0 bg-danger rounded"><%= message %></p>
+      <p class="d-flex justify-content-center m-0 bg-success text-white rounded"><%= message %></p>
       <% } %>
 
       <div class="pt-4 d-flex gap-2">

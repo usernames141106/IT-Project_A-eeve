@@ -17,14 +17,8 @@
             </tr>
             <% if(ownedPokemon) { %>
             <tr>
-                <th>Bijnaam:</th>
-                <td>
-                    <form method="post" action="/rename">
-                        <input type="hidden" name="pokemonId" value="<%= ownedPokemon.id %>">
-                        <input type="text" name="nickname" value="<%= ownedPokemon.name %>">
-                        <button type="submit"><img src="/bootstrapIcons/pen.svg" alt="Pen" width="20" height="20"></button>
-                    </form>
-                </td>
+                <th>Bijnaam</th>
+                <td class="d-flex d-flex justify-content-between"><%= ownedPokemon.name %>
             </tr>
             <tr>
                 <td>Kies als huidige Pokémon</td>

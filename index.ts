@@ -1,7 +1,7 @@
 import express from 'express';
 import session from 'express-session';
 import { IPokemon, IUser } from './interface';
-import { GetPokemonFromApi, LoadUserFromMongoDB, PokemonList, UpdateUserInDB, GetEvolutions } from './db';
+import { GetPokemonFromApi, LoadUserFromMongoDB, PokemonList, UpdateUserInDB} from './db';
 import { RegisterUserInDB, coinFlip } from './db';
 
 
@@ -39,9 +39,9 @@ function isAuthenticated(req: any, res: any, next: any) {
         next();
     } else {
         res.render("message", {
-            title: "Gelieve in te loggen.",
-            message: "Je moet ingelogd zijn om een project te openen.",
-            currentUser: undefined
+            title: "gelieve in te loggen.",
+            message: "je moet ingelogd zijn om een project te openen.",
+            currentuser: undefined
         });
     }
 }
@@ -219,46 +219,47 @@ app.get("/whosthatpokemon", isAuthenticated, (req, res) => {
     });
 });
 
-
 app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
     // Get the correct Pokemon name from the form
-    const correctPokemonName: number | undefined = req.body.correctPokemon;
+    const correctPokemonName: string | undefined = req.body.correctPokemon.toLowerCase();
     // Get the guessed Pokemon name from the form
-    const guessedPokemonName = req.body.pokeGuess;
+    const guessedPokemonName: string | undefined = req.body.pokeGuess.toLowerCase();
     // Check if the guessed Pokemon is correct
-    const isCorrectGuess = (correctPokemonName === guessedPokemonName);
+    const isCorrectGuess: Boolean = (correctPokemonName === guessedPokemonName);
     // Check if user has current pokemon 
-    const haspokemonselected = !(req.session.currentUser?.currentPokemon == undefined);
+    const haspokemonselected: Boolean = !(req.session.currentUser?.currentPokemon === undefined);
 
     let test: IPokemon[] | undefined = req.session.currentUser?.pokemons
     let currentpok: number | undefined = req.session.currentUser?.currentPokemon
 
-    let message;
+    let message: string = "";
 
-    if (isCorrectGuess == true && haspokemonselected == true) {
-        message = "Correct"
+    if (isCorrectGuess && haspokemonselected) {
+
         if (currentpok !== undefined && req.session.currentUser?.pokemons !== undefined) {
             let coinflip: number = coinFlip();
             console.log(coinflip);
             if (coinflip === 0) {
                 if (req.session.currentUser && req.session.currentUser.pokemons && req.session.currentUser.pokemons[currentpok]) {
                     req.session.currentUser.pokemons[currentpok].attack += 1; // Increment attack
+                    message = "JUIST!  AANVAL +1"
                     await UpdateUserInDB(req.session.currentUser);
                 }
 
             } else if (coinflip === 1) {
                 if (req.session.currentUser && req.session.currentUser.pokemons && req.session.currentUser.pokemons[currentpok]) {
                     req.session.currentUser.pokemons[currentpok].defence += 1; // Increment defence
+                    message = "JUIST!  VERDEGING +1"
                     await UpdateUserInDB(req.session.currentUser);
                 }
             }
         }
     }
-    else if (isCorrectGuess == true && haspokemonselected == false) {
-        message = "Correct"
+    else if (isCorrectGuess && !(haspokemonselected)) {
+        message = "JUIST"
     }
     else {
-        message = "Incorrect"
+        message = "FOUT"
     }
 
     res.render("whosThatPokemon", {
@@ -374,9 +375,6 @@ app.get("/pokemondetail", isAuthenticated, (req, res) => {
     });
 });
 
-//////////////////////
-GetEvolutions('charmeleon');
-///////////////
 
 app.get("/mypokemon", isAuthenticated, async (req, res) => {
     const owned: boolean = req.query.owned == "true";
@@ -436,13 +434,16 @@ app.post("/login", async (req, res) => {
         const userS: IUser = user;
         req.session.regenerate(err => {
             req.session.currentUser = userS;
-            res.redirect("/home"); //later te verranderen 
+            res.redirect("back");
         });
     }
     else {
         req.session.destroy(err => {
-            console.log("gebruiker niet gevonden")
-            res.redirect("/");
+            res.render("message", {
+                title: "Login onsuccessvol",
+                message: "De mail en of passwoord is verkeerd.",
+                currentuser: undefined
+            });
         })
     }
 });
@@ -451,8 +452,26 @@ app.post("/register", async (req, res) => {
     const { email, passworda, passwordb } = req.body;
     if (passworda == passwordb && passworda != undefined) {
         await RegisterUserInDB(email, passworda);
+        let user: IUser | null = await LoadUserFromMongoDB(email, passworda);
+        if (user != null) {
+            const userS: IUser = user;
+            req.session.regenerate(err => {
+                req.session.currentUser = userS;
+                res.redirect("back");
+            });
+        }
+        else {
+            res.sendStatus(500);
+        }
+        res.redirect("back");
     }
-    res.redirect("/");
+    else {
+        res.render("message", {
+            title: "Ongeldig passwoord",
+            message: "je paswoord moet ingevuld zijn en ze moeten beide hetzelfde zijn.",
+            currentuser: undefined
+        });
+    }
 });
 
 app.post("/logout", async (req, res) => {
@@ -461,14 +480,21 @@ app.post("/logout", async (req, res) => {
         await UpdateUserInDB(req.session.currentUser);
         req.session.destroy(err => {
             console.log(err);
-            res.redirect("/");
+            res.redirect("back");
         });
     } else {
-        // Redirect to "/" if no currentUser in session
-        res.redirect("/");
+        // Redirect to "back" if no currentUser in session
+        res.redirect("back");
     }
 });
+
 app.use((req, res, next) => {
+    res.status(500).render("message", {
+        title: "500 Error",
+        message: "Interne server error.",
+        currentUser: req.session.currentUser
+    });
+
     res.status(404).render("message", {
         title: "404 Error",
         message: "Deze pagina is niet gevonden.",

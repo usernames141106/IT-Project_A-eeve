@@ -10,7 +10,7 @@ body,
 html {
   overflow-x: hidden;
   /* Fix for the H scrollbar */
-  /* min-height: 100vh; */
+  min-height: 100%;
   /* fix for the footer */
 }
 
