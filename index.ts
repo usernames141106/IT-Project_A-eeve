@@ -91,12 +91,13 @@ app.post("/pokemonBattle", isAuthenticated, (req, res) => {
 });
 
 app.post("/battle", isAuthenticated, (req, res) => {
-    // const form: HTMLElement | null = document.getElementById("form1");
-    // const pokemonName = form?.textContent;
-    const pokemonName: String | undefined = req.body.btnFight;
-    if (pokemonName) {
-        let enemyPokemon: IPokemon | undefined = PokemonList.find(x => x.name == pokemonName);
-        console.log(enemyPokemon?.name);
+    const ownPokemonName = req.body.ownPokemon;
+    let ownPokemon: IPokemon | undefined = PokemonList.find(x => x.name == ownPokemonName);
+    console.log(ownPokemon);
+    const enemyPokemonName: String | undefined = req.body.btnFight;
+    if (enemyPokemonName) {
+        let enemyPokemon: IPokemon | undefined = PokemonList.find(x => x.name == enemyPokemonName);
+        console.log(enemyPokemon);
     } else {
         console.log("Pokemon niet gevonden");
     }
@@ -108,7 +109,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
             return res.render("pokemonBattle", {
                 PokemonList: PokemonList,
                 currentUser: req.session.currentUser,
-                pokemon1: pokemonName,
+                pokemon1: enemyPokemonName,
                 errorMessage: "Er is iets fout gegaan, probeer het opnieuw."
             });
         }
@@ -117,7 +118,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
         res.render("pokemonBattle", {
             PokemonList: PokemonList,
             currentUser: req.session.currentUser,
-            pokemon1: pokemonName
+            pokemon1: enemyPokemonName
         });
     });
 });

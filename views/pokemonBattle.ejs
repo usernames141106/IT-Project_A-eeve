@@ -10,7 +10,7 @@
 
         <section class="row justify-content-center mx-auto flex"> <!-- section Pokemon -->
 
-          <div class="card col-md-5 m-3 pb-3 custom-class" id="ownPokemon"> <!-- size and margin of card 1 -->
+          <div class="card col-md-4 m-3 pb-3 custom-class" id="ownPokemon"> <!-- size and margin of card 1 -->
             <img src="<%= currentPokemon ? currentPokemon.image : " /images/empty.png" %>" alt="Huidige Pokemon">
             <div class="card-body text-center">
               <h5 class="card-title">
@@ -34,7 +34,7 @@
             </div>
           </div>
 
-          <div class="card col-md-5 m-3 pb-3 custom-class" id="enemyPokemon"> <!-- size and margin of card 2 -->
+          <div class="card col-md-4 m-3 pb-3 custom-class" id="enemyPokemon"> <!-- size and margin of card 2 -->
             <% let pokemn1=PokemonList.find(x=> x.name == pokemon1) %>
               <img src="<%= pokemn1 ? pokemn1.image : " /images/empty.png" %>"
               class="img-fluid mx-auto rounded" alt=""></a>
@@ -42,8 +42,9 @@
 
                 <form class="container form-outline mx-auto pt-5 p-sm-1 d-flex flex-row gap-2" method="post"
                   action="/pokemonBattle">
-                  <input type="search" id="form1" class="form-control text-center" placeholder="Zoek Pokémon" aria-label="Search"
-                    list="pokemonlist" name="name1" value="<%= pokemon1 ? pokemon1.toUpperCase(): "" %>" />
+                  <input type="search" id="form1" class="form-control text-center" placeholder="Zoek Pokémon"
+                    aria-label="Search" list="pokemonlist" name="name1"
+                    value="<%= pokemon1 ? pokemon1.toUpperCase(): "" %>" />
                   <datalist id="pokemonlist">
                     <% PokemonList.map(x=> {%><option key="index">
                         <%= x.name %>
@@ -81,7 +82,9 @@
 
         <section class="text-center col-md-3 col-sm-5 container mb-3 mt-3"> <!-- section fightButton -->
           <form method="post" action="/battle">
-            <button class="btn" id="fightButton" type="submit" method="post" action="/battle" name="btnFight" value="<%= pokemon1 ? pokemon1 : "" %>">
+            <button class="btn" id="fightButton" type="submit" method="post" action="/battle" name="btnFight"
+              value="<%= pokemon1 ? pokemon1 : "" %>">
+              <input type="hidden" name="ownPokemon" value="<%= currentPokemon.name %>">
               <img src="/images/fightbutton.png" alt="fightButton">
             </button>
           </form>
