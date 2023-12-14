@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <input type="hidden" name="pokemon" value="<%= Pokemon.id %>">
-                <button type="submit" id="buttonW" formaction="/pokemonCatchSuccess?useDefault=true" class="btn btn-primary">Gebruik naam Pokémon</button>
+                <button type="submit" id="buttonW" formaction="/pokemonCatchSuccess?useDefault=true" class="btn btn-primary">Gebruik de naam "<%= Pokemon.name %>"</button>
                 <button type="submit" id="buttonW" class="btn btn-primary" formaction="/pokemonCatchSuccess?useDefault=false">Gebruik je bijnaam</button>
             </form>
         </article>
