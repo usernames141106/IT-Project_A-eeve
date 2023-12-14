@@ -492,15 +492,14 @@ app.post("/logout", async (req, res) => {
 });
 
 app.use((req, res, next) => {
-    res.status(500).render("message", {
-        title: "500 Error",
-        message: "Interne server error.",
-        currentUser: req.session.currentUser
-    });
-
     res.status(404).render("message", {
         title: "404 Error",
         message: "Deze pagina is niet gevonden.",
+        currentUser: req.session.currentUser
+    });
+    res.status(500).render("message", {
+        title: "500 Error",
+        message: "Interne server error.",
         currentUser: req.session.currentUser
     });
 });
