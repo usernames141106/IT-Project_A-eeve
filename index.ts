@@ -4,6 +4,7 @@ import { IPokemon, IUser } from './interface';
 import { GetPokemonFromApi, LoadUserFromMongoDB, PokemonList, UpdateUserInDB} from './db';
 import { RegisterUserInDB, coinFlip } from './db';
 
+const evelutions:number[][] = require("./evolution-arrays.json");
 
 const app = express();
 
@@ -363,7 +364,6 @@ app.get("/pokemonCatch", isAuthenticated, (req, res) => {
 });
 
 app.get("/pokemondetail", isAuthenticated, (req, res) => {
-    const evelutions:number[][] = require("./evolution-arrays.json");
     const pokemonId: number = Number(req.query.id);
     let pokemon: IPokemon | undefined = [...PokemonList].find(x => x.id == pokemonId);
     pokemon = pokemon ? pokemon : PokemonList[132];
