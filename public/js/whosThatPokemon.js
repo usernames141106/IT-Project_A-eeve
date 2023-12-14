@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const successMessage = document.getElementById('SuccessWTP');
     // Hide messages after 2 seconds
     setTimeout(function() {
-    console.log('Hiding messages...');
+
       if (errorMessage) {
         errorMessage.classList.add('hidden');
       }

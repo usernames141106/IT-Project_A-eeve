@@ -229,26 +229,26 @@ app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
     // Check if user has current pokemon 
     const haspokemonselected: Boolean = !(req.session.currentUser?.currentPokemon === undefined);
 
-    let test: IPokemon[] | undefined = req.session.currentUser?.pokemons
+    
     let currentpok: number | undefined = req.session.currentUser?.currentPokemon
-    let message: string = "";
+    let message = "";
 
     if (isCorrectGuess && haspokemonselected) {
 
         if (currentpok !== undefined && req.session.currentUser?.pokemons !== undefined) {
             let coinflip: number = coinFlip();
-            console.log(coinflip);
+
             if (coinflip === 0) {
                 if (req.session.currentUser && req.session.currentUser.pokemons && req.session.currentUser.pokemons[currentpok]) {
                     req.session.currentUser.pokemons[currentpok].attack += 1; // Increment attack
-                    message = `JUIST!...AANVAL...+1`
+                    message = `JUIST!  AANVAL  +1`
                     await UpdateUserInDB(req.session.currentUser);
                 }
 
             } else if (coinflip === 1) {
                 if (req.session.currentUser && req.session.currentUser.pokemons && req.session.currentUser.pokemons[currentpok]) {
                     req.session.currentUser.pokemons[currentpok].defence += 1; // Increment defence
-                    message = "JUIST!...VERDEGING...+1"
+                    message = "JUIST!   VERDEGING  +1"
                     await UpdateUserInDB(req.session.currentUser);
                 }
             }
@@ -260,7 +260,6 @@ app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
     else {
         message = "FOUT"
     }
-
     res.render("whosThatPokemon", {
         PokemonList: PokemonList,
         currentUser: req.session.currentUser,
