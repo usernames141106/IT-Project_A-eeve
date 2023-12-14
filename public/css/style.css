@@ -93,6 +93,10 @@ caption {
   background-color: #5e727d;
   border: 1px solid #5e727d;
 }
+#loginButton1:hover {
+  background-color: #5e727d;
+  border: 1px solid #5e727d;
+}
 
 /*..........Header.............*/
 
