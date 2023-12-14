@@ -70,7 +70,7 @@
                                 <tr>
                                     <th id="asideTH" class="ps-4" style="text-align: start;">Datum Vangst</th>
                                     <td>
-                                        <%= ownedPokemon.captureDate !== null ? ownedPokemon.captureDate.toString() : "???" %>
+                                        <%= ownedPokemon.captureDate !== null ? ownedPokemon.captureDate.toString().replace("Z"," ").replace("T", " ") : "???" %>
                                     </td>
                                 </tr>
                                 <tr>
