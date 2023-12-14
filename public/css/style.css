@@ -9,8 +9,6 @@
 body,
 html {
   overflow-x: hidden;
-  /* Fix for the H scrollbar */
-  /* fix for the footer */
 }
 
 header {
@@ -18,8 +16,6 @@ header {
 }
 
 main {
-  /* min-height: 84.8vh; */
-  /* fix for the navbar & footer */
   padding-block: min(10vh, 10rem);
   min-height: 100vh;
 }

@@ -111,12 +111,14 @@ app.post("/pokemonBattle", isAuthenticated, (req, res) => {
 });
 
 app.post("/battle", isAuthenticated, (req, res) => {
+    let currentUser: IUser | undefined = req.session.currentUser;
+    let currentPok: number | undefined = req.session.currentUser?.currentPokemon;
     let message: String | undefined;
     let winBattle: Boolean = false;
 
     // Initiate own Pokémon stats and enemy Pokémon stats
-    const ownPokemonName = req.body.ownPokemon;
-    let ownPokemon: IPokemon | undefined = PokemonList.find(x => x.id == ownPokemonName);
+    const ownPokemonId = req.body.ownPokemon;
+    let ownPokemon: IPokemon | undefined = PokemonList.find(x => x.id == ownPokemonId);
     // console.log(ownPokemon);
     const enemyPokemonName: String | undefined = req.body.btnFight;
     let enemyPokemon: IPokemon | undefined = PokemonList.find(x => x.name == enemyPokemonName);
@@ -149,12 +151,20 @@ app.post("/battle", isAuthenticated, (req, res) => {
         // Win the battle -> catch the enemy Pokémon
         // Lose the battle -> "try again with another Pokémon"
         if (winBattle) {
+            if (currentUser && currentPok) {
+                currentUser.pokemons[currentPok].wins += 1;
+            }
+
             // setTimeout(() => {}, 10000);
             res.render("pokemonCatchSuccess", {
                 Pokemon: enemyPokemon,
                 currentUser: req.session.currentUser
             });
         } else {
+            if (currentUser && currentPok) {
+                currentUser.pokemons[currentPok].losses += 1;
+            }
+
             return res.render("pokemonBattle", {
                 PokemonList: PokemonList,
                 currentUser: req.session.currentUser,
@@ -170,7 +180,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
             currentUser: req.session.currentUser,
             pokemon1: enemyPokemonName,
             req: req,
-            message: "Je moet een eigen Pokémon hebben om te kunnen vechten."
+            message: "Je moet een huidige Pokémon hebben om te kunnen vechten."
         });
     } else if (enemyPokemon == undefined) {
         // Return an error when the user has no Pokémon
@@ -244,14 +254,14 @@ app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
             if (coinflip === 0) {
                 if (req.session.currentUser && req.session.currentUser.pokemons && req.session.currentUser.pokemons[currentpok]) {
                     req.session.currentUser.pokemons[currentpok].attack += 1; // Increment attack
-                    message = `juist! aanval +1 `
+                    message = `Juist! Aanval +1 `
                     await UpdateUserInDB(req.session.currentUser);
                 }
 
             } else if (coinflip === 1) {
                 if (req.session.currentUser && req.session.currentUser.pokemons && req.session.currentUser.pokemons[currentpok]) {
                     req.session.currentUser.pokemons[currentpok].defence += 1; // Increment defence
-                    message = "juist! verdediging +1"
+                    message = "Juist! Verdediging +1"
                     await UpdateUserInDB(req.session.currentUser);
                 }
             }

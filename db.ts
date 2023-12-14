@@ -108,7 +108,6 @@ export async function GetPokemonFromApi() {
             maxHP: jsonData.stats[0].base_stat,
             attack: jsonData.stats[1].base_stat,
             defence: jsonData.stats[2].base_stat,
-            currentHp: undefined,
             wins: 0,
             losses: 0,
             captureDate: null

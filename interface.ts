@@ -9,7 +9,6 @@ export interface IPokemon{
     maxHP: number,
     attack:number,
     defence:number,
-    currentHp?:number,
     wins:number,
     losses:number,
     captureDate:Date | null
