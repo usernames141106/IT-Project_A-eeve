@@ -89,10 +89,6 @@ caption {
   margin-left: 5rem;
 }
 
-#registerForm li {
-  padding-bottom: 0px;
-}
-
 #loginButton {
   border: 1px solid #e7e7e7;
   border-radius: 0px;
