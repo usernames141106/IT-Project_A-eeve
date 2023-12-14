@@ -363,18 +363,17 @@ app.get("/pokemonCatch", isAuthenticated, (req, res) => {
 });
 
 app.get("/pokemondetail", isAuthenticated, (req, res) => {
-    const evelutions = require("./evolution-arrays.json");
+    const evelutions:number[][] = require("./evolution-arrays.json");
     const pokemonId: number = Number(req.query.id);
     let pokemon: IPokemon | undefined = [...PokemonList].find(x => x.id == pokemonId);
     pokemon = pokemon ? pokemon : PokemonList[132];
 
-    const evolutionPath: IPokemon[] | undefined = evelutions.findOne((x:number[]) => x.includes(pokemonId));
+    const evolutionPath: IPokemon[] | undefined = evelutions.find((x) => x.includes(pokemonId))?.map(x => PokemonList[x - 1]);
 
     res.render("pokemonDetail", {
         currentUser: req.session.currentUser,
         Pokemon: pokemon,
         evolutionPath: evolutionPath,
-        PokemonList: PokemonList
     });
 });
 

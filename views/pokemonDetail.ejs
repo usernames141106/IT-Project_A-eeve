@@ -114,9 +114,11 @@
                             <h1 class="h1 text-center">Evolutiepad</h1>
                             <div class="d-flex justify-content-center mt-4">
                                 <% evolutionPath.map((x,i) => { %>
+                                <a href="/pokemonDetail?id=<%= x.id %>">
                                 <img src="<%= x.image %>"
                                     width="150px">
-                                    <% if((evolutionPath.length + 1) > i) { %>
+                                </a>
+                                    <% if(evolutionPath.length - 1 > i && ![133,134,135,136].includes(x.id)) { %>
                                 <img src="/images/arrow.png" width="30px" height="30px" class="align-self-center"
                                     id="arrowRight">
                                 <% }
