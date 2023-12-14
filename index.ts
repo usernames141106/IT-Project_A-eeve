@@ -467,7 +467,6 @@ app.post("/register", async (req, res) => {
         else {
             res.sendStatus(500);
         }
-        res.redirect("back");
     }
     else {
         res.render("message", {
