@@ -8,7 +8,7 @@
           <p>Je kunt je pokemon vrijlaten door op de groene ball te druken.</p>
         <% } else { %>
           <a href="/pokemonCatch?attempt=<%= attempt + 1 %>&id=<%= Pokemon.id %>"><img src="/images/pokeBall.png" width="150px" alt="pokeball"></a>
-          <p>Je hebt nog <%= 3 - attempt %> pogingen over om hem te vangen<%= attempt == 0 ? " (je kunt dit probeeren door op de rode ball te druken)" : "" %>.</p>
+          <p>Je hebt nog <%= 3 - attempt %> pogingen over om hem te vangen<%= attempt == 0 ? " (je kunt dit proberen door op de rode bal te druken)" : "" %>.</p>
           <% } %>
     </div>
   </main>
