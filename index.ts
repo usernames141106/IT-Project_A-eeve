@@ -241,14 +241,14 @@ app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
             if (coinflip === 0) {
                 if (req.session.currentUser && req.session.currentUser.pokemons && req.session.currentUser.pokemons[currentpok]) {
                     req.session.currentUser.pokemons[currentpok].attack += 1; // Increment attack
-                    message = `JUIST!  AANVAL  +1`
+                    message = `juist! aanval +1 `
                     await UpdateUserInDB(req.session.currentUser);
                 }
 
             } else if (coinflip === 1) {
                 if (req.session.currentUser && req.session.currentUser.pokemons && req.session.currentUser.pokemons[currentpok]) {
                     req.session.currentUser.pokemons[currentpok].defence += 1; // Increment defence
-                    message = "JUIST!   VERDEGING  +1"
+                    message = "juist! verdediging +1"
                     await UpdateUserInDB(req.session.currentUser);
                 }
             }

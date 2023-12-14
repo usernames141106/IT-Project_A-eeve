@@ -295,10 +295,14 @@ label {
 #ErrorWTP{
   background-color: red;
   color: white;
+  text-transform: capitalize;
+  word-spacing: 0.5rem;
 }
 #SuccessWTP{
   background-color: green;
   color: white;
+  text-transform: uppercase;
+  word-spacing: 0.5rem;
 }
 .hidden {
   color: white;
