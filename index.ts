@@ -41,7 +41,7 @@ function isAuthenticated(req: any, res: any, next: any) {
         res.render("message", {
             title: "gelieve in te loggen.",
             message: "je moet ingelogd zijn om een project te openen.",
-            currentuser: undefined
+            currentUser: undefined
         });
     }
 }
@@ -445,7 +445,7 @@ app.post("/login", async (req, res) => {
             res.render("message", {
                 title: "Login onsuccessvol",
                 message: "De mail en of passwoord is verkeerd.",
-                currentuser: undefined
+                currentUser: undefined
             });
         })
     }
@@ -472,7 +472,7 @@ app.post("/register", async (req, res) => {
         res.render("message", {
             title: "Ongeldig passwoord",
             message: "je paswoord moet ingevuld zijn en ze moeten beide hetzelfde zijn.",
-            currentuser: undefined
+            currentUser: undefined
         });
     }
 });
