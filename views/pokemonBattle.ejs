@@ -6,7 +6,7 @@
     <% } %>
 
       <div class="row">
-        <% const currentPokemon=currentUser.pokemons[currentUser.currentPokemon]; %>
+        <% const currentPokemon = currentUser.pokemons[currentUser.currentPokemon]; %>
 
           <main class="container col-9 d-flex flex-row flex-wrap col-md-9 col-sm-12 d-grid justify-content-center">
             <div>
@@ -44,7 +44,7 @@
               </div>
 
               <div class="card col-md-4 m-3 pb-3 custom-class" id="enemyPokemon"> <!-- size and margin of card 2 -->
-                <% let pokemn1=PokemonList.find(x=> x.name == pokemon1) %>
+                <% let pokemn1 = PokemonList.find(x => x.name == pokemon1) %>
                   <img src="<%= pokemn1 ? pokemn1.image : " /images/empty.png" %>"
                   class="img-fluid mx-auto rounded" alt=""></a>
                   <div class="card-body text-center">
@@ -55,7 +55,7 @@
                         aria-label="Search" list="pokemonlist" name="name1"
                         value="<%= pokemon1 ? pokemon1.toUpperCase(): "" %>" />
                       <datalist id="pokemonlist">
-                        <% PokemonList.map(x=> {%><option key="index">
+                        <% PokemonList.map(x => {%><option key="index">
                             <%= x.name %>
                           </option>
                           <%}); %>

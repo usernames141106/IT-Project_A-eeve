@@ -93,7 +93,7 @@ app.post("/pokemonBattle", isAuthenticated, (req, res) => {
             return res.render("pokemonBattle", {
                 PokemonList: PokemonList,
                 currentUser: req.session.currentUser,
-                pokemon1: req.body.name1,
+                pokemon1: req.body.name1.toLowerCase(),
                 req: req,
                 message: "Er is iets fout gegaan, probeer het opnieuw."
             });
@@ -103,7 +103,7 @@ app.post("/pokemonBattle", isAuthenticated, (req, res) => {
         res.render("pokemonBattle", {
             PokemonList: PokemonList,
             currentUser: req.session.currentUser,
-            pokemon1: req.body.name1,
+            pokemon1: req.body.name1.toLowerCase(),
             req: req,
             message: message
         });
