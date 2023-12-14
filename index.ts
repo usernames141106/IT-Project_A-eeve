@@ -233,7 +233,7 @@ app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
     let currentpok: number | undefined = req.session.currentUser?.currentPokemon
     let message = "";
 
-    if (isCorrectGuess && haspokemonselected) {
+    if (isCorrectGuess == haspokemonselected) {
 
         if (currentpok !== undefined && req.session.currentUser?.pokemons !== undefined) {
             let coinflip: number = coinFlip();
