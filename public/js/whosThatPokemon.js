@@ -25,4 +25,24 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('form1');
+    const dataList = document.getElementById('pokemonlist');
+
+    // Store the original options
+    const originalOptions = Array.from(dataList.options);
+
+    // Add an input event listener to the search input
+    searchInput.addEventListener('input', function() {
+      const inputValue = searchInput.value.toLowerCase();
+
+      // Clear existing options
+      dataList.innerHTML = '';
+
+      // Filter and add options based on the input value
+      const filteredOptions = originalOptions.filter(option => option.value.toLowerCase().startsWith(inputValue));
+      filteredOptions.forEach(option => dataList.appendChild(option));
+    });
+  });
+
 
