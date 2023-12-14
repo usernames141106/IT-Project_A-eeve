@@ -16,10 +16,12 @@
                 </td>
             </tr>
             <% if(ownedPokemon) { %>
+                <% if(ownedPokemon.name.length > 0) { %>
             <tr>
                 <th>Bijnaam</th>
                 <td class="d-flex d-flex justify-content-between"><%= ownedPokemon.name %>
             </tr>
+              <%  } %>
             <tr>
                 <td>Kies als huidige Pokémon</td>
                 <td>
