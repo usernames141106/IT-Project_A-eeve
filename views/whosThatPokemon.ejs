@@ -1,5 +1,6 @@
 <%- include("partials/header",{title: "whosthatpokemon", secondRow:true}); %>
 <script src="/js/searchwhoisthatpokemon.js" defer></script>
+<script src="/js/whosThatPokemon.js" defer></script>
 
 <main class="container flex-column d-flex flex-wrap d-flex justify-content-center col-9 gap-4">
     <h1 class="text-center ">Wie is deze Pokémon ?</h1>
@@ -11,12 +12,12 @@
       <!-- Image to layer on top -->
       <img src="<%= randomPokemon.image %>" class="layered-img" alt=""> 
       <% if (message == "FOUT" ){ %>
-      <% if(message != undefined){%>
-      <p class="d-flex justify-content-center m-0 bg-danger text-white rounded"><%=  message = message.replace("."," ")%></p>
+      <p id="ErrorWTP" class="d-flex justify-content-center m-0 rounded"><%=  message%></p>
       <% }else{ %>
-      <p class="d-flex justify-content-center m-0 bg-success text-white rounded"><%= message = message.replace("."," ") %></p>
-      <% }  %>
+      <p  id="SuccessWTP" class="d-flex justify-content-center m-0 rounded"><%= message%></p>
       <% } %>
+
+
 
       <div class="pt-4 d-flex gap-2">
 
@@ -37,22 +38,6 @@
 
 
     </div>
-      
-      <script defer>
-        document.addEventListener('DOMContentLoaded', function() {
-          const form1 = document.getElementById('form1');
-      
-          form1.addEventListener('keypress', function(event) {
-            if (event.which === 13) { // 13 is the key code for "Enter"
-              event.preventDefault();
-              event.target.closest('form').submit();
-            }
-          });
-        });
-      </script>
-      
-      
-    
 </article>
 </main>
 

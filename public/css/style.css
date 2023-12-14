@@ -292,6 +292,18 @@ label {
   /* Ensure the overlay image is on top of the original image */
   filter: brightness(0);
 }
+#ErrorWTP{
+  background-color: red;
+  color: white;
+}
+#SuccessWTP{
+  background-color: green;
+  color: white;
+}
+.hidden {
+  color: white;
+  background-color: white !important;
+}
 
 
 
