@@ -94,7 +94,7 @@
                 <button class="btn" id="fightButton" type="submit" method="post" action="/battle" name="btnFight"
                   value="<%= pokemon1 ? pokemon1 : "" %>" <%=req.path==='/battle' && (!message) ? 'disabled' : ''
                   %>>
-                  <input type="hidden" name="ownPokemon" value="<%= currentPokemon.id %>">
+                  <input type="hidden" name="ownPokemon" value="<%= currentPokemon ? currentPokemon.id : undefined %>">
                   <img src="/images/fightbutton.png" alt="fightButton">
                 </button>
               </form>

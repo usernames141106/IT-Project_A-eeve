@@ -64,10 +64,12 @@ app.get("/noAccess", (req, res) => {
 app.get("/pokemonBattle", isAuthenticated, (req, res) => {
     let message: String | undefined;
     if (req.session.currentUser && req.session.currentUser.currentPokemon === undefined) {
-        res.render("message", {
-            title: "Selecteer een pokemon",
-            message: "Sorry, je moet een huidige pokemon hebben geselecteerd.",
-            currentUser: req.session.currentUser
+        res.render("pokemonBattle", {
+            PokemonList: PokemonList,
+            pokemon1: undefined,
+            currentUser: req.session.currentUser,
+            req: req,
+            message: "Je hebt nog geen huidige Pokémon."
         });
     }
     else {
@@ -161,23 +163,23 @@ app.post("/battle", isAuthenticated, (req, res) => {
                 message: "Je verliest de strijd! Probeer het met een andere Pokémon of maak je huidige Pokémon sterker."
             });
         }
-    } else if (enemyPokemon == undefined) {
+    } else if (ownPokemon == undefined) {
         // Return an error when the enemy Pokémon is undefined
         return res.render("pokemonBattle", {
             PokemonList: PokemonList,
             currentUser: req.session.currentUser,
             pokemon1: enemyPokemonName,
             req: req,
-            message: "Selecteer een vijand Pokémon."
+            message: "Je moet een eigen Pokémon hebben om te kunnen vechten."
         });
-    } else if (ownPokemon == undefined) {
+    } else if (enemyPokemon == undefined) {
         // Return an error when the user has no Pokémon
         return res.render("pokemonBattle", {
             PokemonList: PokemonList,
             currentUser: req.session.currentUser,
             pokemon1: enemyPokemonName,
             req: req,
-            message: "Je moet een eigen Pokémon hebben om te kunnen vechten."
+            message: "Selecteer een vijand Pokémon."
         });
     }
 

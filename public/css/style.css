@@ -89,13 +89,28 @@ caption {
   margin-left: 5rem;
 }
 
-#loginButton:hover {
-  background-color: #5e727d;
-  border: 1px solid #5e727d;
+#loginButton {
+  border: 1px solid #e7e7e7;
+  border-radius: 0px;
+  margin-bottom: 8px;
+  padding: 10px;
 }
-#loginButton1:hover {
+
+#registerButton {
+  border: 1px solid #e7e7e7;
+  border-radius: 0px;
+  margin-bottom: 8px;
+  padding: 10px;
+}
+
+#loginButton:hover {
+  color: white;
   background-color: #5e727d;
-  border: 1px solid #5e727d;
+}
+
+#registerButton:hover {
+  color: white;
+  background-color: #5e727d;
 }
 
 /*..........Header.............*/
