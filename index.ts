@@ -1,10 +1,10 @@
 import express from 'express';
 import session from 'express-session';
 import { IPokemon, IUser } from './interface';
-import { GetPokemonFromApi, LoadUserFromMongoDB, PokemonList, UpdateUserInDB} from './db';
+import { GetPokemonFromApi, LoadUserFromMongoDB, PokemonList, UpdateUserInDB } from './db';
 import { RegisterUserInDB, coinFlip } from './db';
 
-const evolutions:number[][] = require("./evolution-arrays.json");
+const evolutions: number[][] = require("./evolution-arrays.json");
 
 const app = express();
 
@@ -18,7 +18,7 @@ declare module 'express-session' {
     interface SessionData {
         currentUser?: IUser
     }
-}
+};
 
 app.use(express.static("public"));
 app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'));
@@ -45,7 +45,7 @@ function isAuthenticated(req: any, res: any, next: any) {
             currentUser: undefined
         });
     }
-}
+};
 
 app.get("/home", isAuthenticated, (req, res) => {
     res.render("home", {
@@ -122,6 +122,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
     // console.log(ownPokemon);
     const enemyPokemonName: String | undefined = req.body.btnFight;
     let enemyPokemon: IPokemon | undefined = PokemonList.find(x => x.name == enemyPokemonName);
+    let enemyPokemonID = enemyPokemon?.id;
     // console.log(enemyPokemon);
 
     if (enemyPokemon && ownPokemon) {
@@ -156,9 +157,13 @@ app.post("/battle", isAuthenticated, (req, res) => {
             }
 
             // setTimeout(() => {}, 10000);
-            res.render("pokemonCatchSuccess", {
-                Pokemon: enemyPokemon,
-                currentUser: req.session.currentUser
+            return res.render("pokemonBattle", {
+                PokemonList: PokemonList,
+                currentUser: req.session.currentUser,
+                pokemon1: enemyPokemonName,
+                enemyPokemonID: enemyPokemonID,
+                req: req,
+                message: undefined
             });
         } else {
             if (currentUser && currentPok) {
@@ -169,6 +174,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
                 PokemonList: PokemonList,
                 currentUser: req.session.currentUser,
                 pokemon1: enemyPokemonName,
+                enemyPokemonID: enemyPokemonID,
                 req: req,
                 message: "Je verliest de strijd! Probeer het met een andere Pokémon of maak je huidige Pokémon sterker."
             });
@@ -179,6 +185,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
             PokemonList: PokemonList,
             currentUser: req.session.currentUser,
             pokemon1: enemyPokemonName,
+            enemyPokemonID: enemyPokemonID,
             req: req,
             message: "Je moet een huidige Pokémon hebben om te kunnen vechten."
         });
@@ -188,6 +195,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
             PokemonList: PokemonList,
             currentUser: req.session.currentUser,
             pokemon1: enemyPokemonName,
+            enemyPokemonID: enemyPokemonID,
             req: req,
             message: "Selecteer een vijand Pokémon."
         });
@@ -201,6 +209,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
                 PokemonList: PokemonList,
                 currentUser: req.session.currentUser,
                 pokemon1: enemyPokemonName,
+                enemyPokemonID: enemyPokemonID,
                 req: req,
                 message: "Er is iets fout gegaan, probeer het opnieuw."
             });
@@ -210,16 +219,28 @@ app.post("/battle", isAuthenticated, (req, res) => {
             PokemonList: PokemonList,
             currentUser: req.session.currentUser,
             pokemon1: enemyPokemonName,
+            enemyPokemonID: enemyPokemonID,
             req: req,
             message: message
         });
     });
 });
 
+app.post("/battleWin", (req, res) => {
+    const pokemonId: Number = Number(req.query.id);
+    let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
+    pokemon = pokemon ? pokemon : PokemonList[132];
+    
+    res.render("pokemonCatchSuccess", {
+        Pokemon: pokemon,
+        currentUser: req.session.currentUser
+    });
+});
+
 app.get("/pokemonList", (req, res) => {
     res.type('application/json');
     res.json(PokemonList);
-})
+});
 
 app.get("/whosthatpokemon", isAuthenticated, (req, res) => {
 
@@ -242,7 +263,7 @@ app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
     // Check if user has current pokemon 
     const haspokemonselected: Boolean = !(req.session.currentUser?.currentPokemon === undefined);
 
-    
+
     let currentpok: number | undefined = req.session.currentUser?.currentPokemon
     let message = "";
 

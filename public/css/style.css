@@ -249,7 +249,7 @@ label {
   transition: 0.3s;
 }
 
-.errorMessage {
+.battleMessage {
   font-size: large;
   border-radius: 5px;
   background-color: rgb(255, 200, 200);

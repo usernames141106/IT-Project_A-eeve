@@ -5,10 +5,12 @@
       <img src="<%= Pokemon.image %>" alt="<%= Pokemon.name %>" width="400px">
       <% if(currentUser.pokemons.find(x => x.id == Pokemon.id)) { %>
           <a href="/pokemonRelease?id=<%= Pokemon.id %>"><img src="/images/pokeBallGreen.png" width="150px" alt="Pokebal"></a>
-          <p>Je kan je pokemon vrijlaten door op de groene bal te drukken.</p>
+          <br>
+          <p>Je kan deze Pokémon vrijlaten door op de groene bal te klikken.</p>
         <% } else { %>
           <a href="/pokemonCatch?attempt=<%= attempt + 1 %>&id=<%= Pokemon.id %>"><img src="/images/pokeBall.png" width="150px" alt="Pokebal"></a>
-          <p>Je hebt nog <%= 3 - attempt %> pogingen over om hem te vangen<%= attempt == 0 ? " (Je kan dit proberen door op de rode bal te drukken.)" : "" %>.</p>
+          <br>
+          <p>Je hebt nog <%= 3 - attempt %> pogingen over om deze Pokémon te vangen<%= attempt == 0 ? " (Je kan dit proberen door op de rode bal te klikken.)" : "" %>.</p>
           <% } %>
     </div>
   </main>
