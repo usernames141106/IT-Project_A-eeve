@@ -135,7 +135,7 @@ caption {
 }
 
 
-/*..........My Pokemon.............*/
+/*---------- My Pokemon ----------*/
 
 #myPokemonList {
   transition: 0.5s ease;
@@ -183,6 +183,7 @@ label {
 }
 
 /*---------- Pokemon battle ----------*/
+
 #ownPokemon:hover,
 #enemyPokemon:hover {
   transform: none;
@@ -261,6 +262,12 @@ label {
   justify-content: center;
 }
 
+/*---------- Pokémon catch ----------*/
+
+#successCard:hover {
+  transform: none;
+}
+
 /*---------- compare Pokémon ----------*/
 #buttonW {
   background-color: #5e727d;
@@ -303,18 +310,21 @@ label {
   /* Ensure the overlay image is on top of the original image */
   filter: brightness(0);
 }
-#ErrorWTP{
+
+#ErrorWTP {
   background-color: red;
   color: white;
   text-transform: capitalize;
   word-spacing: 0.5rem;
 }
-#SuccessWTP{
+
+#SuccessWTP {
   background-color: green;
   color: white;
   text-transform: uppercase;
   word-spacing: 0.5rem;
 }
+
 .hidden {
   color: white;
   background-color: white !important;

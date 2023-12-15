@@ -1,7 +1,7 @@
 <%- include("partials/header",{title: "Pokemon vangen geef ze een naam" , secondRow:true }); %>
     <main >
         <div class="container-fluid col-12 d-flex justify-content-center">
-            <article class="card mb-3 col-12 col-sm6 d-flex justify-content-center" style="max-width: 450px;">
+            <article id="successCard" class="card mb-3 col-12 col-sm6 d-flex justify-content-center" style="max-width: 450px;">
             <form class="row g-0" method="post">
                 <div class=".col md-4">
                     <img src="<%= Pokemon.image %>" class="img-fluid rounded-start" alt="<%= Pokemon.name %>">
@@ -9,7 +9,7 @@
                 <div class="">
                     <div class="card-body">
                         <h5 class="text-center">
-                            Geef je gevangen Pokémon een naam
+                            Geef je nieuwe Pokémon een naam
                         </h5>
                         <input type="text" name="name" value="<%= Pokemon.name %>"
                             class="form-outline border border-0 border-bottom ms-2 text-center "style=" width: 100%;" />
