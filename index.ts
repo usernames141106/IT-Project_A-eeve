@@ -422,8 +422,8 @@ app.post("/pokemonvergelijken", isAuthenticated, (req, res) => {
             return res.render("pokemonvergelijken", {
                 PokemonList: PokemonList,
                 currentUser: req.session.currentUser,
-                pokemon1: req.body.name1,
-                pokemon2: req.body.name2,
+                pokemon1: req.body.name1.toLowerCase(),
+                pokemon2: req.body.name2.toLowerCase(),
                 errorMessage: "Er is iets fout gegaan, probeer het opnieuw."
             });
         }
@@ -432,8 +432,8 @@ app.post("/pokemonvergelijken", isAuthenticated, (req, res) => {
         res.render("pokemonvergelijken", {
             PokemonList: PokemonList,
             currentUser: req.session.currentUser,
-            pokemon1: req.body.name1,
-            pokemon2: req.body.name2
+            pokemon1: req.body.name1.toLowerCase(),
+            pokemon2: req.body.name2.toLowerCase()
         });
     });
 });
