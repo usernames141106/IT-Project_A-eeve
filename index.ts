@@ -4,7 +4,7 @@ import { IPokemon, IUser } from './interface';
 import { GetPokemonFromApi, LoadUserFromMongoDB, PokemonList, UpdateUserInDB} from './db';
 import { RegisterUserInDB, coinFlip } from './db';
 
-const evelutions:number[][] = require("./evolution-arrays.json");
+const evolutions:number[][] = require("./evolution-arrays.json");
 
 const app = express();
 
@@ -40,8 +40,8 @@ function isAuthenticated(req: any, res: any, next: any) {
         next();
     } else {
         res.render("message", {
-            title: "gelieve in te loggen.",
-            message: "je moet ingelogd zijn om een project te openen.",
+            title: "Gelieve in te loggen",
+            message: "Je moet ingelogd zijn om een project te openen.",
             currentUser: undefined
         });
     }
@@ -56,7 +56,7 @@ app.get("/home", isAuthenticated, (req, res) => {
 app.get("/noAccess", (req, res) => {
     res.render("message", {
         title: "Geen toegang",
-        message: "Sorry, je hebt helaas geen toegang tot dit project!",
+        message: "Sorry, je hebt geen toegang tot dit project!",
         currentUser: req.session.currentUser
     });
 });
@@ -254,14 +254,14 @@ app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
             if (coinflip === 0) {
                 if (req.session.currentUser && req.session.currentUser.pokemons && req.session.currentUser.pokemons[currentpok]) {
                     req.session.currentUser.pokemons[currentpok].attack += 1; // Increment attack
-                    message = `Juist! Aanval +1 `
+                    message = `Juist! Aanval +1`
                     await UpdateUserInDB(req.session.currentUser);
                 }
 
             } else if (coinflip === 1) {
                 if (req.session.currentUser && req.session.currentUser.pokemons && req.session.currentUser.pokemons[currentpok]) {
                     req.session.currentUser.pokemons[currentpok].defence += 1; // Increment defence
-                    message = "Juist! Verdediging +1"
+                    message = `Juist! Verdediging +1`
                     await UpdateUserInDB(req.session.currentUser);
                 }
             }
@@ -380,7 +380,7 @@ app.get("/pokemondetail", isAuthenticated, (req, res) => {
     let pokemon: IPokemon | undefined = [...PokemonList].find(x => x.id == pokemonId);
     pokemon = pokemon ? pokemon : PokemonList[132];
 
-    const evolutionPath: IPokemon[] | undefined = evelutions.find((x) => x.includes(pokemonId))?.map(x => PokemonList[x - 1]);
+    const evolutionPath: IPokemon[] | undefined = evolutions.find((x) => x.includes(pokemonId))?.map(x => PokemonList[x - 1]);
 
     res.render("pokemonDetail", {
         currentUser: req.session.currentUser,
@@ -455,7 +455,7 @@ app.post("/login", async (req, res) => {
         req.session.destroy(err => {
             res.render("message", {
                 title: "Login onsuccessvol",
-                message: "De mail en of passwoord is verkeerd.",
+                message: "Mail en / of wachtwoord is verkeerd.",
                 currentUser: undefined
             });
         })
@@ -480,8 +480,8 @@ app.post("/register", async (req, res) => {
     }
     else {
         res.render("message", {
-            title: "Ongeldig passwoord",
-            message: "je paswoord moet ingevuld zijn en ze moeten beide hetzelfde zijn.",
+            title: "Ongeldig wachtwoord",
+            message: "Beide wachtwoorden moeten hetzelfde zijn.",
             currentUser: undefined
         });
     }
