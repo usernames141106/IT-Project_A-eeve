@@ -3,14 +3,14 @@
 <script src="/js/whosThatPokemon.js" defer></script>
 
 <main class="container flex-column d-flex flex-wrap d-flex justify-content-center col-9 gap-4">
-    <h1 class="text-center ">Wie is deze Pokémon ?</h1>
+    <h1 class="text-center">Wie is deze Pokémon ?</h1>
 
     <article class="mx-auto flex-column d-flex col-8 relative-position custom-class">
       <!-- Original image -->
       <img src="/images/Whoisthatpokemon.webp" class="img-fluid  rounded mb-3 col-sm-12" alt="" >
       <% const randomPokemon = PokemonList[Math.round(Math.random() * PokemonList.length) - 1]; %>
       <!-- Image to layer on top -->
-      <img src="<%= randomPokemon.image %>" class="layered-img" alt=""> 
+      <img src="<%= randomPokemon.image %>" class="layered-img" alt="Pokémon Shadow"> 
       <% if (message == "FOUT" ){ %>
       <p id="ErrorWTP" class="d-flex justify-content-center m-0 rounded"><%- message%></p>
       <% }else { %>
@@ -27,12 +27,12 @@
           <input type="search" id="form1" class="form-control" placeholder="WIE IS DEZE POKEMON?" aria-label="Search" list="pokemonlist" name="pokeGuess"/>
 
           <datalist id="pokemonlist">
-            <% PokemonList.map(x => {%><option><%= x.name %></option><%}); %>
+            <% PokemonList.map(x => {%><option><%= x.name.charAt(0).toUpperCase() + x.name.slice(1) %></option><%}); %>
           </datalist>
 
           <input type="hidden" name="correctPokemon" value="<%= randomPokemon.name %>">
 
-          <button id="buttonW" type="submit" formaction="/whosThatPokemon" class="btn btn-primary buttonForm1" name="guesPokemon">poging</button>
+          <button id="buttonW" type="submit" formaction="/whosThatPokemon" class="btn btn-primary buttonForm1" name="guesPokemon">POGING</button>
 
       </form>
 

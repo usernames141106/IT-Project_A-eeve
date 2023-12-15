@@ -56,7 +56,7 @@
                         value="<%= pokemon1 ? pokemon1.toUpperCase(): "" %>" />
                       <datalist id="pokemonlist">
                         <% PokemonList.map(x => {%><option key="index">
-                            <%= x.name %>
+                            <%= x.name.charAt(0).toUpperCase() + x.name.slice(1) %>
                           </option>
                           <%}); %>
                       </datalist>

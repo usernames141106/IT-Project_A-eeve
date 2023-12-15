@@ -296,7 +296,7 @@ label {
   position: absolute;
   top: 15%;
   left: 5%;
-  width: 45%;
+  width: 40%;
   /* Make the overlay image cover the entire container */
   height: 45%;
   z-index: 1;
