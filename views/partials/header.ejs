@@ -32,11 +32,14 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <% if(currentUser) { %>
-                    <div class="collapse navbar-collapse justify-content-end pe-5" id="navbarSupportedContent">
-                         <form action="/logout" method="post" class="nav-item dropdown pe-5 d-flex gap-4 align-items-center">
+                    <div class="collapse navbar-collapse justify-content-lg-end" id="navbarSupportedContent">
+                        <div class="d-flex justify-content-center">
+                              <form action="/logout" method="post" class="nav-item dropdown d-flex gap-2 pe-lg-5 align-items-center justify-content-center">
                         <p class="m-2 ">Welkom <%= currentUser.name %></p>
-                        <button id="buttonW" class="btn btn-primary">UITLOGGEN</button>
-                        </form>
+                        <button id="buttonW" class="btn text-uppercase">Uitloggen</button>
+                        </form> 
+                        </div>
+                      
                     </div>
                    
                     </div>

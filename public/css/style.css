@@ -337,13 +337,13 @@ label {
   .homebtn {
     margin-left: 2rem;
   }
+
 }
 
 /*---------- For mobile phones ----------*/
 @media (max-width: 991px) {
   .card:hover {
     transform: none;
-
   }
 
   #navbar_list li {
@@ -366,4 +366,16 @@ label {
   .custom-class {
     width: fit-content;
   }
+
+  #buttonW {
+    height: 1.7rem;
+    font-size: 12px; 
+    line-height: 1;
+    margin-bottom: 0.3rem;
+     }
+
+  .logout {
+    color: blueviolet;
+justify-content: center;
+     }
 }
