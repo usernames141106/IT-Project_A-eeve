@@ -414,7 +414,7 @@ app.get("/pokemondetail", isAuthenticated, (req, res) => {
 app.get("/mypokemon", isAuthenticated, async (req, res) => {
     const owned: boolean = req.query.owned == "true";
     const newCurrentPokemon: number | undefined = req.session.currentUser?.pokemons.findIndex(x => x.id == Number(req.query.newCurrentPokemon));
-    if (newCurrentPokemon !== undefined && newCurrentPokemon != -1 && req.session.currentUser) {
+    if (req.session.currentUser && (newCurrentPokemon !== undefined && newCurrentPokemon != -1 || req.query.newCurrentPokemon === "undefined")) {
         req.session.currentUser.currentPokemon = newCurrentPokemon;
         await UpdateUserInDB(req.session.currentUser);
     }
