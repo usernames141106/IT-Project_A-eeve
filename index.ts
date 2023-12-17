@@ -115,10 +115,13 @@ app.post("/battle", isAuthenticated, (req, res) => {
     let currentPok: number | undefined = req.session.currentUser?.currentPokemon;
     let message: String | undefined;
     let winBattle: Boolean = false;
+    let ownPokemon: IPokemon | undefined ;
 
     // Initiate own Pokémon stats and enemy Pokémon stats
     const ownPokemonId = req.body.ownPokemon;
-    let ownPokemon: IPokemon | undefined = PokemonList.find(x => x.id == ownPokemonId);
+    if(currentPok != undefined && currentUser != undefined){
+    ownPokemon = currentUser?.pokemons[currentPok];
+    }
     // console.log(ownPokemon);
     const enemyPokemonName: String | undefined = req.body.btnFight;
     let enemyPokemon: IPokemon | undefined = PokemonList.find(x => x.name == enemyPokemonName);
