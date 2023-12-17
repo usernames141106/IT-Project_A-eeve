@@ -463,6 +463,7 @@ app.post("/pokemonvergelijken", isAuthenticated, (req, res) => {
 
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;
+
     //check if excists
     let user: IUser | null = await LoadUserFromMongoDB(email, password);
     if (user != null) {
