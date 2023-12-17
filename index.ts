@@ -486,7 +486,7 @@ app.post("/login", async (req, res) => {
 
 app.post("/register", async (req, res) => {
     const { email, passworda, passwordb } = req.body;
-    if (passworda == passwordb && passworda != undefined) {
+    if (passworda == passwordb && passworda && email && email.includes('@')) {
         await RegisterUserInDB(email, passworda);
         let user: IUser | null = await LoadUserFromMongoDB(email, passworda);
         if (user != null) {
@@ -502,8 +502,8 @@ app.post("/register", async (req, res) => {
     }
     else {
         res.render("message", {
-            title: "Ongeldig wachtwoord",
-            message: "Beide wachtwoorden moeten hetzelfde zijn.",
+            title: "Ongeldig wachtwoord of email",
+            message: "Beide wachtwoorden moeten hetzelfde zijn en de mail moet een @ bevatten.",
             currentUser: undefined
         });
     }
