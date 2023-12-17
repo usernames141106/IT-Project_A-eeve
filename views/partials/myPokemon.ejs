@@ -21,13 +21,13 @@
                 <td>
                 <a href="/mypokemon?owned=<%= viewAllPokemon %>&newCurrentPokemon=<%= currentUser.currentPokemon !== undefined ? Pokemon.id : "undefined" %>">
                     <input id="myPokemonSelection" class="form-check-input" type="checkbox" <%= 
-                        currentUser.currentPokemon !== undefined ? 
-                            ownedPokemon.id == currentUser.pokemons[currentUser.currentPokemon].id ? "checked" : ""
-                         : "" %> disabled/>
+                        currentUser && currentUser.currentPokemon !== undefined && ownedPokemon && ownedPokemon.id !== undefined && 
+                         ownedPokemon.id === currentUser.pokemons[currentUser.currentPokemon]?.id ? "checked" : ""
+                %> disabled/>
                 </a>
+                <% } %>
                 </td>
             </tr>
-            <% } %>
         </tbody>
     </table>
 
