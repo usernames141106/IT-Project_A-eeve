@@ -398,9 +398,11 @@ app.get("/pokemonCatch", isAuthenticated, (req, res) => {
 });
 
 app.get("/pokemondetail", isAuthenticated, (req, res) => {
-    const pokemonId: number = Number(req.query.id);
+    let pokemonId: number = Number(req.query.id);
     let pokemon: IPokemon | undefined = [...PokemonList].find(x => x.id == pokemonId);
+    
     pokemon = pokemon ? pokemon : PokemonList[132];
+    pokemonId = pokemon ? pokemon.id : pokemonId;
 
     const evolutionPath: IPokemon[] | undefined = evolutions.find((x) => x.includes(pokemonId))?.map(x => PokemonList[x - 1]);
 
