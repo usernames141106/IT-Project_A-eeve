@@ -19,18 +19,12 @@
             <tr>
                 <td>Kies als huidige Pokémon</td>
                 <td>
-                    <% if(currentUser.currentPokemon !== undefined && currentUser.pokemons[currentUser.currentPokemon].id == ownedPokemon.id) { %>
-                <a href="/mypokemon?owned=<%= viewAllPokemon %>&newCurrentPokemon=undefined">
-                    <input id="myPokemonSelection" class="form-check-input" type="checkbox" checked disabled/>
+                <a href="/mypokemon?owned=<%= viewAllPokemon %>&newCurrentPokemon=<%= currentUser.currentPokemon !== undefined ? Pokemon.id : "undefined" %>">
+                    <input id="myPokemonSelection" class="form-check-input" type="checkbox" <%= 
+                        currentUser.currentPokemon !== undefined ? 
+                            ownedPokemon.id == currentUser.pokemons[currentUser.currentPokemon].id ? "checked" : ""
+                         : "" %> disabled/>
                 </a>
-                <% } else { %>
-                    <a href="/mypokemon?owned=<%= viewAllPokemon %>&newCurrentPokemon=<%= Pokemon.id %>">
-                        <input id="myPokemonSelection" class="form-check-input" type="checkbox" <%= 
-                            currentUser.currentPokemon !== undefined ? 
-                                ownedPokemon.id == currentUser.pokemons[currentUser.currentPokemon].id ? "checked" : ""
-                             : "" %> disabled/>
-                    </a>
-                <% } %>
                 </td>
             </tr>
             <% } %>
