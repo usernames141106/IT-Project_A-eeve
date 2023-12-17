@@ -215,13 +215,14 @@ app.post("/battle", isAuthenticated, (req, res) => {
             });
         }
 
+        // If al previous paths fail, return to pokemonBattle with an error message
         res.render("pokemonBattle", {
             PokemonList: PokemonList,
             currentUser: req.session.currentUser,
             pokemon1: enemyPokemonName,
             enemyPokemonID: enemyPokemonID,
             req: req,
-            message: message
+            message: "Er is iets fout gegaan, probeer het opnieuw."
         });
     });
 });
