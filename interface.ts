@@ -13,6 +13,7 @@ export interface IPokemon{
     losses:number,
     captureDate:Date | null
 }
+
 export interface IUser  {
     _id?: ObjectId,
     name: string,

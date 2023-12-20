@@ -247,7 +247,6 @@ app.get("/pokemonList", (req, res) => {
 });
 
 app.get("/whosthatpokemon", isAuthenticated, (req, res) => {
-
     res.render("whosThatPokemon", {
         PokemonList: PokemonList,
         searchvalue: undefined,
@@ -416,7 +415,6 @@ app.get("/pokemondetail", isAuthenticated, (req, res) => {
     });
 });
 
-
 app.get("/mypokemon", isAuthenticated, async (req, res) => {
     const owned: boolean = req.query.owned == "true";
     const newCurrentPokemon: number | undefined = req.session.currentUser?.pokemons.findIndex(x => x.id == Number(req.query.newCurrentPokemon));
@@ -464,8 +462,6 @@ app.post("/pokemonvergelijken", isAuthenticated, (req, res) => {
         });
     });
 });
-
-
 
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;

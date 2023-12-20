@@ -3,7 +3,6 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
 }
 
 body,
@@ -134,6 +133,9 @@ caption {
   font-size: small;
 }
 
+.logout {
+  color: white;
+}
 
 /*---------- My Pokemon ----------*/
 
@@ -262,6 +264,10 @@ label {
   justify-content: center;
 }
 
+#battleWin {
+  display: none;
+}
+
 /*---------- Pokémon catch ----------*/
 
 #successCard:hover {
@@ -330,14 +336,11 @@ label {
   background-color: white !important;
 }
 
-
-
 /*---------- Media queries ----------*/
 @media (max-width: 1000px) {
   .homebtn {
     margin-left: 2rem;
   }
-
 }
 
 /*---------- For mobile phones ----------*/
@@ -369,13 +372,13 @@ label {
 
   #buttonW {
     height: 1.7rem;
-    font-size: 12px; 
+    font-size: 12px;
     line-height: 1;
     margin-bottom: 0.3rem;
-     }
+  }
 
   .logout {
     color: blueviolet;
-justify-content: center;
-     }
+    justify-content: center;
+  }
 }

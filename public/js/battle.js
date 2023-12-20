@@ -1,15 +1,22 @@
-// fetch("/pokemonList")
-//   .then(response => response.json())
-//   .then(PokemonList => {
-//     document.getElementById('fightButton').addEventListener('click', function () {
-//       var selectedPokemon = document.getElementById('form1').value.toLowerCase();
+console.log("hello world");
 
-//       var enemyPokemon = PokemonList.find(p => p.name === selectedPokemon);
+fetch("/PokemonList")
+    .then(response => response.json())
+    .then(PokemonList => {
+        var enemyPokemonName = document.getElementById('form1').value.toLowerCase();
 
-//         document.getElementById('hp-bar').style.width = "50%";
-//         document.getElementById('HPLabel').textContent = enemyPokemon.maxHP;
-//     });
-//   });
+        var enemyPokemon = PokemonList.find(p => p.name === enemyPokemonName);
+
+        console.log(enemyPokemon);
+
+        var ownPokemon = document.getElementById('ownPokemon').name;
+        console.log(ownPokemon);
+
+        // document.getElementById('hp-bar').style.width = "50%";
+        // document.getElementById('HPLabel').textContent = enemyPokemon.maxHP;
+    });
+
+
 
 // // initialize HP values
 // let ownPokemonHP = 100;
