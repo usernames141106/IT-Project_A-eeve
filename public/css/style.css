@@ -208,7 +208,7 @@ label {
   border: 3px solid inherit;
   color: inherit;
   width: 0%;
-  transition: 2s ease-in-out;
+  transition: 1s ease-in-out;
   background-color: red;
 }
 
@@ -217,7 +217,7 @@ label {
   border: 3px solid inherit;
   color: inherit;
   width: 0%;
-  transition: 2s ease-in-out;
+  transition: 1s ease-in-out;
   background-color: red;
 }
 
@@ -260,7 +260,7 @@ label {
 
 .centered-title {
   display: flex;
-  align-items: end;
+  /* align-items: end; */
   justify-content: center;
 }
 

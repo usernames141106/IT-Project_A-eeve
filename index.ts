@@ -119,8 +119,8 @@ app.post("/battle", isAuthenticated, (req, res) => {
 
     // Initiate own Pokémon stats and enemy Pokémon stats
     const ownPokemonId = req.body.ownPokemon;
-    if(currentPok != undefined && currentUser != undefined){
-    ownPokemon = currentUser?.pokemons[currentPok];
+    if (currentPok != undefined && currentUser != undefined) {
+        ownPokemon = currentUser?.pokemons[currentPok];
     }
     // console.log(ownPokemon);
     const enemyPokemonName: String | undefined = req.body.btnFight;
@@ -133,7 +133,17 @@ app.post("/battle", isAuthenticated, (req, res) => {
         let enemyPokemonHP = enemyPokemon.maxHP;
         // If one Pokémon can't damage the other (attack <= defence), the battle is automaticly decided
         if (ownPokemon.attack <= enemyPokemon.defence || enemyPokemon.attack <= ownPokemon.defence) {
-            if (ownPokemon.attack <= enemyPokemon.defence) {
+            // If both Pokémon can't damage each other, return with a message
+            if (ownPokemon.attack <= enemyPokemon.defence && enemyPokemon.attack <= ownPokemon.defence) {
+                return res.render("pokemonBattle", {
+                    PokemonList: PokemonList,
+                    currentUser: req.session.currentUser,
+                    pokemon1: enemyPokemonName,
+                    enemyPokemonID: enemyPokemonID,
+                    req: req,
+                    message: "Gelijkspel! Beide Pokémon kunnen elkaar geen schade doen."
+                });
+            } else if (ownPokemon.attack <= enemyPokemon.defence) {
                 winBattle = false;
             } else if (enemyPokemon.attack <= ownPokemon.defence) {
                 winBattle = true;
@@ -222,7 +232,7 @@ app.post("/battleWin", (req, res) => {
     const pokemonId: Number = Number(req.body.pokemon);
     let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
     pokemon = pokemon ? pokemon : PokemonList[132];
-    
+
     res.render("pokemonCatchSuccess", {
         Pokemon: pokemon,
         currentUser: req.session.currentUser
@@ -390,7 +400,7 @@ app.get("/pokemonCatch", isAuthenticated, (req, res) => {
 app.get("/pokemondetail", isAuthenticated, (req, res) => {
     let pokemonId: number = Number(req.query.id);
     let pokemon: IPokemon | undefined = [...PokemonList].find(x => x.id == pokemonId);
-    
+
     pokemon = pokemon ? pokemon : PokemonList[132];
     pokemonId = pokemon ? pokemon.id : pokemonId;
 

@@ -11,9 +11,12 @@
           <div class="row">
             <% const currentPokemon = currentUser.pokemons[currentUser.currentPokemon]; %>
             <!-- necessary variables for the battle.js script -->
-            <input type="hidden" id="ownPokemonAttack" value="<%= currentPokemon.attack %>">
-            <input type="hidden" id="ownPokemonDefence" value="<%= currentPokemon.defence %>">
-            <input type="hidden" id="ownPokemonHP" value="<%= currentPokemon.maxHP %>">
+            <% if (currentPokemon) { %>
+              <input type="hidden" id="ownPokemonAttack" value="<%= currentPokemon.attack %>">
+              <input type="hidden" id="ownPokemonDefence" value="<%= currentPokemon.defence %>">
+              <input type="hidden" id="ownPokemonHP" value="<%= currentPokemon.maxHP %>">
+            <% } %>
+
 
               <main class="container col-9 flex-row flex-wrap col-md-9 col-sm-12 d-grid justify-content-center">
                 <div>
@@ -30,7 +33,7 @@
 
                   <!-- this section becomes visible if the player loses the battle -->
                   <% if (req.path === '/battle' && enemyPokemonID !== undefined) { %>
-                    <div id="battleLose">Je pokémon is verloren! Game over.</div>
+                    <div id="battleLose">Je pokémon is verloren! Game over. <a href="/pokemonBattle">Klik hier om opnieuw te proberen.</a></div>
                   <% } %>
 
                   <!-- error handling -->
@@ -49,7 +52,7 @@
                     <img src="<%= currentPokemon ? currentPokemon.image : " /images/empty.png" %>" alt="Huidige
                     Pokemon">
                     <div class="card-body text-center centered-title">
-                      <h5 class="card-title">
+                      <h5 class="card-title pt-2">
                         <%= currentPokemon ? currentPokemon.name.toUpperCase() : "Geen huidige pokemon" %>
                       </h5>
                     </div>
@@ -94,10 +97,11 @@
                                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                             </svg></button>
                         </form>
-
+                        <!-- <button class="btn btn-primary mt-1">random</button> -->
                       </div>
-
+                      
                       <div class="hp"> <!-- HP bar enemy Pokémon -->
+                          
                         <table class="table caption-top mx-auto table-sm table-hover">
                           <tbody>
                             <tr>
