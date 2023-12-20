@@ -10,21 +10,30 @@
 
           <div class="row">
             <% const currentPokemon = currentUser.pokemons[currentUser.currentPokemon]; %>
-            <input type="hidden" id="ownPokemon" value="<%= currentPokemon %>">
-            
+            <!-- necessary variables for the battle.js script -->
+            <input type="hidden" id="ownPokemonAttack" value="<%= currentPokemon.attack %>">
+            <input type="hidden" id="ownPokemonDefence" value="<%= currentPokemon.defence %>">
+            <input type="hidden" id="ownPokemonHP" value="<%= currentPokemon.maxHP %>">
+
               <main class="container col-9 flex-row flex-wrap col-md-9 col-sm-12 d-grid justify-content-center">
                 <div>
                   <h1 class="mx-auto d-flex text-center justify-content-center">Pokémon Battle</h1>
 
-                  <!-- this form will only become visible if the player wins the battle -->
+                  <!-- this form becomes visible if the player wins the battle -->
                   <% if (req.path === '/battle' && enemyPokemonID !== undefined) { %>
                     <form method="post" action="/battleWin" id="battleWin">
                       <button type="submit" method="post" action="/battleWin" name="pokemon" value="<%= enemyPokemonID %>">
-                        Claim hier je prijs
+                        Je Pokémon is gewonnen! Klik hier om <%= pokemon1.toUpperCase() %> toe te voegen aan je collectie.
                       </button>
                     </form>
                   <% } %>
 
+                  <!-- this section becomes visible if the player loses the battle -->
+                  <% if (req.path === '/battle' && enemyPokemonID !== undefined) { %>
+                    <div id="battleLose">Je pokémon is verloren! Game over.</div>
+                  <% } %>
+
+                  <!-- error handling -->
                   <% if (message) { %>
                     <div class="battleMessage text-center justify-content-center">
                       <%= message %>

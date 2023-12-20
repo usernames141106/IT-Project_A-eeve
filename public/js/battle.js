@@ -1,16 +1,84 @@
-console.log("hello world");
-
 fetch("/PokemonList")
     .then(response => response.json())
     .then(PokemonList => {
+        var battleWinForm = document.getElementById('battleWin');
+        var battleLoseForm = document.getElementById('battleLose');
         var enemyPokemonName = document.getElementById('form1').value.toLowerCase();
 
+        // enemyPokemonstats get loaded in from PokemonList
         var enemyPokemon = PokemonList.find(p => p.name === enemyPokemonName);
-
+        let currentEnemyHP = enemyPokemon.maxHP;
         console.log(enemyPokemon);
 
-        var ownPokemon = document.getElementById('ownPokemon').name;
-        console.log(ownPokemon);
+        // ownPokemonstats get loaded in from PokemonList
+        var ownPokemonAttack = document.getElementById('ownPokemonAttack').value;
+        console.log(ownPokemonAttack);
+        var ownPokemonDefence = document.getElementById('ownPokemonDefence').value;
+        console.log(ownPokemonDefence);
+        var ownPokemonHP = document.getElementById('ownPokemonHP').value;
+        console.log(ownPokemonHP);
+        let currentOwnHP = ownPokemonHP;
+
+        console.log(ownPokemonAttack - enemyPokemon.defence);
+
+        let ownLabel = document.getElementById("HPLabel");
+        let enemyLabel = document.getElementById("HPLabelEnemy");
+
+        // function to simulate an attack from your Pokémon
+        function attackEnemyPokemon() {
+            const damage = ownPokemonAttack - enemyPokemon.defence;
+
+            currentEnemyHP = currentEnemyHP - damage;
+
+            if (currentEnemyHP > 0) {
+                enemyLabel.textContent = currentEnemyHP;
+            } else {
+                enemyLabel.textContent = 0;
+                return;
+            }
+        }
+
+        // function to simulate an attack from the enemy Pokémon
+        function attackOwnPokemon() {
+            const damage = enemyPokemon.attack - ownPokemonDefence;
+
+            currentOwnHP = currentOwnHP - damage;
+
+            if (currentOwnHP > 0) {
+                ownLabel.textContent = currentOwnHP;
+            } else if (currentOwnHP <= 0) {
+                ownLabel.textContent = 0;
+                return;
+            }
+        }
+
+        let isOwnPokemonTurn = true;
+
+        // function to perform a sequence of attacks from both Pokémon
+        function battle() {
+            const battleInterval = setInterval(() => {
+                if (currentEnemyHP > 0 && isOwnPokemonTurn) {
+                    attackEnemyPokemon();
+                }
+                if (currentOwnHP > 0 && !isOwnPokemonTurn) {
+                    attackOwnPokemon();
+                }
+
+                isOwnPokemonTurn = !isOwnPokemonTurn;
+
+                // stop the battle when one of the Pokemon is defeated
+                if (currentOwnHP <= 0 || currentEnemyHP <= 0) {
+                    clearInterval(battleInterval);
+                    if (currentOwnHP <= 0) {
+                        battleLoseForm.style.display = 'block';
+                    } else {
+                        battleWinForm.style.display = 'block';
+                    }
+                }
+            }, 2000); // wait for 2 seconds between each attack
+        }
+
+        battle();
 
         // document.getElementById('hp-bar').style.width = "50%";
         // document.getElementById('HPLabel').textContent = enemyPokemon.maxHP;

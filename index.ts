@@ -115,7 +115,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
     let currentPok: number | undefined = req.session.currentUser?.currentPokemon;
     let message: String | undefined;
     let winBattle: Boolean = false;
-    let ownPokemon: IPokemon | undefined ;
+    let ownPokemon: IPokemon | undefined;
 
     // Initiate own Pokémon stats and enemy Pokémon stats
     const ownPokemonId = req.body.ownPokemon;
@@ -152,36 +152,24 @@ app.post("/battle", isAuthenticated, (req, res) => {
             }
         }
 
-        // Win the battle -> catch the enemy Pokémon
-        // Lose the battle -> "try again with another Pokémon"
         if (winBattle) {
             if (currentUser && currentPok) {
                 currentUser.pokemons[currentPok].wins += 1;
             }
-
-            // setTimeout(() => {}, 10000);
-            return res.render("pokemonBattle", {
-                PokemonList: PokemonList,
-                currentUser: req.session.currentUser,
-                pokemon1: enemyPokemonName,
-                enemyPokemonID: enemyPokemonID,
-                req: req,
-                message: undefined
-            });
         } else {
             if (currentUser && currentPok) {
                 currentUser.pokemons[currentPok].losses += 1;
             }
-
-            return res.render("pokemonBattle", {
-                PokemonList: PokemonList,
-                currentUser: req.session.currentUser,
-                pokemon1: enemyPokemonName,
-                enemyPokemonID: enemyPokemonID,
-                req: req,
-                message: "Je verliest de strijd! Probeer het met een andere Pokémon of maak je huidige Pokémon sterker."
-            });
         }
+
+        return res.render("pokemonBattle", {
+            PokemonList: PokemonList,
+            currentUser: req.session.currentUser,
+            pokemon1: enemyPokemonName,
+            enemyPokemonID: enemyPokemonID,
+            req: req,
+            message: undefined
+        });
     } else if (ownPokemon == undefined) {
         // Return an error when the enemy Pokémon is undefined
         return res.render("pokemonBattle", {
@@ -231,7 +219,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
 });
 
 app.post("/battleWin", (req, res) => {
-    const pokemonId: Number = Number(req.query.id);
+    const pokemonId: Number = Number(req.body.pokemon);
     let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
     pokemon = pokemon ? pokemon : PokemonList[132];
     

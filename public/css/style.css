@@ -266,6 +266,22 @@ label {
 
 #battleWin {
   display: none;
+  text-align: center;
+  border-radius: 5px;
+  padding: 1rem;
+  font-size: large;
+  color: white;
+  background-color: green;
+}
+
+#battleLose {
+  display: none;
+  text-align: center;
+  border-radius: 5px;
+  padding: 1rem;
+  font-size: large;
+  color: white;
+  background-color: red;
 }
 
 /*---------- Pokémon catch ----------*/
