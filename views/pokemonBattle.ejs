@@ -17,7 +17,6 @@
               <input type="hidden" id="ownPokemonHP" value="<%= currentPokemon.maxHP %>">
             <% } %>
 
-
               <main class="container col-9 flex-row flex-wrap col-md-9 col-sm-12 d-grid justify-content-center">
                 <div>
                   <h1 class="mx-auto d-flex text-center justify-content-center">Pokémon Battle</h1>
@@ -38,7 +37,7 @@
 
                   <!-- error handling -->
                   <% if (message) { %>
-                    <div class="battleMessage text-center justify-content-center">
+                    <div class="battleMessage text-center">
                       <%= message %>
                     </div>
                   <% } %>
@@ -51,7 +50,7 @@
 
                     <img src="<%= currentPokemon ? currentPokemon.image : " /images/empty.png" %>" alt="Huidige
                     Pokemon">
-                    <div class="card-body text-center centered-title">
+                    <div class="card-body text-center">
                       <h5 class="card-title pt-2">
                         <%= currentPokemon ? currentPokemon.name.toUpperCase() : "Geen huidige pokemon" %>
                       </h5>
@@ -97,7 +96,13 @@
                                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                             </svg></button>
                         </form>
-                        <!-- <button class="btn btn-primary mt-1">random</button> -->
+                        <% if (req.path !== '/battle' || message !== undefined) { %>
+                          <% const randomPokemon = PokemonList[Math.round(Math.random() * PokemonList.length) - 1]; %>
+                          <form action="/pokemonBattle" method="post">
+                            <input type="hidden" id="form1" aria-label="Search" list="pokemonlist" name="name1" value="<%= randomPokemon.name %>" />
+                            <button type="submit" class="btn btn-primary mt-2 bg-secondary border-0" formaction="/pokemonBattle">RANDOM</button>
+                          </form>
+                        <% } %>
                       </div>
                       
                       <div class="hp"> <!-- HP bar enemy Pokémon -->
