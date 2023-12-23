@@ -100,7 +100,7 @@
                           <% const randomPokemon = PokemonList[Math.round(Math.random() * PokemonList.length) - 1]; %>
                           <form action="/pokemonBattle" method="post">
                             <input type="hidden" id="form1" aria-label="Search" list="pokemonlist" name="name1" value="<%= randomPokemon.name %>" />
-                            <button type="submit" class="btn btn-primary mt-2 bg-secondary border-0" formaction="/pokemonBattle">RANDOM</button>
+                            <button type="submit" id="buttonW" class="btn btn-primary mt-2 border-0" formaction="/pokemonBattle">RANDOM</button>
                           </form>
                         <% } %>
                       </div>
@@ -146,6 +146,3 @@
             <!-- BRONNEN -->
             <!-- Fightbutton afbeelding -->
             <!-- https://assetsio.reedpopcdn.com/pokemon-go-type-chart-strength-weakness-resistance-super-effective.jpg?width=690&quality=80&format=jpg&auto=webp -->
-
-            <!-- Versus logo -->
-            <!-- https://media.istockphoto.com/id/1459545409/vector/vs-versus-icon-logo-black-white-vector-symbol-fight-competition-battle-sport-game-grunge.jpg?s=612x612&w=0&k=20&c=dJPtK0BAzoTM9hI5mNBKg-b1-063mYO3WIBOtgScB3w= -->

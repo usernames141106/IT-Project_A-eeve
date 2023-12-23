@@ -1,3 +1,7 @@
+:root {
+  --main-color: #5e727d;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +15,7 @@ html {
 }
 
 header {
-  border-bottom: solid 0.1px #5e727d;
+  border-bottom: solid 0.1px var(--main-color);
 }
 
 main {
@@ -21,7 +25,7 @@ main {
 
 aside {
   padding-block: min(10vh, 10rem);
-  border-left: solid 0.1px #5e727d;
+  border-left: solid 0.1px var(--main-color);
   min-height: 85vh;
 }
 
@@ -42,7 +46,7 @@ a {
 }
 
 a:hover {
-  color: #5e727d;
+  color: var(--main-color);
 }
 
 nav {
@@ -58,7 +62,7 @@ nav {
 }
 
 footer {
-  background-color: #5e727d;
+  background-color: var(--main-color);
   color: white;
 }
 
@@ -100,12 +104,12 @@ caption {
 
 #loginButton:hover {
   color: white;
-  background-color: #5e727d;
+  background-color: var(--main-color);
 }
 
 #registerButton:hover {
   color: white;
-  background-color: #5e727d;
+  background-color: var(--main-color);
 }
 
 /*..........Header.............*/
@@ -149,14 +153,14 @@ caption {
 }
 
 #myPokemonSelection {
-  background-color: #5e727d;
-  border-color: #5e727d;
+  background-color: var(--main-color);
+  border-color: var(--main-color);
 
 }
 
 #myPokemonSelection:hover {
   background-color: #dee2e6;
-  color: #5e727d;
+  color: var(--main-color);
 }
 
 /*---------- Pokemon detail ----------*/
@@ -231,13 +235,13 @@ label {
 }
 
 #buttonSearch {
-  background-color: #5e727d;
-  border-color: #5e727d;
+  background-color: var(--main-color);
+  border-color: var(--main-color);
 }
 
 #buttonSearch:hover {
   background-color: #dee2e6;
-  color: #5e727d;
+  color: var(--main-color);
 }
 
 #fightButton {
@@ -286,28 +290,25 @@ label {
 
 /*---------- compare Pokémon ----------*/
 #buttonW {
-  background-color: #5e727d;
-  border-color: #5e727d;
+  background-color: var(--main-color);
+  border-color: var(--main-color);
 }
 
 #buttonW:hover {
   background-color: #dee2e6;
-  color: #5e727d;
+  color: var(--main-color);
 }
 
 .buttonForm2:hover svg {
-  fill: #5e727d;
-  /* Change the fill color when the button is hovered */
+  fill: var(--main-color);
 }
 
 .buttonForm1:hover svg {
-  fill: #5e727d;
-  /* Change the fill color when the button is hovered */
+  fill: var(--main-color);
 }
 
 .border-on-hover {
-  border: 1px solid #5e727d;
-  /* Change the border style when the button is hovered */
+  border: 1px solid var(--main-color);
 }
 
 /*---------- Wie is deze pokemon ----------*/
@@ -320,10 +321,8 @@ label {
   top: 15%;
   left: 5%;
   width: 40%;
-  /* Make the overlay image cover the entire container */
   height: 45%;
   z-index: 1;
-  /* Ensure the overlay image is on top of the original image */
   filter: brightness(0);
 }
 
@@ -388,7 +387,7 @@ label {
   }
 
   .logout {
-    color: blueviolet;
+    color: white;
     justify-content: center;
   }
 }
