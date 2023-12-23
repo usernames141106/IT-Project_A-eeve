@@ -122,11 +122,10 @@ app.post("/battle", isAuthenticated, (req, res) => {
     if (currentPok != undefined && currentUser != undefined) {
         ownPokemon = currentUser?.pokemons[currentPok];
     }
-    // console.log(ownPokemon);
+    
     const enemyPokemonName: String | undefined = req.body.btnFight;
     let enemyPokemon: IPokemon | undefined = PokemonList.find(x => x.name == enemyPokemonName);
     let enemyPokemonID = enemyPokemon?.id;
-    // console.log(enemyPokemon);
 
     if (enemyPokemon && ownPokemon) {
         let ownPokemonHP = ownPokemon.maxHP;
@@ -255,15 +254,14 @@ app.get("/whosthatpokemon", isAuthenticated, (req, res) => {
 });
 
 app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
-    // Get the correct Pokemon name from the form
+    // Get the correct Pokémon name from the form
     const correctPokemonName: string | undefined = req.body.correctPokemon.toLowerCase();
-    // Get the guessed Pokemon name from the form
+    // Get the guessed Pokémon name from the form
     const guessedPokemonName: string | undefined = req.body.pokeGuess.toLowerCase();
-    // Check if the guessed Pokemon is correct
+    // Check if the guessed Pokémon is correct
     const isCorrectGuess: Boolean = (correctPokemonName === guessedPokemonName);
-    // Check if user has current pokemon 
+    // Check if user has current Pokémon 
     const haspokemonselected: Boolean = !(req.session.currentUser?.currentPokemon === undefined);
-
 
     let currentpok: number | undefined = req.session.currentUser?.currentPokemon
     let message = "";
@@ -428,7 +426,6 @@ app.get("/mypokemon", isAuthenticated, async (req, res) => {
 });
 
 app.get("/pokemonvergelijken", isAuthenticated, (req, res) => {
-
     res.render("pokemonvergelijken", {
         PokemonList: PokemonList,
         pokemon1: undefined,
@@ -464,7 +461,7 @@ app.post("/pokemonvergelijken", isAuthenticated, (req, res) => {
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
-    //check if excists
+    // Check if user already exists
     let user: IUser | null = await LoadUserFromMongoDB(email, password);
     if (user != null) {
         const userS: IUser = user;

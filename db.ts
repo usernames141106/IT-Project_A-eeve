@@ -5,7 +5,7 @@ import crypto from "node:crypto";
 const uri = "mongodb+srv://berrietalboom:webontwikkeling@cluster0.1xbqwl8.mongodb.net/?retryWrites=true&w=majority"
 const client = new MongoClient(uri);
 
-export let PokemonList: IPokemon[] = []; // constiable pokemons from api
+export let PokemonList: IPokemon[] = []; // variabele voor pokemons van de API
 
 async function getUserCollection(): Promise<Collection> {
     return await client.db("itProject").collection('Players');
@@ -32,7 +32,7 @@ export async function RegisterUserInDB(email: string, password: string) {
 
         const collection: Collection = await getUserCollection();
         const existingUser = await collection.findOne({email: email});
-        if(!(existingUser)) { // maakt zeker dat er geen nieuwe user gemaakt word met een bestaande email
+        if(!(existingUser)) { // Zorgt ervoor dat er geen nieuwe user gemaakt word met een bestaande e-mail
             await collection.insertOne(newUser);
         }
     }
@@ -70,13 +70,6 @@ export async function LoadUserFromMongoDB(email: string, password: string): Prom
     }
 }
 
-// functie aangepest om email te gebruiken als unieke identifier en limieten te zeten op wat kan geupdate worden
-/* gebruiksvoorbeeld in post of get functie
-if(req.session.currentUser) {
-    req.session.currentUser.name = newName;
-    await UpdateUserInDB(req.session.currentUser);
-}
-*/
 export async function UpdateUserInDB(user: IUser) {
     try {
         await client.connect();
@@ -115,9 +108,7 @@ export async function GetPokemonFromApi() {
     }
 }
 
-  
-
-//Extra functie voor pokemon battle 
+// Extra functie voor whosthatpokemon
 export function coinFlip() : number {
     // Generate a random number (0 or 1)
     const randomNumber = Math.floor(Math.random() * 2);

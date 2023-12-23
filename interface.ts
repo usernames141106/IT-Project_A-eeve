@@ -1,25 +1,25 @@
 import { ObjectId } from "mongodb"
 
-export interface IPokemon{
+export interface IPokemon {
     id: number,
     name: string,
     image: string,
     height: number,
     weight: number,
     maxHP: number,
-    attack:number,
-    defence:number,
-    wins:number,
-    losses:number,
-    captureDate:Date | null
+    attack: number,
+    defence: number,
+    wins: number,
+    losses: number,
+    captureDate: Date | null
 }
 
-export interface IUser  {
+export interface IUser {
     _id?: ObjectId,
     name: string,
     email: string,
-    salt:string
+    salt: string
     hash: string,
-    pokemons:IPokemon[],
-    currentPokemon?:number
+    pokemons: IPokemon[],
+    currentPokemon?: number
 }
