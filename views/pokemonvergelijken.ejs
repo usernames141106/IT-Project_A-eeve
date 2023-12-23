@@ -16,17 +16,17 @@
 
                         <datalist id="pokemonlist">
                             <% PokemonList.map(x=> {%><option key="index">
-                                    <%= x.name.charAt(0).toUpperCase() + x.name.slice(1) %>
+                                <%= x.name.charAt(0).toUpperCase() + x.name.slice(1) %>
                                 </option>
-                                <%}); %>
+                            <%}); %>
                         </datalist>
 
                         <button id="buttonW" type="submit" class=" btn btn-primary buttonForm1"
                             formaction="/pokemonvergelijken" value="button1"><svg xmlns="http://www.w3.org/2000/svg"
-                                width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                <path
-                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                            </svg></button>
+                            width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                            </svg>
+                        </button>
 
                     </div>
 
@@ -75,23 +75,19 @@
 
                         <datalist id="pokemonlist">
                             <% PokemonList.map(x=> {%><option key="index">
-                                    <%= x.name.charAt(0).toUpperCase() + x.name.slice(1) %>
+                                <%= x.name.charAt(0).toUpperCase() + x.name.slice(1) %>
                                 </option>
-                                <%}); %>
+                            <%}); %>
                         </datalist>
-
 
                         <button id="buttonW" type="submit" class=" btn btn-primary buttonForm2"
                             formaction="/pokemonvergelijken" value="button2"><svg xmlns="http://www.w3.org/2000/svg"
-                                width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                <path
-                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                            </svg></button>
-
-
+                            width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                            </svg>
+                        </button>
 
                     </div>
-
 
                     <a href="<%= pokemn2 ? `/pokemonCatch?id=${pokemn2.id}` : " #" %>" class="h-50 d-flex
                         justify-content-center "><img src="<%= pokemn2 ? pokemn2.image : " /images/empty.png" %>"
@@ -131,4 +127,4 @@
     </main>
 
     <%- include("partials/aside",{myPokemonPagina: false}); %>
-        <%- include("partials/footer"); %>
+    <%- include("partials/footer"); %>

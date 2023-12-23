@@ -4,7 +4,6 @@
         <div class="col-10 d-flex flex-wrap justify-content-around ">
             <div class="col-12 col-sm-12 col-md-12 col-xl-12">
                 <h1 class="text-center p-0">Mijn Collectie</h1>
-
             </div>
             <% if(viewAllPokemon) {
                 PokemonList.map(pokemon => { %>
@@ -14,12 +13,9 @@
                 currentUser.pokemons.map(pokemon => { %>
                     <%- include("partials/myPokemon",{Pokemon:pokemon}) %>
                 <%})
-           } %> 
+            } %> 
         </div>
-
     </main>
 
-
-
-    <%- include("partials/aside",{myPokemonPagina: true}); %>
-        <%- include("partials/footer"); %>
+<%- include("partials/aside",{myPokemonPagina: true}); %>
+<%- include("partials/footer"); %>

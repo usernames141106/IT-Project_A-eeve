@@ -122,7 +122,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
     if (currentPok != undefined && currentUser != undefined) {
         ownPokemon = currentUser?.pokemons[currentPok];
     }
-    
+
     const enemyPokemonName: String | undefined = req.body.btnFight;
     let enemyPokemon: IPokemon | undefined = PokemonList.find(x => x.name == enemyPokemonName);
     let enemyPokemonID = enemyPokemon?.id;

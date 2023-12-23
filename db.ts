@@ -1,11 +1,11 @@
-import { IPokemon, IUser} from "./interface";
+import { IPokemon, IUser } from "./interface";
 import { MongoClient, Collection } from "mongodb";
 import crypto from "node:crypto";
 
 const uri = "mongodb+srv://berrietalboom:webontwikkeling@cluster0.1xbqwl8.mongodb.net/?retryWrites=true&w=majority"
 const client = new MongoClient(uri);
 
-export let PokemonList: IPokemon[] = []; // variabele voor pokemons van de API
+export let PokemonList: IPokemon[] = []; // variable for Pokémons from the API
 
 async function getUserCollection(): Promise<Collection> {
     return await client.db("itProject").collection('Players');
@@ -16,9 +16,8 @@ export async function RegisterUserInDB(email: string, password: string) {
         const indexOfAtSymbol = email.indexOf("@");
         let username = email.substring(0, indexOfAtSymbol);
 
-        const salt:string = crypto.randomBytes(16).toString('hex');
-        const hash:string = crypto.pbkdf2Sync(password, salt,
-        1000, 64, `sha512`).toString(`hex`);
+        const salt: string = crypto.randomBytes(16).toString('hex');
+        const hash: string = crypto.pbkdf2Sync(password, salt, 1000, 64, `sha512`).toString(`hex`);
 
         await client.connect();
         const newUser: IUser = {
@@ -31,8 +30,8 @@ export async function RegisterUserInDB(email: string, password: string) {
         }
 
         const collection: Collection = await getUserCollection();
-        const existingUser = await collection.findOne({email: email});
-        if(!(existingUser)) { // Zorgt ervoor dat er geen nieuwe user gemaakt word met een bestaande e-mail
+        const existingUser = await collection.findOne({ email: email });
+        if (!(existingUser)) { // Ensures that no new user is created with an existing email
             await collection.insertOne(newUser);
         }
     }
@@ -56,11 +55,11 @@ export async function LoadUserFromMongoDB(email: string, password: string): Prom
     }
     finally {
         await client.close();
-        if(outputUser != null) {
+        if (outputUser != null) {
             const hash: string = crypto.pbkdf2Sync(password,
-            outputUser.salt, 1000, 64, `sha512`).toString(`hex`);
-            if(outputUser.hash == hash) {
-                if((!(outputUser.currentPokemon) && outputUser.currentPokemon !== 0) || outputUser.currentPokemon === -1) {
+                outputUser.salt, 1000, 64, `sha512`).toString(`hex`);
+            if (outputUser.hash == hash) {
+                if ((!(outputUser.currentPokemon) && outputUser.currentPokemon !== 0) || outputUser.currentPokemon === -1) {
                     outputUser.currentPokemon = undefined;
                 }
                 return outputUser;
@@ -108,10 +107,8 @@ export async function GetPokemonFromApi() {
     }
 }
 
-// Extra functie voor whosthatpokemon
-export function coinFlip() : number {
-    // Generate a random number (0 or 1)
+// Funtion for whosthatpokemon
+export function coinFlip(): number {
     const randomNumber = Math.floor(Math.random() * 2);
-   
     return randomNumber;
 }

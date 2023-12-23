@@ -1,3 +1,5 @@
+// This document can be used to verify the evolution paths for Pokémon
+
 [
   [1, 2, 3],      // Bulbasaur, Ivysaur, Venusaur
   [4, 5, 6],      // Charmander, Charmeleon, Charizard

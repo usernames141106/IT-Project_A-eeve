@@ -84,14 +84,13 @@
                             value="<%= pokemon1 ? pokemon1.toUpperCase(): "" %>" />
                           <datalist id="pokemonlist">
                             <% PokemonList.map(x=> {%><option key="index">
-                              <%= x.name.charAt(0).toUpperCase() + x.name.slice(1) %></option>
+                            <%= x.name.charAt(0).toUpperCase() + x.name.slice(1) %></option>
                             <%}); %>
                           </datalist>
                           <button id="buttonW" type="submit" method="post" class="btn btn-primary buttonForm1"
                             formaction="/pokemonBattle"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                               fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                              <path
-                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" /></svg>
+                              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" /></svg>
                           </button>
                         </form>
                         <% if (req.path !== '/battle' || message !== undefined) { %>
@@ -139,6 +138,6 @@
           <%- include("partials/footer"); %>
 
 
-            <!-- BRONNEN -->
-            <!-- Fightbutton afbeelding -->
-            <!-- https://assetsio.reedpopcdn.com/pokemon-go-type-chart-strength-weakness-resistance-super-effective.jpg?width=690&quality=80&format=jpg&auto=webp -->
+<!-- BRONNEN -->
+<!-- Fightbutton afbeelding -->
+<!-- https://assetsio.reedpopcdn.com/pokemon-go-type-chart-strength-weakness-resistance-super-effective.jpg?width=690&quality=80&format=jpg&auto=webp -->

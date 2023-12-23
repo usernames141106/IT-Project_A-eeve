@@ -1,8 +1,7 @@
 <% const ownedPokemon = currentUser.pokemons.find(x => x.id == Pokemon.id) %>
 <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 mt-5">
-    <a href="/pokemonDetail?id=<%= Pokemon.id %>"><img id="myPokemonList"
-            src="<%= Pokemon.image %>"
-            , class="<%= ownedPokemon ? "" : "opacity-50" %>" alt="Pokemon Image"></a>
+    <a href="/pokemonDetail?id=<%= Pokemon.id %>"><img id="myPokemonList" src="<%= Pokemon.image %>",
+        class="<%= ownedPokemon ? "" : "opacity-50" %>" alt="Pokemon Image"></a>
 
     <table id="pokemonDetailTables" class="table table-hover">
         <tbody>
@@ -12,8 +11,7 @@
             </tr>
             <tr>
                 <th>Naam</th>
-                <td class="d-flex d-flex justify-content-between"><%= Pokemon.name ? Pokemon.name : "???" %>
-                </td>
+                <td class="d-flex d-flex justify-content-between"><%= Pokemon.name ? Pokemon.name : "???" %></td>
             </tr>
             <% if(ownedPokemon) { %>
             <tr>
@@ -22,8 +20,7 @@
                 <a href="/mypokemon?owned=<%= viewAllPokemon %>&newCurrentPokemon=<%= currentUser.pokemons[currentUser.currentPokemon]?.id === Pokemon.id ? "undefined" : Pokemon.id %>">
                     <input id="myPokemonSelection" class="form-check-input" type="checkbox" <%= 
                         currentUser && currentUser.currentPokemon !== undefined && ownedPokemon && ownedPokemon.id !== undefined && 
-                         ownedPokemon.id === currentUser.pokemons[currentUser.currentPokemon]?.id ? "checked" : ""
-                %> disabled/>
+                        ownedPokemon.id === currentUser.pokemons[currentUser.currentPokemon]?.id ? "checked" : "" %> disabled/>
                 </a>
                 <% } %>
                 </td>
