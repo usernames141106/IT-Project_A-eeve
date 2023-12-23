@@ -60,7 +60,7 @@ export async function LoadUserFromMongoDB(email: string, password: string): Prom
             const hash: string = crypto.pbkdf2Sync(password,
             outputUser.salt, 1000, 64, `sha512`).toString(`hex`);
             if(outputUser.hash == hash) {
-                if(outputUser.currentPokemon === null) {
+                if((!(outputUser.currentPokemon) && outputUser.currentPokemon !== 0) || outputUser.currentPokemon === -1) {
                     outputUser.currentPokemon = undefined;
                 }
                 return outputUser;
