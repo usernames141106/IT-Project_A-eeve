@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (successMessage) {
         successMessage.classList.add('hidden');
       }
-    }, 1500);
+    }, 2000);
   });
 
   document.addEventListener('DOMContentLoaded', function() {
