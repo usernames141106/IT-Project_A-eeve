@@ -288,6 +288,11 @@ label {
   transform: none;
 }
 
+#releaseCard {
+  transform: none;
+  max-width: 450px;
+}
+
 /*---------- compare Pokémon ----------*/
 #buttonW {
   background-color: var(--main-color);

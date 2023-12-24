@@ -69,7 +69,7 @@ app.get("/pokemonBattle", isAuthenticated, (req, res) => {
             pokemon1: undefined,
             currentUser: req.session.currentUser,
             req: req,
-            message: "Je hebt nog geen huidige Pokémon."
+            message: "Je moet een huidige Pokémon hebben om te kunnen vechten."
         });
     }
     else {
@@ -81,7 +81,6 @@ app.get("/pokemonBattle", isAuthenticated, (req, res) => {
             message: message
         });
     }
-
 });
 
 app.post("/pokemonBattle", isAuthenticated, (req, res) => {
@@ -118,7 +117,6 @@ app.post("/battle", isAuthenticated, (req, res) => {
     let ownPokemon: IPokemon | undefined;
 
     // Initiate own Pokémon stats and enemy Pokémon stats
-    const ownPokemonId = req.body.ownPokemon;
     if (currentPok != undefined && currentUser != undefined) {
         ownPokemon = currentUser?.pokemons[currentPok];
     }
