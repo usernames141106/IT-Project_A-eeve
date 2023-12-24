@@ -348,7 +348,8 @@ app.get("/pokemonRelease", isAuthenticated, (req, res) => {
 
 app.post("/pokemonCatchSuccess", isAuthenticated, async (req, res) => {
     const pokemonId: Number = Number(req.body.pokemon);
-    let pokemon: IPokemon | undefined = PokemonList.find(x => x.id == pokemonId);
+    let pokemon: IPokemon | undefined = JSON.parse(JSON.stringify(PokemonList)).find((x:IPokemon) => x.id == pokemonId); 
+    // json parse is gebruikt om de references te verwijderen, zodat PokemonList niet kan aangepast worden. Dit zorgt er dus voor dat de orginele naam van de Pokemon ongewijzigd blijft. 
     const previouslyOwnedPokemonOfThisType: IPokemon | undefined = req.session.currentUser?.pokemons.find(x => x.id == pokemonId);
     if (pokemon && req.session.currentUser && previouslyOwnedPokemonOfThisType === undefined) {
         pokemon.name = req.query.useDefault == "true" ? pokemon.name : req.body.name;

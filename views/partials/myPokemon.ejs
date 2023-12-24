@@ -11,9 +11,17 @@
             </tr>
             <tr>
                 <th>Naam</th>
-                <td class="d-flex d-flex justify-content-between"><%= Pokemon.name ? Pokemon.name : "???" %></td>
+                <td class="d-flex d-flex justify-content-between"><%= PokemonList[Pokemon.id - 1].name ? PokemonList[Pokemon.id - 1].name : "???" %>
+                </td>
             </tr>
-            <% if(ownedPokemon) { %>
+            <% if(ownedPokemon) { 
+                if(ownedPokemon.name != PokemonList[Pokemon.id - 1].name && ownedPokemon.name) { %>
+                <tr>
+                    <th>Bijnaam</th>
+                    <td class="d-flex d-flex justify-content-between"><%= ownedPokemon.name %>
+                    </td>
+                </tr>
+                <%}%>
             <tr>
                 <td>Kies als huidige Pokémon</td>
                 <td>
