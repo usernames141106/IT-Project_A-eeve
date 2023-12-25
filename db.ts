@@ -107,7 +107,7 @@ export async function GetPokemonFromApi() {
     }
 }
 
-// Funtion for whosthatpokemon
+// funtion for whosthatpokemon
 export function coinFlip(): number {
     const randomNumber = Math.floor(Math.random() * 2);
     return randomNumber;

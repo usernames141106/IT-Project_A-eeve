@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Find the message elements
+    // find the message elements
     const errorMessage = document.getElementById('ErrorWTP');
     const successMessage = document.getElementById('SuccessWTP');
-    // Hide messages after 2 seconds
+    // hide messages after 2 seconds
     setTimeout(function() {
 
       if (errorMessage) {
@@ -29,17 +29,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('form1');
     const dataList = document.getElementById('pokemonlist');
 
-    // Store the original options
+    // store the original options
     const originalOptions = Array.from(dataList.options);
 
-    // Add an input event listener to the search input
+    // add an input event listener to the search input
     searchInput.addEventListener('input', function() {
       const inputValue = searchInput.value.toLowerCase();
 
-      // Clear existing options
+      // clear existing options
       dataList.innerHTML = '';
 
-      // Filter and add options based on the input value
+      // filter and add options based on the input value
       const filteredOptions = originalOptions.filter(option => option.value.toLowerCase().startsWith(inputValue));
       filteredOptions.forEach(option => dataList.appendChild(option));
     });

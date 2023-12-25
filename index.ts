@@ -87,7 +87,7 @@ app.post("/pokemonBattle", isAuthenticated, (req, res) => {
     let message: String | undefined;
     req.session.save(async (err) => {
         if (err) {
-            // Handle the error if session save fails
+            // handle the error if session save fails
             console.error(err);
             return res.render("pokemonBattle", {
                 PokemonList: PokemonList,
@@ -98,7 +98,7 @@ app.post("/pokemonBattle", isAuthenticated, (req, res) => {
             });
         }
 
-        // Render the same route after the session has been saved
+        // render the same route after the session has been saved
         res.render("pokemonBattle", {
             PokemonList: PokemonList,
             currentUser: req.session.currentUser,
@@ -116,7 +116,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
     let winBattle: Boolean = false;
     let ownPokemon: IPokemon | undefined;
 
-    // Initiate own Pokémon stats and enemy Pokémon stats
+    // initiate own Pokémon stats and enemy Pokémon stats
     if (currentPok != undefined && currentUser != undefined) {
         ownPokemon = currentUser?.pokemons[currentPok];
     }
@@ -128,9 +128,9 @@ app.post("/battle", isAuthenticated, (req, res) => {
     if (enemyPokemon && ownPokemon) {
         let ownPokemonHP = ownPokemon.maxHP;
         let enemyPokemonHP = enemyPokemon.maxHP;
-        // If one Pokémon can't damage the other (attack <= defence), the battle is automaticly decided
+        // if one Pokémon can't damage the other (attack <= defence), the battle is automaticly decided
         if (ownPokemon.attack <= enemyPokemon.defence || enemyPokemon.attack <= ownPokemon.defence) {
-            // If both Pokémon can't damage each other, return with a message
+            // if both Pokémon can't damage each other, return with a message
             if (ownPokemon.attack <= enemyPokemon.defence && enemyPokemon.attack <= ownPokemon.defence) {
                 return res.render("pokemonBattle", {
                     PokemonList: PokemonList,
@@ -147,9 +147,9 @@ app.post("/battle", isAuthenticated, (req, res) => {
             }
         } else {
             while (ownPokemonHP > 0 && enemyPokemonHP > 0) {
-                // Own Pokémon attacks
+                // own Pokémon attacks
                 enemyPokemonHP -= (ownPokemon.attack - enemyPokemon.defence)
-                // Enemy Pokémon attacks
+                // enemy Pokémon attacks
                 ownPokemonHP -= (enemyPokemon.attack - ownPokemon.defence)
             }
             if (ownPokemonHP <= 0) {
@@ -178,7 +178,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
             message: undefined
         });
     } else if (ownPokemon == undefined) {
-        // Return an error when the enemy Pokémon is undefined
+        // return an error when the enemy Pokémon is undefined
         return res.render("pokemonBattle", {
             PokemonList: PokemonList,
             currentUser: req.session.currentUser,
@@ -188,7 +188,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
             message: "Je moet een huidige Pokémon hebben om te kunnen vechten."
         });
     } else if (enemyPokemon == undefined) {
-        // Return an error when the user has no Pokémon
+        // return an error when the user has no Pokémon
         return res.render("pokemonBattle", {
             PokemonList: PokemonList,
             currentUser: req.session.currentUser,
@@ -201,7 +201,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
 
     req.session.save(async (err) => {
         if (err) {
-            // Handle the error if session save fails
+            // handle the error if session save fails
             console.error(err);
             return res.render("pokemonBattle", {
                 PokemonList: PokemonList,
@@ -213,7 +213,7 @@ app.post("/battle", isAuthenticated, (req, res) => {
             });
         }
 
-        // If al previous paths fail, return to pokemonBattle with an error message
+        // if al previous paths fail, return to pokemonBattle with an error message
         res.render("pokemonBattle", {
             PokemonList: PokemonList,
             currentUser: req.session.currentUser,
@@ -252,13 +252,13 @@ app.get("/whosthatpokemon", isAuthenticated, (req, res) => {
 });
 
 app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
-    // Get the correct Pokémon name from the form
+    // get the correct Pokémon name from the form
     const correctPokemonName: string | undefined = req.body.correctPokemon.toLowerCase();
-    // Get the guessed Pokémon name from the form
+    // get the guessed Pokémon name from the form
     const guessedPokemonName: string | undefined = req.body.pokeGuess.toLowerCase();
-    // Check if the guessed Pokémon is correct
+    // check if the guessed Pokémon is correct
     const isCorrectGuess: Boolean = (correctPokemonName === guessedPokemonName);
-    // Check if user has current Pokémon 
+    // check if user has current Pokémon 
     const haspokemonselected: Boolean = !(req.session.currentUser?.currentPokemon === undefined);
 
     let currentpok: number | undefined = req.session.currentUser?.currentPokemon
@@ -349,7 +349,8 @@ app.get("/pokemonRelease", isAuthenticated, (req, res) => {
 app.post("/pokemonCatchSuccess", isAuthenticated, async (req, res) => {
     const pokemonId: Number = Number(req.body.pokemon);
     let pokemon: IPokemon | undefined = JSON.parse(JSON.stringify(PokemonList)).find((x:IPokemon) => x.id == pokemonId); 
-    // json parse is gebruikt om de references te verwijderen, zodat PokemonList niet kan aangepast worden. Dit zorgt er dus voor dat de orginele naam van de Pokemon ongewijzigd blijft. 
+    // json parse is used to delete the references so that PokemonList can't be altered
+    // this way, the original name of the Pokemon stays the same
     const previouslyOwnedPokemonOfThisType: IPokemon | undefined = req.session.currentUser?.pokemons.find(x => x.id == pokemonId);
     if (pokemon && req.session.currentUser && previouslyOwnedPokemonOfThisType === undefined) {
         pokemon.name = req.query.useDefault == "true" ? pokemon.name : req.body.name;
@@ -436,18 +437,17 @@ app.get("/pokemonvergelijken", isAuthenticated, (req, res) => {
 app.post("/pokemonvergelijken", isAuthenticated, (req, res) => {
     req.session.save(async (err) => {
         if (err) {
-            // Handle the error if session save fails
+            // handle the error if session save fails
             console.error(err);
             return res.render("pokemonvergelijken", {
                 PokemonList: PokemonList,
                 currentUser: req.session.currentUser,
                 pokemon1: req.body.name1.toLowerCase(),
                 pokemon2: req.body.name2.toLowerCase(),
-                errorMessage: "Er is iets fout gegaan, probeer het opnieuw."
             });
         }
 
-        // Render the same route after the session has been saved
+        // render the same route after the session has been saved
         res.render("pokemonvergelijken", {
             PokemonList: PokemonList,
             currentUser: req.session.currentUser,
@@ -460,7 +460,7 @@ app.post("/pokemonvergelijken", isAuthenticated, (req, res) => {
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
-    // Check if user already exists
+    // check if user already exists
     let user: IUser | null = await LoadUserFromMongoDB(email, password);
     if (user != null) {
         const userS: IUser = user;
@@ -507,14 +507,14 @@ app.post("/register", async (req, res) => {
 
 app.post("/logout", async (req, res) => {
     if (req.session.currentUser) {
-        // Update user in MongoDB and destroy session
+        // update user in MongoDB and destroy session
         await UpdateUserInDB(req.session.currentUser);
         req.session.destroy(err => {
             console.log(err);
             res.redirect("back");
         });
     } else {
-        // Redirect to "back" if no currentUser in session
+        // redirect to "back" if no currentUser in session
         res.redirect("back");
     }
 });
