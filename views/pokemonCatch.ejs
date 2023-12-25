@@ -6,7 +6,7 @@
       <% if(currentUser.pokemons.find(x => x.id == Pokemon.id)) { %>
           <a href="/pokemonRelease?id=<%= Pokemon.id %>"><img src="/images/pokeBallGreen.png" width="150px" alt="Pokebal"></a>
           <br>
-          <p>Je kan deze Pokémon vrijlaten door op de groene bal te klikken.</p>
+          <p>Je kan deze Pokémon vrijlaten door op de groene Pokéball te klikken.</p>
         <% } else { %>
           <a href="/pokemonCatch?attempt=<%= attempt + 1 %>&id=<%= Pokemon.id %>"><img src="/images/pokeBall.png" width="150px" alt="Pokebal"></a>
           <br>
