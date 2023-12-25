@@ -29,7 +29,7 @@
     <% if(myPokemonPagina) {%>
     <div class="align-items-start mt-4">
         <label for="">Bekijk alle pokémon</label><br/>
-        <a href="/mypokemon?owned=<%= !(viewAllPokemon) %>"><input id="myPokemonSelection" class="form-check-input" type="checkbox" name="owned" <%= viewAllPokemon ? "checked" : "" %> disabled/></a>
+        <a href="/mypokemon?owned=<%= !(viewAllPokemon) %>"><input id="myPokemonSelection" class="form-check-input bg-light" type="checkbox" name="owned" <%= viewAllPokemon ? "checked" : "" %> disabled/></a>
     </div>
    <% } %>
     </aside>

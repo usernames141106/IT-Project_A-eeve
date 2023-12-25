@@ -112,6 +112,10 @@ caption {
   background-color: var(--main-color);
 }
 
+input[type="checkbox"]:checked {
+  background-color: black!important;
+}
+
 /*..........Header.............*/
 
 .eeveeLogo {

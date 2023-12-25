@@ -348,7 +348,7 @@ app.get("/pokemonRelease", isAuthenticated, (req, res) => {
 
 app.post("/pokemonCatchSuccess", isAuthenticated, async (req, res) => {
     const pokemonId: Number = Number(req.body.pokemon);
-    let pokemon: IPokemon | undefined = JSON.parse(JSON.stringify(PokemonList)).find((x:IPokemon) => x.id == pokemonId); 
+    let pokemon: IPokemon | undefined = JSON.parse(JSON.stringify(PokemonList)).find((x: IPokemon) => x.id == pokemonId);
     // json parse is used to delete the references so that PokemonList can't be altered
     // this way, the original name of the Pokemon stays the same
     const previouslyOwnedPokemonOfThisType: IPokemon | undefined = req.session.currentUser?.pokemons.find(x => x.id == pokemonId);
@@ -371,12 +371,14 @@ app.get("/pokemonCatch", isAuthenticated, (req, res) => {
             res.redirect("/mypokemon");
         }
         const currentPokemonAttack: number = req.session.currentUser.currentPokemon ? req.session.currentUser.pokemons[req.session.currentUser.currentPokemon].attack : 0;
-        const chance: number = ((100 - pokemon.defence) + currentPokemonAttack) / 100;
-        if (Math.random() <= chance) {
-            res.render("pokemonCatchSuccess", {
-                Pokemon: pokemon,
-                currentUser: req.session.currentUser
-            });
+        if (currentPokemonAttack) {
+            const chance: number = ((100 - pokemon.defence) + currentPokemonAttack) / 100;
+            if (Math.random() <= chance) {
+                res.render("pokemonCatchSuccess", {
+                    Pokemon: pokemon,
+                    currentUser: req.session.currentUser
+                });
+            }
         }
         else {
             res.render("pokemonCatch", {
