@@ -1,8 +1,8 @@
 <%- include("partials/header",{title: "Home" , secondRow: true }); %>
     <% const ownedPokemon = currentUser.pokemons.find(x=> x.id == Pokemon.id) %>
-        <main class="col-12 col-sm-12 col-md-12 col-xl-9 d-flex d-flex justify-content-center">
+        <main class="col-12 col-sm-12 col-md-12 col-xl-9 d-flex justify-content-center">
 
-            <div class="row d-flex d-flex justify-content-center">
+            <div class="row d-flex justify-content-center">
                 <div class="col-12 col-sm-12 d-flex flex-column">
                     <h1 class="text-center pt-3">Pokémon Details</h1>
                 </div>
@@ -10,129 +10,121 @@
                     <figure class="">
                         <img src="<%= Pokemon.image %>" class="" alt="Pokemon Image">
                     </figure>
-                    <table id="pokemonDetailTables" class="table caption-top table-sm table table-hover">
+                    <table id="pokemonDetailTables" class="table caption-top table-sm table-hover">
                         <tbody>
                             <tr>
-                                <th id="asideTH" class="ps-4">Nummer:</th>
+                                <th id="asideTH" class="ps-4">Nummer</th>
                                 <td>
                                     <%= Pokemon.id %>
                                 </td>
                             </tr>
                             <tr>
-                                <th id="asideTH" class="ps-4">Naam:</th>
+                                <th id="asideTH" class="ps-4">Naam</th>
                                 <td>
                                     <%= Pokemon.name %>
                                 </td>
                             </tr>
                             <% if(ownedPokemon !== undefined) { %>
                                 <tr>
-                                    <th id="asideTH" class="ps-4">Bijnaam:</th>
+                                    <th id="asideTH" class="ps-4">Bijnaam</th>
                                     <td>
-                                        <form method="post" action="/rename" style="display: flex; flex-direction: row;">
+                                        <form method="post" action="/rename" id="nickname">
                                             <input type="hidden" name="pokemonId" value="<%= ownedPokemon.id %>">
                                             <input type="text" class="form-control" name="nickname" value="<%= ownedPokemon.name %>">
                                             <button type="submit" class="ms-3 me-3"><img src="/bootstrapIcons/pen.svg" alt="Pen" width="20" height="20"></button>
                                         </form>
                                     </td>
                                 </tr>
-                                <%}%>
-
+                            <% } %>
                         </tbody>
                     </table>
-
                 </div>
+
                 <div class="col-12 col-sm-12 col-md-6 col-xl-5 mt-5">
-                    <div class="col-12 d-flex d-flex flex-column align-items-left">
-                        <table id="pokemonDetailTables" class="table caption-top mx-auto table-sm table table-hover">
+                    <div class="col-12 d-flex flex-column align-items-left">
+                        <table id="pokemonDetailTables" class="table caption-top mx-auto table-sm table-hover">
                             <caption class="text-center">
-                                <h3 class="h1 mt-5 p-2">Statistieken</h3>
+                                <h1 class="mt-5 p-2">Statistieken</h1>
                             </caption>
                             <tbody>
                                 <tr>
-                                    <th id="asideTH" class="ps-4" style="text-align: start;">HP</th>
+                                    <th id="asideTH" class="ps-4 text-start">HP</th>
                                     <td>
                                         <%= ownedPokemon ? ownedPokemon.maxHP : Pokemon.maxHP %>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th id="asideTH" class="ps-4" style="text-align: start;">Aanval</th>
+                                    <th id="asideTH" class="ps-4 text-start">Aanval</th>
                                     <td>
                                         <%= ownedPokemon ? ownedPokemon.attack : Pokemon.attack %>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th id="asideTH" class="ps-4" style="text-align: start;">Verdediging</th>
+                                    <th id="asideTH" class="ps-4 text-start">Verdediging</th>
                                     <td>
                                         <%= ownedPokemon ? ownedPokemon.defence : Pokemon.defence %>
                                     </td>
                                 </tr>
                                 <% if(ownedPokemon) { %>
-                                <tr>
-                                    <th id="asideTH" class="ps-4" style="text-align: start;">Datum Vangst</th>
-                                    <td>
-                                        <%= ownedPokemon.captureDate !== null ? ownedPokemon.captureDate.toString().replace("Z"," ").replace("T", " ") : "???" %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th id="asideTH" class="ps-4" style="text-align: start;">Gewonnen</th>
-                                    <td>
-                                        <%= ownedPokemon.wins %>
-                                            <a href="/alterWinsAndLosses?id=<%= ownedPokemon.id %>&wins=true&add=true" class="ms-2">
-                                                <img src="/images/arrow.png" height="20px"
-                                                    style="background-color: brown;" class="rounded-circle">
-                                            </a>
+                                    <tr>
+                                        <th id="asideTH" class="ps-4 text-start">Datum Vangst</th>
+                                        <td>
+                                            <%= ownedPokemon.captureDate !== null ? ownedPokemon.captureDate.toString().replace("Z"," ").replace("T", " ") : "???" %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th id="asideTH" class="ps-4 text-start">Gewonnen</th>
+                                        <td>
+                                            <%= ownedPokemon.wins %>
+                                                <a href="/alterWinsAndLosses?id=<%= ownedPokemon.id %>&wins=true&add=true" class="ms-2">
+                                                    <img src="/images/arrow.png" height="20px"
+                                                        style="background-color: brown;" class="rounded-circle">
+                                                </a>
 
-                                            <a href="/alterWinsAndLosses?id=<%= ownedPokemon.id %>&wins=true&add=false" class="ms-2">
-                                                <img src="/images/arrow.png" height="20px"
-                                                    style="background-color: brown;" class="rounded-circle"
-                                                    id="arrowDown">
-                                            </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th id="asideTH" class="ps-4" style="text-align: start;">Verloren</th>
-                                    <td>
-                                        <%= ownedPokemon.losses %>
-                                            <a href="/alterWinsAndLosses?id=<%= ownedPokemon.id %>&wins=false&add=true" class="ms-2">
-                                                <img src="/images/arrow.png" height="20px"
-                                                    style="background-color: brown;" class="rounded-circle">
-                                            </a>
+                                                <a href="/alterWinsAndLosses?id=<%= ownedPokemon.id %>&wins=true&add=false" class="ms-2">
+                                                    <img src="/images/arrow.png" height="20px"
+                                                        style="background-color: brown;" class="rounded-circle" id="arrowDown">
+                                                </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th id="asideTH" class="ps-4 text-start">Verloren</th>
+                                        <td>
+                                            <%= ownedPokemon.losses %>
+                                                <a href="/alterWinsAndLosses?id=<%= ownedPokemon.id %>&wins=false&add=true" class="ms-2">
+                                                    <img src="/images/arrow.png" height="20px"
+                                                        style="background-color: brown;" class="rounded-circle">
+                                                </a>
 
-                                            <a href="/alterWinsAndLosses?id=<%= ownedPokemon.id %>&wins=false&add=false" class="ms-2">
-                                                <img src="/images/arrow.png" height="20px"
-                                                    style="background-color: brown;" class="rounded-circle"
-                                                    id="arrowDown">
-                                            </a>
-                                    </td>
-                                </tr>
-                                <%}%>
+                                                <a href="/alterWinsAndLosses?id=<%= ownedPokemon.id %>&wins=false&add=false" class="ms-2">
+                                                    <img src="/images/arrow.png" height="20px"
+                                                        style="background-color: brown;" class="rounded-circle" id="arrowDown">
+                                                </a>
+                                        </td>
+                                    </tr>
+                                <% } %>
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-12 d-flex flex-column d-flex align-items-left mt-5 pt-5">
+
+                    <div class="col-12 d-flex flex-column align-items-left mt-5 pt-5">
                         <div>
-                            <h1 class="h1 text-center">Evolutiepad</h1>
+                            <h1 class="text-center">Evolutiepad</h1>
                             <div class="d-flex justify-content-center mt-4">
                                 <% evolutionPath.map((x,i) => { %>
                                 <a href="/pokemonDetail?id=<%= x.id %>">
-                                <img src="<%= x.image %>"
-                                    width="150px">
+                                    <img src="<%= x.image %>" width="150px">
                                 </a>
                                     <% if(evolutionPath.length - 1 > i && ![133,134,135,136].includes(x.id)) { %>
-                                <img src="/images/arrow.png" width="30px" height="30px" class="align-self-center"
-                                    id="arrowRight">
-                                <% }
-                                 }) %>
+                                        <img src="/images/arrow.png" width="30px" height="30px" class="align-self-center" id="arrowRight">
+                                    <% }}) %>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-
-
-
         </main>
 
         <%- include("partials/aside",{myPokemonPagina: false}); %>
-            <%- include("partials/footer"); %>
+        <%- include("partials/footer"); %>

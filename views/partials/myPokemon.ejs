@@ -11,16 +11,14 @@
             </tr>
             <tr>
                 <th>Naam</th>
-                <td class="d-flex d-flex justify-content-between"><%= PokemonList[Pokemon.id - 1].name ? PokemonList[Pokemon.id - 1].name : "???" %>
-                </td>
+                <td class="d-flex justify-content-between"><%= PokemonList[Pokemon.id - 1].name ? PokemonList[Pokemon.id - 1].name : "???" %></td>
             </tr>
             <% if(ownedPokemon) { 
                 if(ownedPokemon.name != PokemonList[Pokemon.id - 1].name && ownedPokemon.name) { %>
-                <tr>
-                    <th>Bijnaam</th>
-                    <td class="d-flex d-flex justify-content-between"><%= ownedPokemon.name %>
-                    </td>
-                </tr>
+                    <tr>
+                        <th>Bijnaam</th>
+                        <td class="d-flex justify-content-between"><%= ownedPokemon.name %></td>
+                    </tr>
                 <%}%>
             <tr>
                 <td>Kies als huidige Pokémon</td>
@@ -30,7 +28,7 @@
                         currentUser && currentUser.currentPokemon !== undefined && ownedPokemon && ownedPokemon.id !== undefined && 
                         ownedPokemon.id === currentUser.pokemons[currentUser.currentPokemon]?.id ? "checked" : "" %> disabled/>
                 </a>
-                <% } %>
+            <% } %>
                 </td>
             </tr>
         </tbody>

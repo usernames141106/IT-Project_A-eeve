@@ -31,12 +31,12 @@
                     </div>
 
                     <% let pokemn1=PokemonList.find(x=> x.name.toLowerCase() == pokemon1) %>
-                        <% let pokemn2=PokemonList.find(x=> x.name.toLowerCase() == pokemon2) %>
+                    <% let pokemn2=PokemonList.find(x=> x.name.toLowerCase() == pokemon2) %>
                             <a href="<%= pokemn1 ? `/pokemonCatch?id=${pokemn1.id}` : " #" %>" class="h-50 d-flex
                                 justify-content-center"><img src="<%= pokemn1 ? pokemn1.image : " /images/empty.png" %>"
                                 class="img-fluid mx-auto rounded" alt=""></a>
 
-                            <table class="table caption-top mx-auto table table-hover">
+                            <table class="table caption-top mx-auto table-hover">
                                 <caption>
                                     <h1>Statistieken</h1>
                                 </caption>
@@ -65,6 +65,7 @@
                                 </tbody>
                             </table>
                 </article>
+
                 <article class="col-md-9 col-lg-4 col-sm-7 d-flex flex-column">
 
                     <div class="d-flex gap-1">
@@ -93,32 +94,32 @@
                         justify-content-center "><img src="<%= pokemn2 ? pokemn2.image : " /images/empty.png" %>"
                         class="img-fluid mx-auto rounded" alt=""></a>
 
-                    <table class="table caption-top mx-auto table table-hover">
+                    <table class="table caption-top mx-auto table-hover">
                         <caption>
                             <h1>Statistieken</h1>
                         </caption>
                         <tbody>
-                            <tr">
-                                <th style="text-align: start;">HP</th>
+                            <tr>
+                                <th class="text-start">HP</th>
                                 <td
                                     class="<%= (pokemn1 && pokemn2 && pokemn1.maxHP < pokemn2.maxHP) ? 'text-success' : (pokemn1 && pokemn2 && pokemn1.maxHP > pokemn2.maxHP) ? 'text-danger' : '' %>">
                                     <%= (pokemn2 && pokemn2.maxHP !==undefined) ? pokemn2.maxHP : '???' %>
                                 </td>
-                                </tr>
-                                <tr>
-                                    <th style="text-align: start;">Aanval</th>
-                                    <td
-                                        class="<%= (pokemn1 && pokemn2 && pokemn1.attack < pokemn2.attack) ? 'text-success' : (pokemn1 && pokemn2 && pokemn1.attack > pokemn2.attack) ? 'text-danger' : '' %>">
-                                        <%= (pokemn2 && pokemn2.attack !==undefined) ? pokemn2.attack : '???' %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th style="text-align: start;">Verdediging</th>
-                                    <td
-                                        class="<%= (pokemn1 && pokemn2 && pokemn1.defence < pokemn2.defence) ? 'text-success' : (pokemn1 && pokemn2 && pokemn1.defence > pokemn2.defence) ? 'text-danger' : (pokemn1 && pokemn2 && pokemn1.defence === pokemn2.defence) ? 'text-black' : '' %>">
-                                        <%= (pokemn2 && pokemn2.defence !==undefined) ? pokemn2.defence : '???' %>
-                                    </td>
-                                </tr>
+                            </tr>
+                            <tr>
+                                <th class="text-start">Aanval</th>
+                                <td
+                                    class="<%= (pokemn1 && pokemn2 && pokemn1.attack < pokemn2.attack) ? 'text-success' : (pokemn1 && pokemn2 && pokemn1.attack > pokemn2.attack) ? 'text-danger' : '' %>">
+                                    <%= (pokemn2 && pokemn2.attack !==undefined) ? pokemn2.attack : '???' %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-start">Verdediging</th>
+                                <td
+                                    class="<%= (pokemn1 && pokemn2 && pokemn1.defence < pokemn2.defence) ? 'text-success' : (pokemn1 && pokemn2 && pokemn1.defence > pokemn2.defence) ? 'text-danger' : (pokemn1 && pokemn2 && pokemn1.defence === pokemn2.defence) ? 'text-black' : '' %>">
+                                    <%= (pokemn2 && pokemn2.defence !==undefined) ? pokemn2.defence : '???' %>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </article>

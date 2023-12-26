@@ -192,6 +192,11 @@ label {
   font-size: 40px;
 }
 
+#nickname {
+  display: flex;
+  flex-direction: row;
+}
+
 /*---------- Pokemon battle ----------*/
 
 #ownPokemon:hover,
