@@ -359,6 +359,11 @@ label {
   background-color: white !important;
 }
 
+/*-------- Dark Mode ------------*/
+.dark img.icon {
+  filter: invert(100%);
+}
+
 /*---------- Media queries ----------*/
 @media (max-width: 1000px) {
   .homebtn {
