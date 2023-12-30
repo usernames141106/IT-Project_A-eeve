@@ -10,7 +10,7 @@
         <% } else { %>
           <a href="/pokemonCatch?attempt=<%= attempt + 1 %>&id=<%= Pokemon.id %>"><img src="/images/pokeBall.png" width="150px" alt="Pokebal"></a>
           <br>
-          <p>Je hebt nog <%= 3 - attempt %> pogingen over om deze Pokémon te vangen<%= attempt == 0 ? " (Je kan dit proberen door op de rode bal te klikken.)" : "" %>.</p>
+          <p>Je hebt nog <%= 3 - attempt %> pogingen over om deze Pokémon te vangen.<%- attempt == 0 ? " <br> (Je kan dit proberen door op de rode Pokéball te klikken)" : "" %></p>
           <% } %>
     </div>
   </main>

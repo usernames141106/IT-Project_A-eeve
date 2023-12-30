@@ -301,7 +301,11 @@ app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
 app.post("/rename", isAuthenticated, async (req, res) => {
     const targetPokemon: IPokemon | undefined = req.session.currentUser?.pokemons.find(x => x.id == Number(req.body.pokemonId));
     if (targetPokemon && req.session.currentUser) {
-        targetPokemon.name = String(req.body.nickname);
+        if (req.body.nickname.trim() !== undefined) {
+            targetPokemon.name = String(req.body.nickname);
+        } else {
+            targetPokemon.name = String(PokemonList.find(x => x.id == req.body.pokemonId)?.name);
+        }
         await UpdateUserInDB(req.session.currentUser);
     }
     res.redirect(`back`);
@@ -370,7 +374,7 @@ app.get("/pokemonCatch", isAuthenticated, (req, res) => {
         if (attempt >= 3) {
             res.redirect("/mypokemon");
         }
-        const currentPokemonAttack: number = req.session.currentUser.currentPokemon ? req.session.currentUser.pokemons[req.session.currentUser.currentPokemon].attack : 0;
+        const currentPokemonAttack: number | undefined = req.session.currentUser.currentPokemon ? req.session.currentUser.pokemons[req.session.currentUser.currentPokemon].attack : 0;
         if (currentPokemonAttack) {
             const chance: number = ((100 - pokemon.defence) + currentPokemonAttack) / 100;
             if (Math.random() <= chance) {
