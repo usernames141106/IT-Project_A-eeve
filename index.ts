@@ -300,13 +300,14 @@ app.post("/whosthatpokemon", isAuthenticated, async (req, res) => {
 
 app.post("/rename", isAuthenticated, async (req, res) => {
     const targetPokemon: IPokemon | undefined = req.session.currentUser?.pokemons.find(x => x.id == Number(req.body.pokemonId));
-    if (targetPokemon && req.session.currentUser) {
+    const targetPokemonName: string | undefined = targetPokemon?.name;
+    if (targetPokemon?.name.trim() != "" && targetPokemon !== undefined && req.session.currentUser) {
         if (req.body.nickname.trim() !== undefined) {
-            targetPokemon.name = String(req.body.nickname);
-        } else {
-            targetPokemon.name = String(PokemonList.find(x => x.id == req.body.pokemonId)?.name);
+            targetPokemon!.name = String(req.body.nickname);
         }
         await UpdateUserInDB(req.session.currentUser);
+    } else if (targetPokemonName === undefined || targetPokemonName.trim() == "") {
+        targetPokemon!.name = String(PokemonList.find(x => x.id == req.body.pokemonId)?.name);
     }
     res.redirect(`back`);
 });
@@ -424,11 +425,24 @@ app.get("/mypokemon", isAuthenticated, async (req, res) => {
         req.session.currentUser.currentPokemon = newCurrentPokemon;
         await UpdateUserInDB(req.session.currentUser);
     }
-    res.render("myPokemon", {
-        currentUser: req.session.currentUser,
-        PokemonList: PokemonList,
-        viewAllPokemon: owned
+    req.session.save(async (err) => {
+        if (err) {
+            // handle the error if session save fails
+            console.error(err);
+            return res.render("message", {
+                title: "Fout",
+                message: "Er is een fout opgetreden. Probeer het opnieuw",
+                currentUser: req.session.currentUser
+            });
+        }
+
+        res.render("myPokemon", {
+            currentUser: req.session.currentUser,
+            PokemonList: PokemonList,
+            viewAllPokemon: owned
+        });
     });
+    
 });
 
 app.get("/pokemonvergelijken", isAuthenticated, (req, res) => {
