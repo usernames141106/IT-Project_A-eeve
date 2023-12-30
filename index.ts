@@ -9,7 +9,7 @@ const evolutions: number[][] = require("./evolution-arrays.json");
 const app = express();
 
 app.use(session({
-    secret: 'blabla',
+    secret: 'vz7%F654#oMAA3',
     resave: false,
     saveUninitialized: false
 }));
