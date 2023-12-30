@@ -84,10 +84,14 @@ fetch("/PokemonList")
                     clearInterval(battleInterval);
                     if (currentOwnHP <= 0) {
                         ownHPBar.style.width = "0%";
-                        battleLoseForm.style.display = 'block';
+                        setTimeout(() => {
+                            battleLoseForm.style.display = 'block';
+                        }, 1000);
                     } else if (currentEnemyHP <= 0) {
                         enemyHPBar.style.width = "0%";
-                        battleWinForm.style.display = 'block';
+                        setTimeout(() => {
+                            battleWinForm.style.display = 'block';
+                        }, 1000);
                     }
                 }
             }, 1500); // wait for 1.5 seconds between each attack

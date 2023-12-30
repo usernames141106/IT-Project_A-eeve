@@ -113,7 +113,7 @@ caption {
 }
 
 input[type="checkbox"]:checked {
-  background-color: black!important;
+  background-color: black !important;
 }
 
 /*..........Header.............*/
@@ -383,13 +383,12 @@ label {
     align-items: left;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    
+
   }
 
-   #navbar_list p {
-    /* color: rgb(174, 132, 90);  */
-margin-left: 2rem;
-}  
+  #navbar_list p {
+    margin-left: 2rem;
+  }
 
   .custom-aside {
     border: none;
