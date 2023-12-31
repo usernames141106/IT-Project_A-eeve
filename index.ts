@@ -302,10 +302,10 @@ app.post("/rename", isAuthenticated, async (req, res) => {
     const targetPokemon: IPokemon | undefined = req.session.currentUser?.pokemons.find(x => x.id == Number(req.body.pokemonId));
     if (req.body.nickname.trim() != "" && req.body.nickname != undefined && req.session.currentUser) {
         targetPokemon!.name = String(req.body.nickname);
+        await UpdateUserInDB(req.session.currentUser);
     } else {
         targetPokemon!.name = String(PokemonList.find(x => x.id == req.body.pokemonId)?.name);
     }
-    await UpdateUserInDB(req.session.currentUser!);
     res.redirect(`back`);
 });
 
