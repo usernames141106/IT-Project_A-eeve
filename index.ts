@@ -372,15 +372,13 @@ app.get("/pokemonCatch", isAuthenticated, (req, res) => {
         if (attempt >= 3) {
             res.redirect("/mypokemon");
         }
-        const currentPokemonAttack: number | undefined = req.session.currentUser.currentPokemon ? req.session.currentUser.pokemons[req.session.currentUser.currentPokemon].attack : 0;
-        if (currentPokemonAttack) {
-            const chance: number = ((100 - pokemon.defence) + currentPokemonAttack) / 100;
-            if (Math.random() <= chance) {
-                res.render("pokemonCatchSuccess", {
-                    Pokemon: pokemon,
-                    currentUser: req.session.currentUser
-                });
-            }
+        const currentPokemonAttack: number = req.session.currentUser.currentPokemon ? req.session.currentUser.pokemons[req.session.currentUser.currentPokemon].attack : 0;
+        const chance: number = ((100 - pokemon.defence) + currentPokemonAttack) / 100;
+        if (Math.random() <= chance) {
+            res.render("pokemonCatchSuccess", {
+                Pokemon: pokemon,
+                currentUser: req.session.currentUser
+            });
         }
         else {
             res.render("pokemonCatch", {
