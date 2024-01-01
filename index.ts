@@ -372,7 +372,11 @@ app.get("/pokemonCatch", isAuthenticated, (req, res) => {
         if (attempt >= 3) {
             res.redirect("/mypokemon");
         }
-        const currentPokemonAttack: number = req.session.currentUser.currentPokemon ? req.session.currentUser.pokemons[req.session.currentUser.currentPokemon].attack : 0;
+        let currentPokemonAttack: number = 0;
+        try {
+            currentPokemonAttack = req.session.currentUser.currentPokemon ? req.session.currentUser.pokemons[req.session.currentUser.currentPokemon].attack : 0;
+        } catch (e) {
+        }
         const chance: number = ((100 - pokemon.defence) + currentPokemonAttack) / 100;
         if (Math.random() <= chance) {
             res.render("pokemonCatchSuccess", {
