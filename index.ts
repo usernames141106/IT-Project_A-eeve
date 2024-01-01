@@ -374,7 +374,7 @@ app.get("/pokemonCatch", isAuthenticated, (req, res) => {
         }
         let currentPokemonAttack: number = 0;
         try {
-            currentPokemonAttack = req.session.currentUser.currentPokemon ? req.session.currentUser.pokemons[req.session.currentUser.currentPokemon].attack : 0;
+            currentPokemonAttack = req.session.currentUser.currentPokemon !== undefined ? req.session.currentUser.pokemons[req.session.currentUser.currentPokemon].attack : 0;
         } catch (e) {
         }
         const chance: number = ((100 - pokemon.defence) + currentPokemonAttack) / 100;
