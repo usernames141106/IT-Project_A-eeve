@@ -14,7 +14,7 @@
                 <td class="d-flex justify-content-between"><%= PokemonList[Pokemon.id - 1].name ? PokemonList[Pokemon.id - 1].name : "???" %></td>
             </tr>
             <% if(ownedPokemon) { 
-                if(ownedPokemon.name != PokemonList[Pokemon.id - 1].name && ownedPokemon.name.trim()) { %>
+                if(ownedPokemon.name != PokemonList[Pokemon.id - 1].name && ownedPokemon.name) { %>
                     <tr>
                         <th>Bijnaam</th>
                         <td class="d-flex justify-content-between"><%= ownedPokemon.name %></td>
